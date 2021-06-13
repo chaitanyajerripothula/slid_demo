@@ -1,0 +1,35 @@
+.video-block {
+  outline: 0px solid transparent;
+}
+
+.video-block.height-placeholder {
+  padding-top: 56.25% !important;
+  border: 4px solid #dcdcdc;
+  border-radius: 5px;
+}
+
+.video-block video {
+  border: 4px solid #dcdcdc;
+  background-color: #f7f7f9;
+  border-radius: 5px;
+  object-fit: contain;
+  width: 100%;
+  /* max-height: 475px; */
+  max-height: 375px;
+}
+
+@media print {
+  .video-block video {
+    display: none;
+    max-height: unset;
+    border: unset;
+    background: unset;
+    max-height: 150mm;
+  }
+
+  @media (orientation: landscape) {
+    .video-block video {
+      max-height: 180mm;
+    }
+  }
+}
