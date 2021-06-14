@@ -15,25 +15,28 @@
         <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
         <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
       </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:feature" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
     </expand>
-    <select />
+    <select>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:feature" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </select>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6d7cd792-536c-4b0c-b3f5-d9fc0977d923" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/slid-demo-app/src/Main.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/slid-demo-app/src/editor/EditorComponent.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/slid-demo-app/src/vdocs/VideoDocument.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/slid-demo-app/src/vdocs/VideoDocumentEditor.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/slid-demo-app/src/vdocs/VideoPlayer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/slid-demo-app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/slid-demo-app/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/slid-demo-app/src/App.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slid-demo-app/src/App.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slid-demo-app/src/App.test.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slid-demo-app/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/slid-demo-app/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/slid-demo-app/src/logo.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slid-demo-app/src/reportWebVitals.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slid-demo-app/src/setupTests.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/slid-demo-app/src/vdocs/VideoDocument.js" beforeDir="false" afterPath="$PROJECT_DIR$/slid-demo-app/src/vdocs/VideoDocument.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/slid-demo-app/src/vdocs/VideoDocumentEditor.js" beforeDir="false" afterPath="$PROJECT_DIR$/slid-demo-app/src/vdocs/VideoDocumentEditor.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,10 +47,16 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JavaScript File" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="feature/editor" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1tv7lJIMvBITv4ooUaJR8x3GAiQ" />
@@ -62,6 +71,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="prettierjs.PrettierConfiguration.Package" value="$PROJECT_DIR$/slid-demo-app/node_modules/prettier" />
     <property name="settings.editor.selected.configurable" value="JavaScript.Libraries" />
@@ -78,7 +88,9 @@
       <workItem from="1623637860044" duration="2571000" />
       <workItem from="1623640809237" duration="226000" />
       <workItem from="1623641062872" duration="814000" />
-      <workItem from="1623642348081" duration="1076000" />
+      <workItem from="1623642348081" duration="1374000" />
+      <workItem from="1623648300205" duration="1379000" />
+      <workItem from="1623649731918" duration="268000" />
     </task>
     <servers />
   </component>
@@ -98,29 +110,41 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="378" y="154" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1623639559332">
+    <state x="378" y="154" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1623649283694">
       <screen x="0" y="0" width="1280" height="800" />
     </state>
-    <state x="378" y="154" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1280.800@0.0.1280.800" timestamp="1623639559332" />
-    <state width="1238" height="212" key="GridCell.Tab.0.bottom" timestamp="1623641036035">
+    <state x="378" y="154" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1280.800@0.0.1280.800" timestamp="1623649283694" />
+    <state width="1238" height="212" key="GridCell.Tab.0.bottom" timestamp="1623649708150">
       <screen x="0" y="0" width="1280" height="800" />
     </state>
-    <state width="1238" height="212" key="GridCell.Tab.0.bottom/0.0.1280.800@0.0.1280.800" timestamp="1623641036035" />
-    <state width="1238" height="212" key="GridCell.Tab.0.center" timestamp="1623641036034">
+    <state width="1238" height="212" key="GridCell.Tab.0.bottom/0.0.1280.800@0.0.1280.800" timestamp="1623649708150" />
+    <state width="1238" height="212" key="GridCell.Tab.0.center" timestamp="1623649708149">
       <screen x="0" y="0" width="1280" height="800" />
     </state>
-    <state width="1238" height="212" key="GridCell.Tab.0.center/0.0.1280.800@0.0.1280.800" timestamp="1623641036034" />
-    <state width="1238" height="212" key="GridCell.Tab.0.left" timestamp="1623641036033">
+    <state width="1238" height="212" key="GridCell.Tab.0.center/0.0.1280.800@0.0.1280.800" timestamp="1623649708149" />
+    <state width="1238" height="212" key="GridCell.Tab.0.left" timestamp="1623649708148">
       <screen x="0" y="0" width="1280" height="800" />
     </state>
-    <state width="1238" height="212" key="GridCell.Tab.0.left/0.0.1280.800@0.0.1280.800" timestamp="1623641036033" />
-    <state width="1238" height="212" key="GridCell.Tab.0.right" timestamp="1623641036034">
+    <state width="1238" height="212" key="GridCell.Tab.0.left/0.0.1280.800@0.0.1280.800" timestamp="1623649708148" />
+    <state width="1238" height="212" key="GridCell.Tab.0.right" timestamp="1623649708149">
       <screen x="0" y="0" width="1280" height="800" />
     </state>
-    <state width="1238" height="212" key="GridCell.Tab.0.right/0.0.1280.800@0.0.1280.800" timestamp="1623641036034" />
+    <state width="1238" height="212" key="GridCell.Tab.0.right/0.0.1280.800@0.0.1280.800" timestamp="1623649708149" />
     <state x="0" y="76" key="SettingsEditor" timestamp="1623641846975">
       <screen x="0" y="0" width="1280" height="800" />
     </state>
     <state x="0" y="76" key="SettingsEditor/0.0.1280.800@0.0.1280.800" timestamp="1623641846975" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/slid-demo-app/src/vdocs/VideoDocumentEditor.js</url>
+          <line>4</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

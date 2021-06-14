@@ -1,7 +1,12 @@
 import React from "react";
+import EditorComponent from "../editor/EditorComponent";
 
 const VideoDocumentEditor = () => {
-  return <div>VideoDocumentEditor</div>;
+  return (
+    <div>
+      <EditorComponent />
+    </div>
+  );
 };
 
 export default VideoDocumentEditor;
