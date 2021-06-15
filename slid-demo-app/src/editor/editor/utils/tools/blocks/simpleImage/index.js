@@ -15,6 +15,9 @@ import "./index.css";
  * @property {boolean} withBackground - should image be rendered with background
  * @property {boolean} stretched - should image be stretched to full width of container
  */
+
+let testUrl = "";
+
 export default class SimpleImage {
   /**
    * Render plugin`s main Element and fill it with saved data
@@ -31,7 +34,7 @@ export default class SimpleImage {
      */
     this.api = api;
     this.readOnly = readOnly;
-
+    this.config = config;
     /**
      * When block is only constructing,
      * current block points to previous block.
@@ -105,7 +108,14 @@ export default class SimpleImage {
    *
    * @public
    */
+
+  static insertImg(url) {
+    testUrl = url;
+    console.log(`insert >> ${url}`);
+  }
+
   render() {
+    console.log("render");
     const wrapper = this._make("div", [this.CSS.baseClass, this.CSS.wrapper]),
       loader = this._make("div", this.CSS.loading),
       imageHolder = this._make("div", this.CSS.imageHolder),
@@ -113,9 +123,9 @@ export default class SimpleImage {
 
     wrapper.appendChild(loader);
 
-    if (this.data.url) {
-      image.src = this.data.url;
-    }
+     if (this.data.url) {
+       image.src = this.data.url;
+     }
 
     image.onload = () => {
       wrapper.classList.remove(this.CSS.loading);
@@ -143,6 +153,8 @@ export default class SimpleImage {
    * @returns {SimpleImageData}
    */
   save(blockContent) {
+    console.log("save");
+
     const image = blockContent.querySelector("img");
 
     if (!image) {
@@ -158,6 +170,8 @@ export default class SimpleImage {
    * Sanitizer rules
    */
   static get sanitize() {
+    console.log("sanitize");
+
     return {
       url: {},
       withBorder: {},
@@ -172,6 +186,8 @@ export default class SimpleImage {
    * @returns {boolean}
    */
   static get isReadOnlySupported() {
+    console.log("isReadOnlySupported");
+
     return true;
   }
 
@@ -183,6 +199,8 @@ export default class SimpleImage {
    * @returns {Promise<SimpleImageData>}
    */
   onDropHandler(file) {
+    console.log("onDropHandler");
+
     const reader = new FileReader();
 
     reader.readAsDataURL(file);
@@ -202,6 +220,8 @@ export default class SimpleImage {
    * @param {PasteEvent} event - event with pasted config
    */
   onPaste(event) {
+    console.log("onPaste");
+
     switch (event.type) {
       case "tag": {
         const img = event.detail.data;
@@ -239,6 +259,8 @@ export default class SimpleImage {
    * @returns {SimpleImageData}
    */
   get data() {
+    console.log("getData");
+
     return this._data;
   }
 
@@ -248,7 +270,12 @@ export default class SimpleImage {
    * @param {SimpleImageData} data
    */
   set data(data) {
+    console.log("setData");
+
     this._data = Object.assign({}, this.data, data);
+
+    console.log(`setData url>>  ${this._data.url}`);
+
 
     if (this.nodes.image) {
       this.nodes.image.src = this.data.url;
@@ -262,6 +289,8 @@ export default class SimpleImage {
    * @public
    */
   static get pasteConfig() {
+    console.log("pasteConfig");
+
     return {
       patterns: {
         image: /https?:\/\/\S+\.(gif|jpe?g|tiff|png|webp)$/i,
@@ -279,6 +308,8 @@ export default class SimpleImage {
    * @returns {HTMLDivElement}
    */
   renderSettings() {
+    console.log("renderSettings");
+
     const wrapper = document.createElement("div");
 
     this.settings.forEach((tune) => {
@@ -309,6 +340,8 @@ export default class SimpleImage {
    * @returns {Element}
    */
   _make(tagName, classNames = null, attributes = {}) {
+    console.log("_make");
+
     const el = document.createElement(tagName);
 
     if (Array.isArray(classNames)) {
