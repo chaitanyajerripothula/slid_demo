@@ -1,0 +1,17 @@
+.container {
+  overflow-y: auto;
+  z-index: 1;
+  background: #ffffff;
+  display: flex;
+  padding: 20px 40px 0;
+  flex-direction: column;
+}
+
+.input_title {
+  border: none;
+  outline: none;
+  -webkit-appearance: none;
+  background: none;
+  font-weight: 400;
+  color: black;
+}

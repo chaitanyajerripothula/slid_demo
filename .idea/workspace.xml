@@ -32,11 +32,16 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6d7cd792-536c-4b0c-b3f5-d9fc0977d923" name="Default Changelist" comment="Update package.json">
+    <list default="true" id="6d7cd792-536c-4b0c-b3f5-d9fc0977d923" name="Default Changelist" comment="Add editor.js &amp; Tools &amp; SimpleImg custom">
+      <change afterPath="$PROJECT_DIR$/slid-demo-app/src/editor/editor/editor.module.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/slid-demo-app/src/editor/editor/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/slid-demo-app/src/editor/editor/utils/tools/Tools.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/slid-demo-app/src/editor/editor/utils/tools/blocks/simpleImage/index.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/slid-demo-app/src/editor/editor/utils/tools/blocks/simpleImage/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/slid-demo-app/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/slid-demo-app/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/slid-demo-app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/slid-demo-app/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/slid-demo-app/src/vdocs/VideoDocument.js" beforeDir="false" afterPath="$PROJECT_DIR$/slid-demo-app/src/vdocs/VideoDocument.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/slid-demo-app/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/slid-demo-app/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/slid-demo-app/src/editor/EditorComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/slid-demo-app/src/editor/EditorComponent.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,6 +81,11 @@
     <property name="prettierjs.PrettierConfiguration.Package" value="$PROJECT_DIR$/slid-demo-app/node_modules/prettier" />
     <property name="settings.editor.selected.configurable" value="JavaScript.Libraries" />
     <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\slid\slid_demo\slid-demo-app\src\editor\editor\utils\tools\blocks" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -122,36 +132,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Update package.json" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update package.json" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="378" y="154" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1623649283694">
-      <screen x="0" y="0" width="1280" height="800" />
-    </state>
-    <state x="378" y="154" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1280.800@0.0.1280.800" timestamp="1623649283694" />
-    <state width="1238" height="212" key="GridCell.Tab.0.bottom" timestamp="1623649708150">
-      <screen x="0" y="0" width="1280" height="800" />
-    </state>
-    <state width="1238" height="212" key="GridCell.Tab.0.bottom/0.0.1280.800@0.0.1280.800" timestamp="1623649708150" />
-    <state width="1238" height="212" key="GridCell.Tab.0.center" timestamp="1623649708149">
-      <screen x="0" y="0" width="1280" height="800" />
-    </state>
-    <state width="1238" height="212" key="GridCell.Tab.0.center/0.0.1280.800@0.0.1280.800" timestamp="1623649708149" />
-    <state width="1238" height="212" key="GridCell.Tab.0.left" timestamp="1623649708148">
-      <screen x="0" y="0" width="1280" height="800" />
-    </state>
-    <state width="1238" height="212" key="GridCell.Tab.0.left/0.0.1280.800@0.0.1280.800" timestamp="1623649708148" />
-    <state width="1238" height="212" key="GridCell.Tab.0.right" timestamp="1623649708149">
-      <screen x="0" y="0" width="1280" height="800" />
-    </state>
-    <state width="1238" height="212" key="GridCell.Tab.0.right/0.0.1280.800@0.0.1280.800" timestamp="1623649708149" />
-    <state x="0" y="76" key="SettingsEditor" timestamp="1623641846975">
-      <screen x="0" y="0" width="1280" height="800" />
-    </state>
-    <state x="0" y="76" key="SettingsEditor/0.0.1280.800@0.0.1280.800" timestamp="1623641846975" />
-    <state x="240" y="140" key="Vcs.Push.Dialog.v2" timestamp="1623650177760">
-      <screen x="0" y="0" width="1280" height="800" />
-    </state>
-    <state x="240" y="140" key="Vcs.Push.Dialog.v2/0.0.1280.800@0.0.1280.800" timestamp="1623650177760" />
+    <MESSAGE value="Add editor.js &amp; Tools &amp; SimpleImg custom" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add editor.js &amp; Tools &amp; SimpleImg custom" />
   </component>
 </project>
