@@ -2,20 +2,15 @@ import React from "react";
 import EditorJs from "react-editor-js";
 import { EDITOR_JS_TOOLS } from "./utils/tools/Tools";
 import styles from "./editor.module.css";
-import SimpleImage from "./utils/tools/blocks/simpleImage";
+import testImg from "./utils/tools/blocks/simpleImage/img_test.png";
 
 class Editor extends React.PureComponent {
-  async handleSave() {
-    const saveData = await this.editorInstance.save();
-  }
-
   onChangeEditor() {
     console.log("내용이 변경됨!");
   }
 
   uploadImg = () => {
-    //const url = "https://www.tesla.com/tesla_theme/assets/img/_vehicle_redesign/roadster_and_semi/roadster/hero.jpg";
-    //this.editorInstance.blocks.insert(this.SimpleImage,url,true,this.editorInstance.blocks.getCurrentBlockIndex()+1,false)
+    this.editorInstance.blocks.insert("image", { url: testImg }, {}, this.editorInstance.blocks.getCurrentBlockIndex() + 1, true);
     console.log("upload!");
   };
 
