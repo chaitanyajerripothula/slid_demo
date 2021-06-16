@@ -32,9 +32,12 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6d7cd792-536c-4b0c-b3f5-d9fc0977d923" name="Default Changelist" comment="Add editor.js &amp; Tools &amp; SimpleImg custom">
+    <list default="true" id="6d7cd792-536c-4b0c-b3f5-d9fc0977d923" name="Default Changelist" comment="Add editorController">
+      <change afterPath="$PROJECT_DIR$/slid-demo-app/src/editor/editorController/editorController.module.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/slid-demo-app/src/editor/editorController/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/slid-demo-app/src/editor/editor/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/slid-demo-app/src/editor/editor/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/slid-demo-app/src/editor/EditorComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/slid-demo-app/src/editor/EditorComponent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/slid-demo-app/src/editor/editor/utils/tools/blocks/simpleImage/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/slid-demo-app/src/editor/editor/utils/tools/blocks/simpleImage/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -124,7 +127,14 @@
       <option name="project" value="LOCAL" />
       <updated>1623740148271</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Fix insert image">
+      <created>1623813802250</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1623813802250</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -145,7 +155,9 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Update package.json" />
     <MESSAGE value="Add editor.js &amp; Tools &amp; SimpleImg custom" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add editor.js &amp; Tools &amp; SimpleImg custom" />
+    <MESSAGE value="Fix insert image" />
+    <MESSAGE value="Add editorController" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add editorController" />
   </component>
   <component name="WindowStateProjectService">
     <state width="1238" height="212" key="GridCell.Tab.0.bottom" timestamp="1623802617945">
@@ -164,5 +176,9 @@
       <screen x="0" y="0" width="1280" height="800" />
     </state>
     <state width="1238" height="212" key="GridCell.Tab.0.right/0.0.1280.800@0.0.1280.800" timestamp="1623802617944" />
+    <state x="240" y="140" key="Vcs.Push.Dialog.v2" timestamp="1623813806029">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state x="240" y="140" key="Vcs.Push.Dialog.v2/0.0.1280.800@0.0.1280.800" timestamp="1623813806029" />
   </component>
 </project>
