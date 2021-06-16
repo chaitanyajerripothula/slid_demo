@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState } from 'react';
 import ReactPlayer from "react-player";
 import Dropdown from 'react-bootstrap/Dropdown'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
@@ -6,7 +6,7 @@ import Tooltip from 'react-bootstrap/Tooltip'
 
 const VideoPlayer = () => {
   const [isPlaying, setIsPlaying] = useState();
-  const [videoState, setVideoState] = useState();
+  const [videoState, setVideoState] = useState("empty");
   const [playbackSpeed, setPlaybackSpeed] = useState(1);
   const [skipInterval, setSkipInterval] = useState(5);
 
@@ -16,24 +16,12 @@ const VideoPlayer = () => {
   const videoForwardButtonRef = useRef();
 
   const toggleIsPlaying = () => {
-    if (isPlaying) {
-      videoPlayerRef.current.pause();
-      setIsPlaying(false);
-    }
-    else {
-      videoPlayerRef.current.play();
-      setIsPlaying(true);
-    }
+    isPlaying ? setIsPlaying(false) : setIsPlaying(true);
   }
 
-  const updateVideoTime = () => {
-    console.log("냐옹");
-    //let direction;
-
-    // if(direction == "forward") videoPlayerRef.current.currentTime += skipInterval;
-    // else videoPlayerRef.current.currentTime -= skipInterval;
-
-    videoPlayerRef.current.currentTime += skipInterval;
+  const updateVideoTime = (skipInterval, e) => {
+    const currentTime = videoPlayerRef.current.getCurrentTime()
+    videoPlayerRef.current.seekTo(currentTime + skipInterval);
   }
 
   return (
@@ -127,7 +115,7 @@ const VideoPlayer = () => {
               }>
               <button
                 ref={videoBackwardButtonRef}
-                onClick={updateVideoTime}>
+                onClick={(e)=>{updateVideoTime(-skipInterval, e)}}>
                   -{skipInterval}{" "}
               </button>
             </OverlayTrigger>
@@ -151,7 +139,7 @@ const VideoPlayer = () => {
               }>
               <button
                 ref={videoForwardButtonRef}
-                onClick={updateVideoTime}>
+                onClick={(e)=>{updateVideoTime(skipInterval, e)}}>
                   +{skipInterval}
               </button>
             </OverlayTrigger>
@@ -160,6 +148,7 @@ const VideoPlayer = () => {
         </div>
       </div>
 
+      {/* Video Stamp */}
 
     </div>
   );
