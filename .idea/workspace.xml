@@ -33,11 +33,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6d7cd792-536c-4b0c-b3f5-d9fc0977d923" name="Default Changelist" comment="Add editorController">
-      <change afterPath="$PROJECT_DIR$/slid-demo-app/src/editor/editorController/editorController.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/slid-demo-app/src/editor/editorController/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/slid-demo-app/src/design/assets/slid_backward_icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/slid-demo-app/src/design/assets/slid_backward_white_icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/slid-demo-app/src/design/assets/slid_capture_icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/slid-demo-app/src/design/assets/slid_double_check_icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/slid-demo-app/src/design/assets/slid_download_icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/slid-demo-app/src/design/assets/slid_forward_icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/slid-demo-app/src/design/assets/slid_forward_white_icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/slid-demo-app/src/design/assets/slid_help_blue_icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/slid-demo-app/src/design/assets/slid_list_open_icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/slid-demo-app/src/design/assets/slid_recording_gray_icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/slid-demo-app/src/design/assets/slid_recording_video_red_icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/slid-demo-app/src/design/assets/slid_set_area_icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/slid-demo-app/src/design/assets/slid_setting_icon.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/slid-demo-app/src/editor/EditorComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/slid-demo-app/src/editor/EditorComponent.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/slid-demo-app/src/editor/editor/utils/tools/blocks/simpleImage/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/slid-demo-app/src/editor/editor/utils/tools/blocks/simpleImage/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/slid-demo-app/src/editor/editor/editor.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/slid-demo-app/src/editor/editor/editor.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/slid-demo-app/src/editor/editor/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/slid-demo-app/src/editor/editor/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/slid-demo-app/src/editor/editor/utils/tools/blocks/simpleImage/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/slid-demo-app/src/editor/editor/utils/tools/blocks/simpleImage/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/slid-demo-app/src/editor/editorController/editorController.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/slid-demo-app/src/editor/editorController/editorController.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/slid-demo-app/src/editor/editorController/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/slid-demo-app/src/editor/editorController/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,7 +95,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/slid-demo-app/src/editor/editor/utils/tools/blocks/simpleImage" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/slid-demo-app/src" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="prettierjs.PrettierConfiguration.Package" value="$PROJECT_DIR$/slid-demo-app/node_modules/prettier" />
@@ -88,11 +103,13 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\slid\slid_demo\slid-demo-app\src\editor\editor\utils\tools\blocks\simpleImage" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/slid-demo-app/src/design/assets" />
       <recent name="C:\slid\slid_demo\slid-demo-app\src\editor\editor\utils\tools\blocks" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/slid-demo-app/src" />
+      <recent name="C:\slid\slid_demo\slid-demo-app\src\editor\editor\utils\tools\blocks\simpleImage" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -112,6 +129,7 @@
       <workItem from="1623650033807" duration="512000" />
       <workItem from="1623650794865" duration="648000" />
       <workItem from="1623652263111" duration="140000" />
+      <workItem from="1623841385453" duration="3659000" />
     </task>
     <task id="LOCAL-00001" summary="Update package.json">
       <created>1623650174081</created>
