@@ -4,7 +4,6 @@ import Editor from "./editor";
 const EditorComponent = () => {
   return (
     <div>
-      EditorComponent
       <Editor />
     </div>
   );
