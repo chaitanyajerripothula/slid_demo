@@ -3,6 +3,7 @@ import ReactPlayer from "react-player";
 import Dropdown from 'react-bootstrap/Dropdown'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import Tooltip from 'react-bootstrap/Tooltip'
+import VideoCapture from "./VideoCapture";
 
 const VideoPlayer = () => {
   const [isPlaying, setIsPlaying] = useState();
@@ -14,6 +15,7 @@ const VideoPlayer = () => {
   const videoPlaceholderRef = useRef()
   const videoBackwardButtonRef = useRef();
   const videoForwardButtonRef = useRef();
+  const canvasRef = useRef();
 
   const toggleIsPlaying = () => {
     isPlaying ? setIsPlaying(false) : setIsPlaying(true);
@@ -29,7 +31,7 @@ const VideoPlayer = () => {
       <div>
         <div ref={videoPlaceholderRef}>
           <ReactPlayer
-            url="https://vimeo.com/1084537"
+            url="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
             playing={isPlaying}
             ref={videoPlayerRef}
             onReady={() => {
@@ -149,6 +151,8 @@ const VideoPlayer = () => {
       </div>
 
       {/* Video Stamp */}
+
+      <VideoCapture videoPlayerRef={videoPlayerRef} />
 
     </div>
   );
