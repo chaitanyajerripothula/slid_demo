@@ -4,6 +4,7 @@ import CheckList from "@editorjs/checklist";
 import CodeTool from "@editorjs/code";
 import Marker from "@editorjs/marker";
 import NestedList from "@editorjs/list";
+import Underline from "@editorjs/underline";
 import SimpleImage from "./blocks/simpleImage/index";
 
 export const EDITOR_JS_TOOLS = {
@@ -32,5 +33,8 @@ export const EDITOR_JS_TOOLS = {
   },
   image: {
     class: SimpleImage,
+  },
+  Underline: {
+    class: Underline,
   },
 };

@@ -1,4 +1,4 @@
-import React  from "react";
+import React, { useState } from "react";
 import editorController from "./editorController.module.css";
 import undoImg from "../../design/assets/slid_backward_icon.png";
 import redoImg from "../../design/assets/slid_forward_icon.png";
@@ -9,8 +9,9 @@ import captureImg from "../../design/assets/slid_capture_icon.png";
 import { useReactToPrint } from "react-to-print";
 
 const EditorController = (props) => {
-
   const { componentRef } = props;
+
+  const [save, setSave] = useState(true);
 
   const renderPdfPrint = useReactToPrint({
     content: () => componentRef.current,
@@ -42,7 +43,7 @@ const EditorController = (props) => {
       <div className={editorController.video_document_editor_right_wrapper}>
         <div className={editorController.video_document_editor_save_container}>
           <img className={editorController.video_document_editor_save_icon} src={saveImg} alt="saveImage" />
-          <span className={editorController.video_document_editor_text}>저장완료</span>
+          <span className={editorController.video_document_editor_text}>{save ? "저장완료" : "자동 저장 중..."}</span>
         </div>
         <div className={editorController.video_document_editor_download_container} onClick={renderPdfPrint}>
           <img className={editorController.video_document_editor_download_icon} src={downloadImg} alt="downloadImage" />
