@@ -1,0 +1,156 @@
+.video-container {
+  height: 100%;
+  position: relative;
+  background-color: #1f1f1f!important;
+}
+
+.video-placeholder-container {
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.video-placeholder {
+  position: relative;
+  background-color: #3d3d3d!important;
+  width: 100%;
+  margin-bottom: 72px;
+}
+
+.video-player {
+  width: 100%;
+  height: 100%;
+  left: 0px;
+  top: 0px;
+  display: block;
+  /* position: absolute; */
+  object-fit: contain;
+}
+  
+.video-view-controller-container {
+  background-color: #3d3d3d!important;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 72px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px!important;
+}
+
+.recoding-red-icon {
+
+}
+
+.recoding-red-icon-hide {
+
+}
+
+.video-play-controller-container {
+  background-color: #3d3d3d!important;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 72px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px!important;
+}
+
+.setting-container {
+  position: absolute;
+  left: 0;
+}
+
+.setting-toggle {
+  color: #f3f3f3!important;
+  display: flex;
+  align-items: center;
+  background-color: #3d3d3d;
+}
+
+.setting-icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 6px;
+  vertical-align: middle;
+  border-style: none;
+}
+
+.setting-popup {
+
+}
+
+.setting-title {
+
+}
+
+.setting-option {
+
+}
+
+.select {
+
+}
+
+.control-container {
+
+}
+
+.shortcut-tooltip {
+
+}
+
+.skip-btn {
+  font-size: 17px;
+  font-weight: 500;
+  height: 44px;
+  background-color: #797979!important;
+  border-radius: 5px!important;
+  color: #f3f3f3!important;
+}
+
+.skip-backward-btn {
+
+}
+
+.skip-backward {
+  width: 28px;
+  height: 28px;
+  vertical-align: middle;
+  border-style: none;
+}
+
+.skip-forward-btn {
+
+}
+
+.skip-forward {
+  width: 28px;
+  height: 28px;
+  vertical-align: middle;
+  border-style: none;
+}
+
+.btn-secondary {
+  border-color: #6c757d;
+}
+
+.video-icon {
+  margin: 0;
+  width: 100%;
+  vertical-align: middle;
+  border-style: none;
+}
+
+.play-btn {
+  width: 44px;
+  height: 44px;
+  margin-left: 12px;
+  margin-right: 12px;
+  cursor: pointer;
+  padding: 0;
+}

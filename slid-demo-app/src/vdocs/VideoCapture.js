@@ -7,7 +7,7 @@ const VideoCapture = ({videoPlayerRef}) => {
       let w, h, ratio;
 
       ratio = videoPlayerRef.current.videoWidth / videoPlayerRef.current.videoHeight;
-      //console.log(ratio.toString)
+      //console.log(videoPlayerRef.current.videoWidth)
 
       h = 375
       w = 600
@@ -22,8 +22,7 @@ const VideoCapture = ({videoPlayerRef}) => {
       
       //const frame = captureVideoFrame(this.player.getInternalPlayer())
       //let imageURL = frame.dataUri
-      let imageURL = ctx.toDataURL();
-      console.log(imageURL);
+      let imageURL = canvasRef.current.toDataURL();
     }
 
     return (
