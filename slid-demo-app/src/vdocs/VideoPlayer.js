@@ -25,7 +25,7 @@ const VideoPlayer = () => {
     const currentTime = videoPlayerRef.current.getCurrentTime()
     videoPlayerRef.current.seekTo(currentTime + skipInterval);
     
-    console.log("width " + videoPlayerRef.current.width)
+    console.log("width " + videoPlayerRef.current.getInternalPlayer().videoWidth)
   }
 
   return (
