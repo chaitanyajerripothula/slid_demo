@@ -36,5 +36,6 @@ export const EDITOR_JS_TOOLS = {
   },
   Underline: {
     class: Underline,
+    shortcut: "CMD+SHIFT+U",
   },
 };
