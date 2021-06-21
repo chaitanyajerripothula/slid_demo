@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import EditorJs from "react-editor-js";
 import { EDITOR_JS_TOOLS } from "./utils/tools/Tools";
 import styles from "./editor.module.css";
@@ -25,7 +25,6 @@ class Editor extends React.PureComponent {
 
   render() {
     let { undoInstance } = this.state;
-
     const setUndoRedoInstance = () => {
       const editor = this.editorInstance;
       console.log(editor);
@@ -46,7 +45,7 @@ class Editor extends React.PureComponent {
     return (
       <div>
         <div className={styles.container}>
-          <input className={styles.input_title} type="text" onChange={onChangeTitle} placeholder="제목을 입력하세요" autoComplete="false" autoFocus={true} />
+          <input className={styles.input_title} type="text" onCha nge={onChangeTitle} placeholder="제목을 입력하세요" autoComplete="false" autoFocus={true} />
           <EditorJs ref={this.componentRef} tools={EDITOR_JS_TOOLS} onReady={setUndoRedoInstance} onChange={this.onChangeEditor} instanceRef={(instance) => (this.editorInstance = instance)} />
         </div>
         <EditorController insertImage={this.insertImage} componentRef={this.componentRef} undoEditor={() => undoInstance.undo()} redoEditor={() => undoInstance.redo()} />

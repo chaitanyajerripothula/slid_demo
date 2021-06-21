@@ -7,11 +7,13 @@ import saveImg from "../../design/assets/slid_double_check_icon.png";
 import downloadImg from "../../design/assets/slid_download_icon.png";
 import captureImg from "../../design/assets/slid_capture_icon.png";
 import { useReactToPrint } from "react-to-print";
+import EditorSetting from "../editorSetting";
 
 const EditorController = (props) => {
   const { componentRef } = props;
 
   const [save, setSave] = useState(true);
+  const [open, setOpen] = useState(false);
 
   const renderPdfPrint = useReactToPrint({
     content: () => componentRef.current,
@@ -21,8 +23,13 @@ const EditorController = (props) => {
     props.insertImage();
   };
 
+  const openEditorSetting = () => {
+    setOpen(!open);
+  };
+
   return (
     <div className={styles.container}>
+      {open ? <EditorSetting /> : null}
       <div className={styles.video_document_editor_left_wrapper}>
         <div className={styles.video_document_editor_undo_redo_container}>
           <img
@@ -42,7 +49,7 @@ const EditorController = (props) => {
             }}
           />
         </div>
-        <div className={styles.video_document_editor_setting_container}>
+        <div className={styles.video_document_editor_setting_container} onClick={openEditorSetting}>
           <img className={styles.video_document_editor_setting_icon} src={settingImg} alt="settingImage" />
           <span className={styles.video_document_editor_text}>Editor Setting</span>
         </div>

@@ -1,0 +1,31 @@
+.editor_setting_container {
+  position: absolute;
+  width: 284px;
+  height: 238px;
+  background: #ffffff;
+  border-radius: 5px !important;
+  padding: 24px 27px;
+  margin: 0 0 2px 2px;
+  transform: translate(0px, -204px);
+  insert: auto auto 0px 0px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  box-sizing: border-box;
+  cursor: auto;
+  z-index: 1000;
+}
+
+.editor_setting_container_item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.editor_setting_container_title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #000000;
+  line-height: 1.5;
+}

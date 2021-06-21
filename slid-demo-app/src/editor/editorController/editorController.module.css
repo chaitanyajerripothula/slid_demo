@@ -5,7 +5,7 @@
   justify-content: space-between;
   background: #ffffff;
   z-index: 1;
-  box-shadow: 0 -5px 10px hsl(0, 0% ,97%);
+  box-shadow: 0 -5px 10px hsl(0, 0%, 97%);
 }
 
 .video_document_editor_left_wrapper {
@@ -105,7 +105,7 @@
   margin: 0 6px;
   background: #488cff;
   border: 1px solid transparent;
-  padding: .375rem .75rem;
+  padding: 0.375rem 0.75rem;
   display: flex;
   align-items: center;
   justify-content: center;
