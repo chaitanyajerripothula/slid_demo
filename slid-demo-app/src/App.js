@@ -1,8 +1,8 @@
 import React from "react";
 import VideoDocument from "./vdocs/VideoDocument";
 
-const Main = () => {
+const App = () => {
   return <VideoDocument />;
 };
 
-export default Main;
+export default App;

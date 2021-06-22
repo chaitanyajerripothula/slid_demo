@@ -20,20 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6d7cd792-536c-4b0c-b3f5-d9fc0977d923" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/slid-demo-app/src/Main.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/slid-demo-app/src/editor/EditorComponent.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/slid-demo-app/src/vdocs/VideoDocument.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/slid-demo-app/src/vdocs/VideoDocumentEditor.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/slid-demo-app/src/vdocs/VideoPlayer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/slid-demo-app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/slid-demo-app/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/slid-demo-app/src/App.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slid-demo-app/src/App.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slid-demo-app/src/App.test.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/slid-demo-app/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/slid-demo-app/src/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/slid-demo-app/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/slid-demo-app/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/slid-demo-app/src/logo.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slid-demo-app/src/reportWebVitals.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slid-demo-app/src/setupTests.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
