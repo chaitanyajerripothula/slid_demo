@@ -32,6 +32,8 @@
     </select>
   </component>
   <component name="ChangeListManager">
+    <list default="true" id="6d7cd792-536c-4b0c-b3f5-d9fc0977d923" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/slid-demo-app/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/slid-demo-app/src/App.js" afterDir="false" />
     <list default="true" id="6d7cd792-536c-4b0c-b3f5-d9fc0977d923" name="Default Changelist" comment="Add Undo">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/slid-demo-app/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/slid-demo-app/package-lock.json" afterDir="false" />
