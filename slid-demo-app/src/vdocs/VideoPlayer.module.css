@@ -1,7 +1,7 @@
 .video-container {
   height: 100%;
   position: relative;
-  background-color: #1f1f1f!important;
+  background-color: #1f1f1f !important;
 }
 
 .video-placeholder-container {
@@ -13,7 +13,7 @@
 
 .video-placeholder {
   position: relative;
-  background-color: #3d3d3d!important;
+  background-color: #1f1f1f !important;
   width: 100%;
   margin-bottom: 72px;
 }
@@ -29,7 +29,7 @@
 }
   
 .video-view-controller-container {
-  background-color: #3d3d3d!important;
+  background-color: #3d3d3d !important;
   position: absolute;
   bottom: 0;
   width: 100%;
@@ -37,19 +37,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 14px!important;
-}
-
-.recoding-red-icon {
-
-}
-
-.recoding-red-icon-hide {
-
+  font-size: 14px !important;
 }
 
 .video-play-controller-container {
-  background-color: #3d3d3d!important;
+  background-color: #3d3d3d !important;
   position: absolute;
   bottom: 0;
   width: 100%;
@@ -57,7 +49,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 14px!important;
+  font-size: 14px !important;
 }
 
 .setting-container {
@@ -66,10 +58,9 @@
 }
 
 .setting-toggle {
-  color: #f3f3f3!important;
+  color: #f3f3f3 !important;
   display: flex;
   align-items: center;
-  background-color: #3d3d3d;
 }
 
 .setting-icon {
@@ -81,19 +72,26 @@
 }
 
 .setting-popup {
-
+  width: 264px;
+  border-radius: 5px !important;
+  padding: 24px 27px !important;
 }
 
 .setting-title {
-
+  font-size: 16px;
+  font-weight: 700;
 }
 
 .setting-option {
-
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 14px;
 }
 
 .select {
-
+  width: 77px !important;
 }
 
 .control-container {
@@ -135,22 +133,16 @@
   border-style: none;
 }
 
-.btn-secondary {
-  border-color: #6c757d;
-}
-
 .video-icon {
   margin: 0;
   width: 100%;
-  vertical-align: middle;
-  border-style: none;
 }
 
 .play-btn {
+  padding: 0px !important;
   width: 44px;
   height: 44px;
   margin-left: 12px;
   margin-right: 12px;
   cursor: pointer;
-  padding: 0;
 }

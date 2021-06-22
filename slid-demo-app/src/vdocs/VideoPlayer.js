@@ -25,6 +25,7 @@ const VideoPlayer = () => {
   }
 
   return (
+    <div>
     <div className={styles[`video-container`]}>
       <div className={`${styles[`video-placeholder-container`]}`}>
         <div ref={videoPlaceholderRef} className={`${styles[`video-placeholder`]}`}>
@@ -65,7 +66,7 @@ const VideoPlayer = () => {
         <div className={styles[`setting-container`]}>
           <Dropdown drop={'right'}>
             <Dropdown.Toggle variant={'white'} className={styles[`setting-toggle`]}>
-              <img className={styles[`setting-icon`]} src={`../../design/assets/slid_setting_icon.png`} />
+              <img alt={`setting icon img`} className={styles[`setting-icon`]} src={`../../design/assets/slid_setting_icon.png`} />
               <span>Video Setting</span>
             </Dropdown.Toggle>
 
@@ -77,7 +78,7 @@ const VideoPlayer = () => {
                 <div className={`${styles[`setting-option`]}`}>
                   <span>구간 이동 간격</span>
                   <select
-                    className={`${styles[`select`]}`}
+                    className={`${styles[`select`]} custom-select custom-select-sm`}
                     value={skipInterval}
                     onChange={(event) => {
                       setSkipInterval(parseInt(event.target.value));
@@ -91,7 +92,7 @@ const VideoPlayer = () => {
                 <div className={`${styles[`setting-option`]}`}>
                   <span>재생속도</span>
                   <select
-                    className={`${styles[`select`]}`}
+                    className={`${styles[`select`]} custom-select custom-select-sm`}
                     value={playbackSpeed}
                     onChange={(event) => {
                       setPlaybackSpeed(parseFloat(event.target.value))
@@ -122,7 +123,7 @@ const VideoPlayer = () => {
               }>
               <button
                 ref={videoBackwardButtonRef}
-                className={`${styles[`skip-btn`]} ${styles[`skip-backward-btn`]}`}
+                className={`${styles[`skip-btn`]} ${styles[`skip-backward-btn`]} btn btn-secondary`}
                 onClick={(e)=>{updateVideoTime(-skipInterval, e)}}>
                   -{skipInterval}{" "}
                   <img alt={`skip backward button`} className={`${styles[`skip-backward`]}`} src={`../../design/assets/slid_backward_white_icon.png`} />
@@ -137,7 +138,7 @@ const VideoPlayer = () => {
                 </Tooltip>
               }>
               <button
-                className={`${styles[`play-btn`]}`}
+                className={`${styles[`play-btn`]} btn btn-light`}
                 onClick={toggleIsPlaying}>
                 <img alt={`play pause button`} className={styles[`video-icon`]} src={`../../design/assets/slid_${isPlaying ? "pause" : "play"}_btn_icon.png`} />
               </button>
@@ -152,7 +153,7 @@ const VideoPlayer = () => {
               }>
               <button
                 ref={videoForwardButtonRef}
-                className={`${styles[`skip-btn`]} ${styles[`skip-forward-btn`]}`}
+                className={`${styles[`skip-btn`]} ${styles[`skip-forward-btn`]} btn btn-secondary`}
                 onClick={(e)=>{updateVideoTime(skipInterval, e)}}>
                 <img alt={`skip forward button`} className={`${styles[`skip-forward`]}`} src={`../../design/assets/slid_forward_white_icon.png`} />
                 +{skipInterval}
@@ -161,12 +162,14 @@ const VideoPlayer = () => {
 
           </div>
         </div>
+
       </div>
 
       {/* Video Stamp */}
 
-      {/* <VideoCapture videoPlayerRef={videoPlayerRef} /> */}
+    </div>
 
+    <VideoCapture videoPlayerRef={videoPlayerRef} />
     </div>
   );
 };
