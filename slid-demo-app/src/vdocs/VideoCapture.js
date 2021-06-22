@@ -6,12 +6,11 @@ const VideoCapture = ({videoPlayerRef}) => {
     const fullImageCapture = () => {
       let w, h, ratio;
 
-      ratio = videoPlayerRef.current.videoWidth / videoPlayerRef.current.videoHeight;
-      //console.log(videoPlayerRef.current.videoWidth)
+      ratio = videoPlayerRef.current.getInternalPlayer().videoWidth / videoPlayerRef.current.getInternalPlayer().videoHeight;
+      console.log(ratio)
 
       h = 375
-      w = 600
-      //w = parseInt(h * ratio, 10);
+      w = parseInt(h * ratio, 10);
 
       canvasRef.current.width = w;
       canvasRef.current.height = h;

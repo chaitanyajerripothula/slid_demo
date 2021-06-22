@@ -1,8 +1,6 @@
 import React, { useRef, useState } from 'react';
 import ReactPlayer from "react-player";
-import Dropdown from 'react-bootstrap/Dropdown'
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
-import Tooltip from 'react-bootstrap/Tooltip'
+import { Dropdown, OverlayTrigger, Tooltip } from 'react-bootstrap'
 import VideoCapture from "./VideoCapture";
 import styles from './VideoPlayer.module.css';
 
@@ -24,8 +22,6 @@ const VideoPlayer = () => {
   const updateVideoTime = (skipInterval, e) => {
     const currentTime = videoPlayerRef.current.getCurrentTime()
     videoPlayerRef.current.seekTo(currentTime + skipInterval);
-    
-    console.log("width " + videoPlayerRef.current.getInternalPlayer().videoWidth)
   }
 
   return (
