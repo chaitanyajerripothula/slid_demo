@@ -1,15 +1,22 @@
 .container {
-  overflow-y: auto;
+  overflow-y: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   z-index: 1;
   background: #ffffff;
+}
+.editor-container {
+  /* font-size */
+  box-sizing: border-box;
   display: flex;
-  padding: 20px 40px 0;
-  flex-direction: column;
+  padding: 0 40px 0;
 }
 
-.input_title {
+.input-title {
   border: none;
   outline: none;
+  padding: 20px 40px 0;
   -webkit-appearance: none;
   background: none;
   font-weight: 400;

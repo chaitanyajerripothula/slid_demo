@@ -1,0 +1,8 @@
+.container {
+    display: flex;
+    height: 80%;
+    flex-direction: column;
+    border: 1px solid #c4c4c4;
+    box-shadow: 0 1rem 3rem rgb(0, 0, 18%);
+
+}

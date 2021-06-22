@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import styles from "./editorSetting.module.css";
 
 const EditorSetting = () => {
-  const [fontSize, setFontSize] = useState("Small");
+  const [fontSize, setFontSize] = useState("");
   const ChangeFontSize = (e) => {
     const value = e.target.value;
+    console.log(`value : ${value}`);
     setFontSize(value);
     console.log(`fontSize : ${fontSize}`);
   };
