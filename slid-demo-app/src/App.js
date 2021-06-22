@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import VideoDocument from "./vdocs/VideoDocument";
 
-const Main = () => {
+const App = () => {
   
   const [ lang, setLang ] = useState("en");
   useEffect(()=>{
@@ -12,4 +12,4 @@ const Main = () => {
   return <VideoDocument lang={lang} />;
 };
 
-export default Main;
+export default App;
