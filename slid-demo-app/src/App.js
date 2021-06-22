@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import VideoDocument from "../src/vdocs/VideoDocument";
+import VideoDocument from "./vdocs/VideoDocument";
 
 const Main = () => {
   
