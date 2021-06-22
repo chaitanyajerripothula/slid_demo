@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styles from "./editorSetting.module.css";
+
 const EditorSetting = () => {
   const [fontSize, setFontSize] = useState("Small");
   const ChangeFontSize = (e) => {
@@ -9,11 +10,11 @@ const EditorSetting = () => {
   };
 
   return (
-    <div className={styles.editor_setting_container}>
-      <span className={styles.editor_setting_container_title}>에디터 설정</span>
-      <div className={styles.editor_setting_container_item}>
+    <div className={`${styles[`editor-setting-container`]}`} >
+      <span className={`${styles[`editor-setting-container-title`]}`}>에디터 설정</span>
+      <div className={`${styles[`editor-setting-container-item`]}`}>
         폰트 크기
-        <select value={fontSize} onChange={ChangeFontSize}>
+        <select className={`${styles[`select`]} custom-select custom-select-sm`} value={fontSize} onChange={ChangeFontSize}>
           <option value="Small">Small</option>
           <option value="Medium">Medium</option>
           <option value="Large">Large</option>

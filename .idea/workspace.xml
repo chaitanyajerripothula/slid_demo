@@ -32,15 +32,13 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6d7cd792-536c-4b0c-b3f5-d9fc0977d923" name="Default Changelist" comment="Add renderPdf">
-      <change afterPath="$PROJECT_DIR$/slid-demo-app/src/editor/editor/utils/tools/undo/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/slid-demo-app/src/editor/editor/utils/tools/undo/observer.js" afterDir="false" />
+    <list default="true" id="6d7cd792-536c-4b0c-b3f5-d9fc0977d923" name="Default Changelist" comment="Add Undo">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/slid-demo-app/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/slid-demo-app/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/slid-demo-app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/slid-demo-app/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/slid-demo-app/src/editor/editor/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/slid-demo-app/src/editor/editor/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/slid-demo-app/src/editor/editor/utils/tools/Tools.js" beforeDir="false" afterPath="$PROJECT_DIR$/slid-demo-app/src/editor/editor/utils/tools/Tools.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/slid-demo-app/src/editor/editorController/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/slid-demo-app/src/editor/editorController/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/slid-demo-app/src/editor/editorSetting/editorSetting.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/slid-demo-app/src/editor/editorSetting/editorSetting.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/slid-demo-app/src/editor/editorSetting/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/slid-demo-app/src/editor/editorSetting/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/slid-demo-app/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/slid-demo-app/src/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,9 +52,6 @@
         <option value="JavaScript File" />
       </list>
     </option>
-  </component>
-  <component name="Git.Pull.Settings">
-    <option name="BRANCH" value="feature/editor" />
   </component>
   <component name="Git.Settings">
     <option name="PUSH_TAGS">
@@ -127,6 +122,7 @@
       <workItem from="1623650794865" duration="648000" />
       <workItem from="1623652263111" duration="140000" />
       <workItem from="1623841385453" duration="3659000" />
+      <workItem from="1624320698412" duration="4609000" />
     </task>
     <task id="LOCAL-00001" summary="Update package.json">
       <created>1623650174081</created>
@@ -156,7 +152,14 @@
       <option name="project" value="LOCAL" />
       <updated>1623911907242</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Add Undo">
+      <created>1623919392989</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1623919392989</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -180,6 +183,7 @@
     <MESSAGE value="Fix insert image" />
     <MESSAGE value="Add editorController" />
     <MESSAGE value="Add renderPdf" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add renderPdf" />
+    <MESSAGE value="Add Undo" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add Undo" />
   </component>
 </project>
