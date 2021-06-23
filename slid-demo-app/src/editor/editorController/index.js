@@ -12,8 +12,8 @@ import EditorSetting from "../editorSetting";
 const EditorController = (props) => {
   const { componentRef } = props;
 
-  const [save, setSave] = useState(true);
   const [open, setOpen] = useState(false);
+  const [fontSize, setFontSize] = useState("");
 
   const renderPdfPrint = useReactToPrint({
     content: () => componentRef.current,
@@ -27,9 +27,11 @@ const EditorController = (props) => {
     setOpen(!open);
   };
 
+  props.setEditorFontSize(fontSize);
+
   return (
     <div className={styles.container}>
-      {open ? <EditorSetting /> : null}
+      {open ? <EditorSetting setFontSize={setFontSize} /> : null}
       <div className={styles.video_document_editor_left_wrapper}>
         <div className={styles.video_document_editor_undo_redo_container}>
           <img
@@ -64,7 +66,7 @@ const EditorController = (props) => {
       <div className={styles.video_document_editor_right_wrapper}>
         <div className={styles.video_document_editor_save_container}>
           <img className={styles.video_document_editor_save_icon} src={saveImg} alt="saveImage" />
-          <span className={styles.video_document_editor_text}>{save ? "저장완료" : "자동 저장 중..."}</span>
+          <span className={styles.video_document_editor_text}>{props.save ? "저장완료" : "자동 저장 중..."}</span>
         </div>
         <div className={styles.video_document_editor_download_container} onClick={renderPdfPrint}>
           <img className={styles.video_document_editor_download_icon} src={downloadImg} alt="downloadImage" />

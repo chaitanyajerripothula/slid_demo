@@ -9,9 +9,23 @@
 .editor-container {
   /* font-size */
   box-sizing: border-box;
-  display: flex;
   padding: 0 40px 0;
 }
+
+.font-small {
+  font-size: 1rem;
+}
+
+.font-medium {
+  font-size: 1.2rem;
+
+}
+
+.font-large {
+  font-size: 1.5rem;
+}
+
+
 
 .input-title {
   border: none;
@@ -21,5 +35,6 @@
   background: none;
   font-weight: 400;
   font-size: 1.8em;
+  width: 100%;
   color: black;
 }
