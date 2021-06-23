@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import ReactPlayer from "react-player";
-import { Dropdown, OverlayTrigger, Tooltip } from "react-bootstrap";
+import { Dropdown, OverlayTrigger, Tooltip, Button } from "react-bootstrap";
 import VideoCapture from "./VideoCapture";
 import styles from "./VideoPlayer.module.css";
 import { fabric } from "fabric";
@@ -25,11 +25,19 @@ const VideoPlayer = (props) => {
   }, [show]);
 
   const initCanvas = () => {
+    let video = document.getElementById("video-size-check");
+
     new fabric.Canvas("canvas", {
-      width: "420",
-      height: "250",
+      width: video.offsetWidth,
+      height: video.offsetHeight,
       backgroundColor: "pink",
     });
+  };
+
+  const checkVideoSize = () => {
+    let video = document.getElementById("video-size-check");
+    console.log(video.offsetHeight);
+    console.log(video.offsetWidth);
   };
 
   const toggleIsPlaying = () => {
@@ -60,7 +68,7 @@ const VideoPlayer = (props) => {
       </div>
       <div className={styles[`video-container`]}>
         <div className={`${styles[`video-placeholder-container`]}`}>
-          <div ref={videoPlaceholderRef} className={`${styles[`video-placeholder`]}`}>
+          <div id="video-size-check" ref={videoPlaceholderRef} className={`${styles[`video-placeholder`]}`}>
             <ReactPlayer
               className={styles[`video-player`]}
               url="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
@@ -188,6 +196,7 @@ const VideoPlayer = (props) => {
       </div>
 
       <VideoCapture videoPlayerRef={videoPlayerRef} />
+      <Button onClick={checkVideoSize}>videoSize</Button>
     </div>
   );
 };
