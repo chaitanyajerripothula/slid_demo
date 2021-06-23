@@ -8,13 +8,12 @@ import Undo from "./utils/tools/undo";
 
 class Editor extends React.PureComponent {
   componentRef = React.createRef();
-
+  isSave = true;
   constructor(props) {
     super(props);
     this.state = {
       undoInstance: this.setUndoRedoInstance,
       fontSize: "small",
-      save: true,
     };
   }
 
@@ -25,7 +24,7 @@ class Editor extends React.PureComponent {
 
   onChangeEditor = () => {
     console.log(`내용 변경 중!`);
-    this.setState({ save: false });
+    this.isSave = false;
   };
 
   insertImage = () => {
@@ -37,7 +36,7 @@ class Editor extends React.PureComponent {
   };
 
   render() {
-    let { fontSize, save } = this.state;
+    let { fontSize } = this.state;
 
     document.title = "제목 없음";
     const onChangeTitle = (e) => {
@@ -62,7 +61,7 @@ class Editor extends React.PureComponent {
           setEditorFontSize={this.setFontSize}
           undoEditor={() => this.undoInstance.undo()}
           redoEditor={() => this.undoInstance.redo()}
-          save={save}
+          isSave={this.isSave}
         />
       </div>
     );

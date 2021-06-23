@@ -8,7 +8,7 @@
   box-shadow: 0 -5px 10px hsl(0, 0%, 97%);
 }
 
-.video_document_editor_left_wrapper {
+.video-document-editor-left-wrapper {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -17,7 +17,7 @@
   width: 136px;
 }
 
-.video_document_editor_center_wrapper {
+.video-document-editor-center-wrapper {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -26,7 +26,7 @@
   background: #ffffff;
 }
 
-.video_document_editor_right_wrapper {
+.video-document-editor-right-wrapper {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -35,14 +35,14 @@
   width: 136px;
 }
 
-.video_document_editor_undo_redo_container {
+.video-document-editor-undo-redo-container {
   display: flex;
   justify-content: space-around;
   align-items: center;
   height: 50% !important;
 }
 
-.video_document_editor_setting_container {
+.video-document-editor-setting-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -51,7 +51,7 @@
   cursor: pointer;
 }
 
-.video_document_editor_save_container {
+.video-document-editor-save-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -60,7 +60,7 @@
   cursor: pointer;
 }
 
-.video_document_editor_download_container {
+.video-document-editor-download-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -68,38 +68,38 @@
   cursor: pointer;
 }
 
-.video_document_editor_control_icon {
+.video-document-editor-control-icon {
   width: 20px;
   height: 20px;
   cursor: pointer;
 }
 
-.video_document_editor_save_icon {
+.video-document-editor-save-icon {
   width: 16px;
   height: 16px;
   margin-right: 4px;
   cursor: pointer;
 }
 
-.video_document_editor_setting_icon {
+.video-document-editor-setting-icon {
   width: 16px;
   height: 16px;
   margin-right: 4px;
   cursor: pointer;
 }
 
-.video_document_editor_text {
+.video-document-editor-text {
   font-size: 13px;
 }
 
-.video_document_editor_download_icon {
+.video-document-editor-download-icon {
   width: 16px;
   height: 16px;
   margin-right: 4px;
   cursor: pointer;
 }
 
-.video_document_editor_capture_btn {
+.video-document-editor-capture-btn {
   width: 52px;
   height: 52px;
   margin: 0 6px;
@@ -112,8 +112,28 @@
   border-radius: 0.25rem;
 }
 
-.video_document_editor_capture_icon {
+.video-document-editor-capture-icon {
   width: 24px;
   height: 24px;
   cursor: pointer;
+}
+
+.video-document-editor-capture-option-btn {
+  width: 44px;
+  height: 44px;
+  background-color: #f7f7f9;
+  padding: 0 !important;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+}
+
+.video-document-editor-capture-option-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.video-document-editor-recording-icon {
+  width: 30px;
+  height: auto;
 }

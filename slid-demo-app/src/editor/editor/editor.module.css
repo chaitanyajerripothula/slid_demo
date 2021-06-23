@@ -1,15 +1,15 @@
 .container {
-  overflow-y: hidden;
+  height: 700px;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   z-index: 1;
   background: #ffffff;
 }
 .editor-container {
-  /* font-size */
   box-sizing: border-box;
   padding: 0 40px 0;
+  background: #ffffff;
 }
 
 .font-small {

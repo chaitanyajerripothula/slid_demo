@@ -6,14 +6,18 @@ import settingImg from "../../design/assets/slid_setting_icon.png";
 import saveImg from "../../design/assets/slid_double_check_icon.png";
 import downloadImg from "../../design/assets/slid_download_icon.png";
 import captureImg from "../../design/assets/slid_capture_icon.png";
+import areaCaptureImg from "../../design/assets/slid_set_area_icon.png";
+import recordingImg from "../../design/assets/slid_recording_gray_icon.png";
+
 import { useReactToPrint } from "react-to-print";
 import EditorSetting from "../editorSetting";
 
 const EditorController = (props) => {
   const { componentRef } = props;
-
   const [open, setOpen] = useState(false);
   const [fontSize, setFontSize] = useState("");
+
+  props.setEditorFontSize(fontSize);
 
   const renderPdfPrint = useReactToPrint({
     content: () => componentRef.current,
@@ -27,15 +31,13 @@ const EditorController = (props) => {
     setOpen(!open);
   };
 
-  props.setEditorFontSize(fontSize);
-
   return (
-    <div className={styles.container}>
+    <div className={`${styles[`container`]}`}>
       {open ? <EditorSetting setFontSize={setFontSize} /> : null}
-      <div className={styles.video_document_editor_left_wrapper}>
-        <div className={styles.video_document_editor_undo_redo_container}>
+      <div className={`${styles[`video-document-editor-left-wrapper`]}`}>
+        <div className={`${styles[`video-document-editor-undo-redo-container`]}`}>
           <img
-            className={styles.video_document_editor_control_icon}
+            className={`${styles[`video-document-editor-control-icon`]}`}
             src={undoImg}
             alt="undo"
             onClick={() => {
@@ -43,7 +45,7 @@ const EditorController = (props) => {
             }}
           />
           <img
-            className={styles.video_document_editor_control_icon}
+            className={`${styles[`video-document-editor-control-icon`]}`}
             src={redoImg}
             alt="redo"
             onClick={() => {
@@ -51,26 +53,30 @@ const EditorController = (props) => {
             }}
           />
         </div>
-        <div className={styles.video_document_editor_setting_container} onClick={openEditorSetting}>
-          <img className={styles.video_document_editor_setting_icon} src={settingImg} alt="settingImage" />
-          <span className={styles.video_document_editor_text}>Editor Setting</span>
+        <div className={`${styles[`video-document-editor-setting-container`]}`} onClick={openEditorSetting}>
+          <img className={`${styles[`video-document-editor-setting-icon`]}`} src={settingImg} alt="settingImage" />
+          <span className={`${styles[`video-document-editor-text`]}`}>Editor Setting</span>
         </div>
       </div>
-      <div className={styles.video_document_editor_center_wrapper}>
-        <button>1</button>
-        <button className={styles.video_document_editor_capture_btn} onClick={insertImage}>
-          <img className={styles.video_document_editor_capture_icon} src={captureImg} alt="captureImage" />
+      <div className={`${styles[`video-document-editor-center-wrapper`]}`}>
+        <button className={`${styles[`video-document-editor-capture-option-btn`]} btn btn-light`}>
+          <img className={`${styles[`video-document-editor-capture-option-icon`]}`} src={areaCaptureImg} alt="areaCaptureImage" />
         </button>
-        <button>3</button>
+        <button className={`${styles[`video-document-editor-capture-btn`]} btn btn-primary`} onClick={insertImage}>
+          <img className={`${styles[`video-document-editor-capture-icon`]}`} src={captureImg} alt="captureImage" />
+        </button>
+        <button className={`${styles[`video-document-editor-capture-option-btn`]} btn btn-light`}>
+          <img className={`${styles[`video-document-editor-recording-icon`]}`} src={recordingImg} alt="recordingImg" />
+        </button>
       </div>
-      <div className={styles.video_document_editor_right_wrapper}>
-        <div className={styles.video_document_editor_save_container}>
-          <img className={styles.video_document_editor_save_icon} src={saveImg} alt="saveImage" />
-          <span className={styles.video_document_editor_text}>{props.save ? "저장완료" : "자동 저장 중..."}</span>
+      <div className={`${styles[`video-document-editor-right-wrapper`]}`}>
+        <div className={`${styles[`video-document-editor-save-container`]}`}>
+          <img className={`${styles[`video-document-editor-save-icon`]}`} src={saveImg} alt="saveImage" />
+          <span className={`${styles[`video-document-editor-text`]}`}>{props.isSave ? "저장완료" : "자동 저장 중..."}</span>
         </div>
-        <div className={styles.video_document_editor_download_container} onClick={renderPdfPrint}>
-          <img className={styles.video_document_editor_download_icon} src={downloadImg} alt="downloadImage" />
-          <span className={styles.video_document_editor_text}>Download</span>
+        <div className={`${styles[`video-document-editor-download-container`]}`} onClick={renderPdfPrint}>
+          <img className={`${styles[`video-document-editor-download-icon`]}`} src={downloadImg} alt="downloadImage" />
+          <span className={`${styles[`video-document-editor-text`]}`}>Download</span>
         </div>
       </div>
     </div>
