@@ -1,6 +1,7 @@
 import React from "react";
 import EditorComponent from "../editor/EditorComponent";
 import Swal from "sweetalert2";
+import "./VideoDocumentEditor.css";
 
 const VideoDocumentEditor = (props) => {
   const { show, handleClose, handleShow } = props;
@@ -8,15 +9,13 @@ const VideoDocumentEditor = (props) => {
   const HandleClick = () => {
     handleShow();
     Swal.fire({
-      position: "center",
+      target: document.getElementById("toast-container"),
       title: "Are you sure?",
       text: "User will have Admin Privileges",
-      icon: "warning",
       showDenyButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes!",
-      target: document.querySelector("#toast-container"),
     }).then((result) => {
       if (result.isDenied) {
         handleClose();
@@ -24,7 +23,7 @@ const VideoDocumentEditor = (props) => {
         handleClose();
       }
     });
-
+    console.log(document.getElementById("test"));
     console.log(Swal.getContainer);
   };
 
@@ -34,15 +33,7 @@ const VideoDocumentEditor = (props) => {
       <button class="btn btn-success btn" onClick={HandleClick}>
         button
       </button>
-      <div
-        style={{
-          width: 100,
-          height: 100,
-          backgroundColor: "blue",
-        }}
-      >
-        hi
-      </div>
+      <div id="test"></div>
     </div>
   );
 };
