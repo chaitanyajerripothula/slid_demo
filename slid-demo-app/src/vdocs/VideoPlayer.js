@@ -25,19 +25,11 @@ const VideoPlayer = (props) => {
   }, [show]);
 
   const initCanvas = () => {
-    let video = document.getElementById("video-size-check");
-
     new fabric.Canvas("canvas", {
-      width: video.offsetWidth,
-      height: video.offsetHeight,
+      width: videoPlaceholderRef.current.offsetWidth,
+      height: videoPlaceholderRef.current.offsetHeight,
       backgroundColor: "pink",
     });
-  };
-
-  const checkVideoSize = () => {
-    let video = document.getElementById("video-size-check");
-    console.log(video.offsetHeight);
-    console.log(video.offsetWidth);
   };
 
   const toggleIsPlaying = () => {
@@ -196,7 +188,6 @@ const VideoPlayer = (props) => {
       </div>
 
       <VideoCapture videoPlayerRef={videoPlayerRef} />
-      <Button onClick={checkVideoSize}>videoSize</Button>
     </div>
   );
 };
