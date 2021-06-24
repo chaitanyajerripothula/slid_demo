@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 import "./VideoDocumentEditor.css";
 
 const VideoDocumentEditor = (props) => {
-  const { show, handleClose, handleShow } = props;
+  const { show, handleClose, handleShow, fullImageCapture } = props;
 
   const HandleClick = () => {
     handleShow();
@@ -33,6 +33,7 @@ const VideoDocumentEditor = (props) => {
       <button class="btn btn-success btn" onClick={HandleClick}>
         button
       </button>
+      <button onClick={fullImageCapture}> FullCapture </button>
       <div id="test"></div>
     </div>
   );
