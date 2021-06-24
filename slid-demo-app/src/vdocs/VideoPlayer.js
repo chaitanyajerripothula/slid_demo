@@ -21,28 +21,20 @@ const VideoPlayer = (props) => {
   const videoForwardButtonRef = useRef();
 
   useEffect(() => {
+    console.log("useEffect");
     setCanvas(initCanvas);
-    console.log(canvas);
-    console.log(document.getElementById("canvas"));
+
+    if (show) {
+      createBoundary(canvas);
+    }
   }, [show]);
 
-  const initCanvas = () => {
+  const initCanvas = () =>
     new fabric.Canvas("canvas", {
       width: videoPlaceholderRef.current.offsetWidth,
       height: videoPlaceholderRef.current.offsetHeight,
       backgroundColor: "transparent",
     });
-  };
-
-  const addRect = (canvi) => {
-    const rect = new fabric.Rect({
-      height: 280,
-      width: 200,
-      fill: "yellow",
-    });
-    canvi.add(rect);
-    canvi.renderAll();
-  };
 
   // 범위 지정 사각형 생성 함수
   const createBoundary = (canvas) => {
@@ -54,6 +46,18 @@ const VideoPlayer = (props) => {
     let y = 0;
 
     let square;
+
+    square = new fabric.Rect({
+      height: videoPlaceholderRef.current.offsetHeight - 3,
+      width: videoPlaceholderRef.current.offsetWidth - 3,
+      fill: "rgb(255, 255, 255, 0.2)",
+      stroke: "blue",
+      opacity: 1,
+      strokeWidth: 3,
+      strokeDashArray: [15, 15],
+    });
+    canvas.add(square);
+    canvas.renderAll();
 
     canvas.on("mouse:down", (event) => {
       clearCanvas(canvas);
@@ -69,7 +73,7 @@ const VideoPlayer = (props) => {
         height: 0,
         left: x,
         top: y,
-        fill: "rgb(255, 255, 255, 0)",
+        fill: "rgb(255, 255, 255, 0.2)",
         stroke: "blue",
         opacity: 1,
         strokeWidth: 4,
@@ -85,9 +89,7 @@ const VideoPlayer = (props) => {
       if (!mousePressed) {
         return false;
       }
-
       const mouse = canvas.getPointer(event.e);
-
       let w = Math.abs(mouse.x - x),
         h = Math.abs(mouse.y - y);
 
@@ -105,7 +107,8 @@ const VideoPlayer = (props) => {
       }
       square = canvas.getActiveObject();
       canvas.add(square);
-
+      console.log(canvas);
+      console.log(square);
       // imageCapture(square);
 
       canvas.renderAll();
@@ -116,7 +119,7 @@ const VideoPlayer = (props) => {
     canvas.getObjects().forEach((o) => {
       console.log(o);
       console.log(canvas.getObjects());
-      if (o !== canvas.backgroundImage) {
+      if (o !== canvas.backgroundColor) {
         canvas.remove(o);
       }
     });
@@ -278,7 +281,7 @@ const VideoPlayer = (props) => {
       </div>
 
       <VideoCapture videoPlayerRef={videoPlayerRef} />
-      <Button onClick={() => addRect(canvas)}>createBoundary</Button>
+      <Button onClick={() => createBoundary(canvas)}>createBoundary</Button>
     </div>
   );
 };
