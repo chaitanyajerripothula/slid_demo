@@ -15,6 +15,7 @@ const VideoPlayer = (props) => {
   const [skipInterval, setSkipInterval] = useState(5);
 
   const canvasRef = useRef();
+  const fabricCanvas = useRef();
   const videoPlayerRef = useRef();
   const videoPlaceholderRef = useRef();
   const videoBackwardButtonRef = useRef();
@@ -22,14 +23,23 @@ const VideoPlayer = (props) => {
 
   useEffect(() => {
     setCanvas(initCanvas);
+    console.log(canvasRef);
   }, [show]);
 
   const initCanvas = () => {
-    new fabric.Canvas("canvas", {
+    const canvi = new fabric.Canvas("canvas", {
       width: videoPlaceholderRef.current.offsetWidth,
       height: videoPlaceholderRef.current.offsetHeight,
-      backgroundColor: "pink",
+      backgroundColor: "transparent"
     });
+
+    const rect = new fabric.Rect({
+      height: 100,
+      width: 100,
+      fill: "yellow",
+    });
+    canvi.add(rect);
+    canvi.renderAll();
   };
 
   const toggleIsPlaying = () => {
@@ -54,7 +64,7 @@ const VideoPlayer = (props) => {
               zIndex: 1000,
             }}
           >
-            <canvas id="canvas" />
+            <canvas id="canvas"/>
           </span>
         ) : null}
       </div>
