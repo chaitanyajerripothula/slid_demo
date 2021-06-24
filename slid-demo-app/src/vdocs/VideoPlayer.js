@@ -8,149 +8,26 @@ import { fabric } from "fabric";
 const VideoPlayer = (props) => {
   const { show } = props;
 
-  const [canvas, setCanvas] = useState("");
   const [isPlaying, setIsPlaying] = useState();
   const [videoState, setVideoState] = useState("empty");
   const [playbackSpeed, setPlaybackSpeed] = useState(1);
   const [skipInterval, setSkipInterval] = useState(5);
 
-  const canvasRef = useRef();
   const videoPlayerRef = useRef();
   const videoPlaceholderRef = useRef();
-  const videoBackwardButtonRef = useRef();
-  const videoForwardButtonRef = useRef();
-
-  useEffect(() => {
-    console.log("useEffect");
-    setCanvas(initCanvas);
-
-    if (show) {
-      createBoundary(canvas);
-    }
-  }, [show]);
-
-  const initCanvas = () =>
-    new fabric.Canvas("canvas", {
-      width: videoPlaceholderRef.current.offsetWidth,
-      height: videoPlaceholderRef.current.offsetHeight,
-      backgroundColor: "transparent",
-    });
-
-  // 범위 지정 사각형 생성 함수
-  const createBoundary = (canvas) => {
-    console.log("createBoundary");
-    console.log(canvas);
-    console.log(canvasRef.current);
-    let mousePressed = false;
-    let x = 0;
-    let y = 0;
-
-    let square;
-
-    square = new fabric.Rect({
-      height: videoPlaceholderRef.current.offsetHeight - 3,
-      width: videoPlaceholderRef.current.offsetWidth - 3,
-      fill: "rgb(255, 255, 255, 0.2)",
-      stroke: "blue",
-      opacity: 1,
-      strokeWidth: 3,
-      strokeDashArray: [15, 15],
-    });
-    canvas.add(square);
-    canvas.renderAll();
-
-    canvas.on("mouse:down", (event) => {
-      clearCanvas(canvas);
-      mousePressed = true;
-      console.log(event);
-      const mouse = canvas.getPointer(event.e);
-      mousePressed = true;
-      x = mouse.x;
-      y = mouse.y;
-
-      square = new fabric.Rect({
-        width: 0,
-        height: 0,
-        left: x,
-        top: y,
-        fill: "rgb(255, 255, 255, 0.2)",
-        stroke: "blue",
-        opacity: 1,
-        strokeWidth: 4,
-        strokeDashArray: [15, 15],
-      });
-
-      canvas.add(square);
-      canvas.renderAll();
-      canvas.setActiveObject(square);
-    });
-
-    canvas.on("mouse:move", (event) => {
-      if (!mousePressed) {
-        return false;
-      }
-      const mouse = canvas.getPointer(event.e);
-      let w = Math.abs(mouse.x - x),
-        h = Math.abs(mouse.y - y);
-
-      if (!w || !h) {
-        return false;
-      }
-      square = canvas.getActiveObject();
-      square.set("width", w).set("height", h);
-      canvas.renderAll();
-    });
-
-    canvas.on("mouse:up", (event) => {
-      if (mousePressed) {
-        mousePressed = false;
-      }
-      square = canvas.getActiveObject();
-      canvas.add(square);
-      console.log(canvas);
-      console.log(square);
-      // imageCapture(square);
-
-      canvas.renderAll();
-    });
-  };
-
-  const clearCanvas = (canvas) => {
-    canvas.getObjects().forEach((o) => {
-      console.log(o);
-      console.log(canvas.getObjects());
-      if (o !== canvas.backgroundColor) {
-        canvas.remove(o);
-      }
-    });
-  };
 
   const toggleIsPlaying = () => {
     isPlaying ? setIsPlaying(false) : setIsPlaying(true);
   };
 
-  const updateVideoTime = (skipInterval, e) => {
+  const updateVideoTime = (skipInterval) => {
     const currentTime = videoPlayerRef.current.getCurrentTime();
     videoPlayerRef.current.seekTo(currentTime + skipInterval);
   };
 
   return (
     <div>
-      <div>
-        {show ? (
-          <span
-            style={{
-              position: "absolute",
-              left: 0,
-              top: 0,
-              visibility: "visible",
-              zIndex: 1000,
-            }}
-          >
-            <canvas id="canvas" ref={canvasRef} />
-          </span>
-        ) : null}
-      </div>
+      <div></div>
       <div className={styles[`video-container`]}>
         <div className={`${styles[`video-placeholder-container`]}`}>
           <div id="video-size-check" ref={videoPlaceholderRef} className={`${styles[`video-placeholder`]}`}>
@@ -246,10 +123,9 @@ const VideoPlayer = (props) => {
             <div className={styles[`control-container`]}>
               <OverlayTrigger placement={"top"} overlay={<Tooltip className={`shortcut-tooltip`}>{`${skipInterval}초 뒤로 (Alt + J)`}</Tooltip>}>
                 <button
-                  ref={videoBackwardButtonRef}
                   className={`${styles[`skip-btn`]} ${styles[`skip-backward-btn`]} btn btn-secondary`}
-                  onClick={(e) => {
-                    updateVideoTime(-skipInterval, e);
+                  onClick={() => {
+                    updateVideoTime(-skipInterval);
                   }}
                 >
                   -{skipInterval} <img alt={`skip backward button`} className={`${styles[`skip-backward`]}`} src={`../../design/assets/slid_backward_white_icon.png`} />
@@ -264,10 +140,9 @@ const VideoPlayer = (props) => {
 
               <OverlayTrigger placement={"top"} overlay={<Tooltip className={`shortcut-tooltip`}>{`${skipInterval}초 앞으로 (Alt + L)`}</Tooltip>}>
                 <button
-                  ref={videoForwardButtonRef}
                   className={`${styles[`skip-btn`]} ${styles[`skip-forward-btn`]} btn btn-secondary`}
-                  onClick={(e) => {
-                    updateVideoTime(skipInterval, e);
+                  onClick={() => {
+                    updateVideoTime(skipInterval);
                   }}
                 >
                   <img alt={`skip forward button`} className={`${styles[`skip-forward`]}`} src={`../../design/assets/slid_forward_white_icon.png`} />+{skipInterval}
@@ -280,8 +155,7 @@ const VideoPlayer = (props) => {
         {/* Video Stamp */}
       </div>
 
-      <VideoCapture videoPlayerRef={videoPlayerRef} />
-      <Button onClick={() => createBoundary(canvas)}>createBoundary</Button>
+      <VideoCapture show={show} videoPlayerRef={videoPlayerRef} videoPlaceholderRef={videoPlaceholderRef} />
     </div>
   );
 };
