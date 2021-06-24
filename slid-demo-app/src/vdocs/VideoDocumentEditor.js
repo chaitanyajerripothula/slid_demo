@@ -21,10 +21,10 @@ const VideoDocumentEditor = (props) => {
         handleClose();
       } else if (result.isConfirmed) {
         handleClose();
+      } else {
+        handleClose();
       }
     });
-    console.log(document.getElementById("test"));
-    console.log(Swal.getContainer);
   };
 
   return (

@@ -8,45 +8,19 @@ import { fabric } from "fabric";
 const VideoPlayer = (props) => {
   const { show } = props;
 
-  const [canvas, setCanvas] = useState("");
   const [isPlaying, setIsPlaying] = useState();
   const [videoState, setVideoState] = useState("empty");
   const [playbackSpeed, setPlaybackSpeed] = useState(1);
   const [skipInterval, setSkipInterval] = useState(5);
 
-  const canvasRef = useRef();
-  const fabricCanvas = useRef();
   const videoPlayerRef = useRef();
   const videoPlaceholderRef = useRef();
-  const videoBackwardButtonRef = useRef();
-  const videoForwardButtonRef = useRef();
-
-  useEffect(() => {
-    setCanvas(initCanvas);
-    console.log(canvasRef);
-  }, [show]);
-
-  const initCanvas = () => {
-    const canvi = new fabric.Canvas("canvas", {
-      width: videoPlaceholderRef.current.offsetWidth,
-      height: videoPlaceholderRef.current.offsetHeight,
-      backgroundColor: "transparent"
-    });
-
-    const rect = new fabric.Rect({
-      height: 100,
-      width: 100,
-      fill: "yellow",
-    });
-    canvi.add(rect);
-    canvi.renderAll();
-  };
 
   const toggleIsPlaying = () => {
     isPlaying ? setIsPlaying(false) : setIsPlaying(true);
   };
 
-  const updateVideoTime = (skipInterval, e) => {
+  const updateVideoTime = (skipInterval) => {
     const currentTime = videoPlayerRef.current.getCurrentTime();
     videoPlayerRef.current.seekTo(currentTime + skipInterval);
   };
@@ -54,19 +28,6 @@ const VideoPlayer = (props) => {
   return (
     <div>
       <div>
-        {show ? (
-          <span
-            style={{
-              position: "absolute",
-              left: 0,
-              top: 0,
-              visibility: "visible",
-              zIndex: 1000,
-            }}
-          >
-            <canvas id="canvas"/>
-          </span>
-        ) : null}
       </div>
       <div className={styles[`video-container`]}>
         <div className={`${styles[`video-placeholder-container`]}`}>
@@ -163,10 +124,9 @@ const VideoPlayer = (props) => {
             <div className={styles[`control-container`]}>
               <OverlayTrigger placement={"top"} overlay={<Tooltip className={`shortcut-tooltip`}>{`${skipInterval}초 뒤로 (Alt + J)`}</Tooltip>}>
                 <button
-                  ref={videoBackwardButtonRef}
                   className={`${styles[`skip-btn`]} ${styles[`skip-backward-btn`]} btn btn-secondary`}
-                  onClick={(e) => {
-                    updateVideoTime(-skipInterval, e);
+                  onClick={() => {
+                    updateVideoTime(-skipInterval);
                   }}
                 >
                   -{skipInterval} <img alt={`skip backward button`} className={`${styles[`skip-backward`]}`} src={`../../design/assets/slid_backward_white_icon.png`} />
@@ -181,10 +141,9 @@ const VideoPlayer = (props) => {
 
               <OverlayTrigger placement={"top"} overlay={<Tooltip className={`shortcut-tooltip`}>{`${skipInterval}초 앞으로 (Alt + L)`}</Tooltip>}>
                 <button
-                  ref={videoForwardButtonRef}
                   className={`${styles[`skip-btn`]} ${styles[`skip-forward-btn`]} btn btn-secondary`}
-                  onClick={(e) => {
-                    updateVideoTime(skipInterval, e);
+                  onClick={() => {
+                    updateVideoTime(skipInterval);
                   }}
                 >
                   <img alt={`skip forward button`} className={`${styles[`skip-forward`]}`} src={`../../design/assets/slid_forward_white_icon.png`} />+{skipInterval}
@@ -197,7 +156,7 @@ const VideoPlayer = (props) => {
         {/* Video Stamp */}
       </div>
 
-      <VideoCapture videoPlayerRef={videoPlayerRef} />
+      <VideoCapture show={show} videoPlayerRef={videoPlayerRef} videoPlaceholderRef={videoPlaceholderRef} />
     </div>
   );
 };
