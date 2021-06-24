@@ -22,13 +22,103 @@ const VideoPlayer = (props) => {
 
   useEffect(() => {
     setCanvas(initCanvas);
+    console.log(canvas);
+    console.log(document.getElementById("canvas"));
   }, [show]);
 
   const initCanvas = () => {
     new fabric.Canvas("canvas", {
       width: videoPlaceholderRef.current.offsetWidth,
       height: videoPlaceholderRef.current.offsetHeight,
-      backgroundColor: "pink",
+      backgroundColor: "transparent",
+    });
+  };
+
+  const addRect = (canvi) => {
+    const rect = new fabric.Rect({
+      height: 280,
+      width: 200,
+      fill: "yellow",
+    });
+    canvi.add(rect);
+    canvi.renderAll();
+  };
+
+  // 범위 지정 사각형 생성 함수
+  const createBoundary = (canvas) => {
+    console.log("createBoundary");
+    console.log(canvas);
+    console.log(canvasRef.current);
+    let mousePressed = false;
+    let x = 0;
+    let y = 0;
+
+    let square;
+
+    canvas.on("mouse:down", (event) => {
+      clearCanvas(canvas);
+      mousePressed = true;
+      console.log(event);
+      const mouse = canvas.getPointer(event.e);
+      mousePressed = true;
+      x = mouse.x;
+      y = mouse.y;
+
+      square = new fabric.Rect({
+        width: 0,
+        height: 0,
+        left: x,
+        top: y,
+        fill: "rgb(255, 255, 255, 0)",
+        stroke: "blue",
+        opacity: 1,
+        strokeWidth: 4,
+        strokeDashArray: [15, 15],
+      });
+
+      canvas.add(square);
+      canvas.renderAll();
+      canvas.setActiveObject(square);
+    });
+
+    canvas.on("mouse:move", (event) => {
+      if (!mousePressed) {
+        return false;
+      }
+
+      const mouse = canvas.getPointer(event.e);
+
+      let w = Math.abs(mouse.x - x),
+        h = Math.abs(mouse.y - y);
+
+      if (!w || !h) {
+        return false;
+      }
+      square = canvas.getActiveObject();
+      square.set("width", w).set("height", h);
+      canvas.renderAll();
+    });
+
+    canvas.on("mouse:up", (event) => {
+      if (mousePressed) {
+        mousePressed = false;
+      }
+      square = canvas.getActiveObject();
+      canvas.add(square);
+
+      // imageCapture(square);
+
+      canvas.renderAll();
+    });
+  };
+
+  const clearCanvas = (canvas) => {
+    canvas.getObjects().forEach((o) => {
+      console.log(o);
+      console.log(canvas.getObjects());
+      if (o !== canvas.backgroundImage) {
+        canvas.remove(o);
+      }
     });
   };
 
@@ -54,7 +144,7 @@ const VideoPlayer = (props) => {
               zIndex: 1000,
             }}
           >
-            <canvas id="canvas" />
+            <canvas id="canvas" ref={canvasRef} />
           </span>
         ) : null}
       </div>
@@ -188,6 +278,7 @@ const VideoPlayer = (props) => {
       </div>
 
       <VideoCapture videoPlayerRef={videoPlayerRef} />
+      <Button onClick={() => addRect(canvas)}>createBoundary</Button>
     </div>
   );
 };

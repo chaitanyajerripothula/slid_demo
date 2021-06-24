@@ -3,6 +3,7 @@ import SplitPane from "react-split-pane";
 import VideoPlayer from "../vdocs/VideoPlayer";
 import VideoDocumentEditor from "../vdocs/VideoDocumentEditor";
 import styles from "./VideoDocument.module.css";
+import { fabric } from "fabric";
 
 const VideoDocument = () => {
   const [show, setShow] = useState(false);
