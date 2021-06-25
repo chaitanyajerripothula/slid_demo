@@ -4,7 +4,7 @@ import styles from "./editorComponent.module.css";
 
 const EditorComponent = () => {
   return (
-    <div className={`${styles[`container`]}`}>
+    <div id="custom-target" className={`${styles[`container`]}`}>
       <Editor />
     </div>
   );
