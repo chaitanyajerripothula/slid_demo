@@ -174,8 +174,6 @@ export default class SimpleImage {
    * @returns {boolean}
    */
   static get isReadOnlySupported() {
-    console.log("isReadOnlySupported");
-
     return true;
   }
 
@@ -253,8 +251,6 @@ export default class SimpleImage {
    */
   set data(data) {
     this._data = Object.assign({}, this.data, data);
-
-    console.log(`setData url>>  ${this._data.url}`);
 
     if (this.nodes.image) {
       this.nodes.image.src = this.data.url;
