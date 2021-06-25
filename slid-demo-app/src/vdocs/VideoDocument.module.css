@@ -1,9 +1,10 @@
 .vdocs-container {
     height: 100%;
-    min-height: -webkit-fill-available;
-    display: block;
 }
 .split-wrapper {
     height: 100%;
-    display: flex!important;
+}
+
+*:fullscreen, *:-webkit-full-screen, *:-moz-full-screen, *:-ms-fullscreen{
+    background-color: white;
 }

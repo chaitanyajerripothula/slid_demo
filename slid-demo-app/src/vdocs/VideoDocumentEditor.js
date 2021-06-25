@@ -16,6 +16,7 @@ const VideoDocumentEditor = (props) => {
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes!",
+      heightAuto: false,
     }).then((result) => {
       if (result.isDenied) {
         handleClose();

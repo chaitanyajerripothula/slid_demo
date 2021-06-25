@@ -6,20 +6,20 @@
 
 .video-view-controller-container {
   position: fixed;
-  width: 66px;
-  height: 37px;
-  top: 20px;
-  left: 20px;
+  width: 87px;
+  height: 48px;
+  top: 10px;
+  left: 10px;
   box-shadow: rgb(0 0 0 / 15%) 0px 0.5rem 1rem;
   border-radius: 5px;
   background-color: rgb(65, 65, 65);
   z-index: 2147483647;
-  padding: 0.3rem !important;
+  padding: 0.5rem !important;
 }
 
 .video-view-icon {
   cursor: pointer;
-  width: 25px;
+  width: 32px;
   display: inline;
   margin-right: 0.2rem !important;
   margin: 0;
@@ -42,13 +42,12 @@
 }
 
 .video-player {
-  width: 100%;
-  height: 100%;
+  width: 100% !important;
+  height: 100% !important;
   left: 0px;
   top: 0px;
-  display: block;
   position: absolute;
-  object-fit: contain;
+  border: unset;
 }
 
 .video-play-controller-container {

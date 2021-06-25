@@ -3,7 +3,7 @@ import { fabric } from "fabric";
 import styles from "./VideoCapture.module.css";
 
 const VideoCapture = (props) => {
-    const { show, videoPlayerRef, videoPlaceholderRef, captureBtnClicked } = props;
+    const { show, videoPlayerRef, videoPlaceholderRef, captureBtnClicked, fullImageCapture } = props;
     const canvas = useRef();
     const canvasRef = useRef();
 
@@ -12,7 +12,6 @@ const VideoCapture = (props) => {
         let w, h, ratio;
 
         ratio = videoPlayerRef.current.getInternalPlayer().videoWidth / videoPlayerRef.current.getInternalPlayer().videoHeight;
-        console.log(ratio)
   
         h = 300
         w = parseInt(h * ratio, 10);
@@ -27,6 +26,9 @@ const VideoCapture = (props) => {
         //const frame = captureVideoFrame(this.player.getInternalPlayer())
         //let imageURL = frame.dataUri
         let imageURL = canvas.current.toDataURL();
+        console.log(imageURL);
+
+        fullImageCapture();
       }
     }, [captureBtnClicked]);
 
@@ -134,7 +136,7 @@ const VideoCapture = (props) => {
                 </span>
                 ) : null}
 
-            {captureBtnClicked ? (<canvas ref={canvas}/>) : null}
+            <canvas ref={canvas}/>
         </div>
     );
 };

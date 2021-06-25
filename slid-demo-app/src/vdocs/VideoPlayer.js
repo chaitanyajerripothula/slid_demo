@@ -6,7 +6,7 @@ import styles from "./VideoPlayer.module.css";
 import { fabric } from "fabric";
 
 const VideoPlayer = (props) => {
-  const { show, isFullScreen, setFullScreen, captureBtnClicked} = props;
+  const { show, isFullScreen, setFullScreen, captureBtnClicked, fullImageCapture, lang, isMacOs } = props;
 
   const [isPlaying, setIsPlaying] = useState();
   const [videoState, setVideoState] = useState("empty");
@@ -25,8 +25,11 @@ const VideoPlayer = (props) => {
     videoPlayerRef.current.seekTo(currentTime + skipInterval);
   };
 
+  const fullImageCaptureRef = () => {
+    fullImageCapture();
+  }
+
   return (
-    <div>
     <div className={styles[`video-container`]}>
       <div className={styles[`video-view-controller-container`]}>
         <img alt={`slid close button`} src={`../../design/assets/slid_video_close_icon.png`} className={styles[`video-view-icon`]}/>
@@ -81,11 +84,11 @@ const VideoPlayer = (props) => {
 
             <Dropdown.Menu className={styles[`setting-popup`]}>
               <div>
-                <span className={styles[`setting-title`]}>동영상 설정</span>
+                <span className={styles[`setting-title`]}>{lang === "ko-KR" ? "동영상 설정" : "Video Setting"} </span>
               </div>
               <div>
                 <div className={`${styles[`setting-option`]}`}>
-                  <span>구간 이동 간격</span>
+                  <span>{lang === "ko-KR" ? "구간 이동 간격" : "Skip interval"}</span>
                   <select
                     className={`${styles[`select`]} custom-select custom-select-sm`}
                     value={skipInterval}
@@ -100,7 +103,7 @@ const VideoPlayer = (props) => {
                   </select>
                 </div>
                 <div className={`${styles[`setting-option`]}`}>
-                  <span>재생속도</span>
+                  <span>{lang === "ko-KR" ? "재생 속도" : "Playback Speed"}</span>
                   <select
                     className={`${styles[`select`]} custom-select custom-select-sm`}
                     value={playbackSpeed}
@@ -125,7 +128,12 @@ const VideoPlayer = (props) => {
         </div>
         <div>
           <div className={styles[`control-container`]}>
-            <OverlayTrigger placement={"top"} overlay={<Tooltip className={`shortcut-tooltip`}>{`${skipInterval}초 뒤로 (Alt + J)`}</Tooltip>}>
+            <OverlayTrigger 
+              placement={"top"} 
+              overlay={
+                <Tooltip className={`shortcut-tooltip`}>
+                  {lang === "ko-KR" ? `${skipInterval}초 뒤로 (${isMacOs ? "Cmd + J" : "Alt + J"})` : `Rewind (${isMacOs ? "Cmd + J" : "Alt + J"})`}
+                </Tooltip>}>
               <button
                 className={`${styles[`skip-btn`]} ${styles[`skip-backward-btn`]} btn btn-secondary`}
                 onClick={() => {
@@ -136,13 +144,29 @@ const VideoPlayer = (props) => {
               </button>
             </OverlayTrigger>
 
-            <OverlayTrigger placement={"top"} overlay={<Tooltip className={`shortcut-tooltip`}>{{ isPlaying } ? `일시정지 (Alt + K)` : `재생 (Alt + K)`}</Tooltip>}>
+            <OverlayTrigger 
+              placement={"top"} 
+              overlay={
+                <Tooltip className={`shortcut-tooltip`}>
+                  {{ isPlaying } 
+                    ? lang === "ko-KR"
+                      ? `일시정지 (${isMacOs ? "Cmd + K" : "Alt + K"})`
+                      : `Pause (${isMacOs ? "Cmd + K" : "Alt + K"})`
+                    : lang === "ko-KR"
+                    ? `재생 (${isMacOs ? "Cmd + K" : "Alt + K"})`
+                    : `Play (${isMacOs ? "Cmd + K" : "Alt + K"})`}
+                  </Tooltip>}>
               <button className={`${styles[`play-btn`]} btn btn-light`} onClick={toggleIsPlaying}>
                 <img alt={`play pause button`} className={styles[`video-icon`]} src={`../../design/assets/slid_${isPlaying ? "pause" : "play"}_btn_icon.png`} />
               </button>
             </OverlayTrigger>
 
-            <OverlayTrigger placement={"top"} overlay={<Tooltip className={`shortcut-tooltip`}>{`${skipInterval}초 앞으로 (Alt + L)`}</Tooltip>}>
+            <OverlayTrigger 
+              placement={"top"} 
+              overlay={
+                <Tooltip className={`shortcut-tooltip`}>
+                  {lang === "ko-KR" ? `${skipInterval}초 앞으로 (${isMacOs ? "Cmd + L" : "Alt + L"})` : `Fast-forward (${isMacOs ? "Cmd + L" : "Alt + L"})`}
+                </Tooltip>}>
               <button
                 className={`${styles[`skip-btn`]} ${styles[`skip-forward-btn`]} btn btn-secondary`}
                 onClick={() => {
@@ -158,11 +182,7 @@ const VideoPlayer = (props) => {
         {/* Video Stamp */}
 
       </div>
-    </div>
-
-    <div>
-    <VideoCapture show={show} videoPlayerRef={videoPlayerRef} videoPlaceholderRef={videoPlaceholderRef} captureBtnClicked={captureBtnClicked} />
-    </div>
+      <VideoCapture show={show} videoPlayerRef={videoPlayerRef} videoPlaceholderRef={videoPlaceholderRef} captureBtnClicked={captureBtnClicked} fullImageCapture={fullImageCaptureRef} />
     </div>
   );
 };
