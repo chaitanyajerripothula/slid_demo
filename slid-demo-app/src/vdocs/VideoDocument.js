@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import SplitPane from "react-split-pane";
+import Split from 'react-split'
 import VideoPlayer from "../vdocs/VideoPlayer";
 import VideoDocumentEditor from "../vdocs/VideoDocumentEditor";
 import styles from "./VideoDocument.module.css";
@@ -55,7 +55,7 @@ const VideoDocument = (props) => {
 
   return (
     <div className={`${styles[`vdocs-container`]}`} id="slidDocument" ref={slidDoc}>
-      <SplitPane
+      <Split
         className={`${styles[`split-wrapper`]}`}
         sizes={[60, 40]}
         minSize={[(580, 330)]}
@@ -68,7 +68,7 @@ const VideoDocument = (props) => {
       >
         <VideoPlayer show={show} isFullScreen={isFullScreen} setFullScreen={setFullScreen} captureBtnClicked={captureBtnClicked} fullImageCapture={fullImageCapture} lang={lang} isMacOs={isMacOs}/>
         <VideoDocumentEditor show={show} handleClose={handleClose} handleShow={handleShow} fullImageCapture={fullImageCapture} />
-      </SplitPane>
+      </Split>
     </div>
   );
 };
