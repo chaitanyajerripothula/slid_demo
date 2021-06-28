@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import Split from 'react-split'
+import Split from 'react-split';
 import VideoPlayer from "../vdocs/VideoPlayer";
 import VideoDocumentEditor from "../vdocs/VideoDocumentEditor";
 import styles from "./VideoDocument.module.css";
@@ -56,7 +56,7 @@ const VideoDocument = (props) => {
   return (
     <div className={`${styles[`vdocs-container`]}`} id="slidDocument" ref={slidDoc}>
       <Split
-        className={`${styles[`split-wrapper`]}`}
+        className={`${styles[`split-wrapper`]} ${styles[`gutter-horizontal`]} d-flex`}
         sizes={[60, 40]}
         minSize={[(580, 330)]}
         expandToMin={false}

@@ -8,3 +8,7 @@
 *:fullscreen, *:-webkit-full-screen, *:-moz-full-screen, *:-ms-fullscreen{
     background-color: white;
 }
+
+.gutter-horizontal {
+    /* background-color: #c4c4c4; */
+}

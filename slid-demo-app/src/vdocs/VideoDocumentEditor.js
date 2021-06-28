@@ -1,10 +1,10 @@
 import React from "react";
 import EditorComponent from "../editor/EditorComponent";
 import Swal from "sweetalert2";
-import "./VideoDocumentEditor.css";
+import "./VideoDocumentEditor.module.css";
 
 const VideoDocumentEditor = (props) => {
-  const { show, handleClose, handleShow, fullImageCapture } = props;
+  const { handleClose, handleShow, fullImageCapture } = props;
 
   const HandleClick = () => {
     handleShow();

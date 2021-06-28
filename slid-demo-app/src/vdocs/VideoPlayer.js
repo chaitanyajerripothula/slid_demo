@@ -1,15 +1,14 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState } from "react";
 import ReactPlayer from "react-player";
-import { Dropdown, OverlayTrigger, Tooltip, Button } from "react-bootstrap";
+import { Dropdown, OverlayTrigger, Tooltip } from "react-bootstrap";
 import VideoCapture from "./VideoCapture";
 import styles from "./VideoPlayer.module.css";
-import { fabric } from "fabric";
 
 const VideoPlayer = (props) => {
   const { show, isFullScreen, setFullScreen, captureBtnClicked, fullImageCapture, lang, isMacOs } = props;
 
   const [isPlaying, setIsPlaying] = useState();
-  const [videoState, setVideoState] = useState("empty");
+  const [videoState, setVideoState] = useState();
   const [playbackSpeed, setPlaybackSpeed] = useState(1);
   const [skipInterval, setSkipInterval] = useState(5);
 
