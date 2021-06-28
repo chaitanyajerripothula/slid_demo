@@ -3,15 +3,25 @@ import SplitPane from "react-split-pane";
 import VideoPlayer from "../vdocs/VideoPlayer";
 import VideoDocumentEditor from "../vdocs/VideoDocumentEditor";
 import styles from "./VideoDocument.module.css";
-import { fabric } from "fabric";
 
 const VideoDocument = () => {
   const [show, setShow] = useState(false);
+  const [capture, setCapture] = useState(false);
 
   const handleClose = () => {
     console.log("handleClose");
     setShow(false);
   };
+
+  const handleCaptureOn = () => {
+    console.log("handleCaptureOn");
+    setCapture(true);
+  };
+
+  const handleCaptureOff = () => {
+    setCapture(false);
+  };
+
   const handleShow = () => {
     console.log("handleShow");
     setShow(true);
@@ -30,8 +40,8 @@ const VideoDocument = () => {
         direction="horizontal"
         cursor="col-resize"
       >
-        <VideoPlayer show={show} />
-        <VideoDocumentEditor show={show} handleClose={handleClose} handleShow={handleShow} />
+        <VideoPlayer show={show} capture={capture} handleCaptureOff={handleCaptureOff} />
+        <VideoDocumentEditor show={show} handleClose={handleClose} handleShow={handleShow} handleCaptureOn={handleCaptureOn} />
       </SplitPane>
     </div>
   );

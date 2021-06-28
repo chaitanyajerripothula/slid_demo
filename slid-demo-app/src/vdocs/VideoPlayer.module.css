@@ -28,7 +28,7 @@
   position: absolute;
   object-fit: contain;
 }
-  
+
 .video-view-controller-container {
   background-color: #3d3d3d !important;
   position: absolute;
@@ -96,24 +96,21 @@
 }
 
 .control-container {
-
 }
 
 .shortcut-tooltip {
-
 }
 
 .skip-btn {
   font-size: 17px;
   font-weight: 500;
   height: 44px;
-  background-color: #797979!important;
-  border-radius: 5px!important;
-  color: #f3f3f3!important;
+  background-color: #797979 !important;
+  border-radius: 5px !important;
+  color: #f3f3f3 !important;
 }
 
 .skip-backward-btn {
-
 }
 
 .skip-backward {
@@ -124,7 +121,6 @@
 }
 
 .skip-forward-btn {
-
 }
 
 .skip-forward {

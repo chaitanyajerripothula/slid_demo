@@ -1,9 +1,17 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { fabric } from "fabric";
 import styles from "./VideoCapture.module.css";
 
 const VideoCapture = (props) => {
-  const { show, videoPlayerRef, videoPlaceholderRef } = props;
+  const { show, capture, videoPlayerRef, videoPlaceholderRef } = props;
+
+  const [squareCoordinate, setSquareCoordinate] = useState({
+    left: "",
+    top: "",
+    width: "",
+    height: "",
+  });
+
   const canvas = useRef();
   const canvasRef = useRef();
 
@@ -32,23 +40,14 @@ const VideoCapture = (props) => {
   //영역 지정 캡처
   useEffect(() => {
     canvasRef.current = new fabric.Canvas("canvas", {
+      left: videoPlaceholderRef.current.left,
+      top: videoPlaceholderRef.current.top,
       width: videoPlaceholderRef.current.offsetWidth,
       height: videoPlaceholderRef.current.offsetHeight,
       backgroundColor: "transparent",
     });
     createBoundary(canvasRef.current);
   }, [show]);
-
-  const addRect = (canvi) => {
-    const rect = new fabric.Rect({
-      height: 280,
-      width: 200,
-      fill: "yellow",
-    });
-
-    canvi.add(rect);
-    canvi.renderAll();
-  };
 
   // 범위 지정 사각형 생성 함수
   const createBoundary = (canvas) => {
@@ -70,8 +69,6 @@ const VideoCapture = (props) => {
 
     canvas.on("mouse:down", (event) => {
       clearCanvas(canvas);
-      mousePressed = true;
-      console.log(event);
       const mouse = canvas.getPointer(event.e);
       mousePressed = true;
       x = mouse.x;
@@ -82,7 +79,7 @@ const VideoCapture = (props) => {
         height: 0,
         left: x,
         top: y,
-        fill: "rgb(255, 255, 255, 0)",
+        fill: "rgb(255, 255, 255, 0.2)",
         stroke: "blue",
         opacity: 1,
         strokeWidth: 3,
@@ -101,12 +98,19 @@ const VideoCapture = (props) => {
 
       const mouse = canvas.getPointer(event.e);
 
+      console.log(`x: ${mouse.x}, y: ${mouse.y}`);
+
       if (mouse.x > videoPlaceholderRef.current.offsetWidth) {
         mouse.x = videoPlaceholderRef.current.offsetWidth;
       }
-
       if (mouse.y > videoPlaceholderRef.current.offsetHeight) {
         mouse.y = videoPlaceholderRef.current.offsetHeight;
+      }
+      if (mouse.x < 0) {
+        mouse.x = 0;
+      }
+      if (mouse.y < 0) {
+        mouse.y = 0;
       }
 
       let w = Math.abs(mouse.x - x),
@@ -115,8 +119,21 @@ const VideoCapture = (props) => {
       if (!w || !h) {
         return false;
       }
+
       square = canvas.getActiveObject();
-      square.set("width", w).set("height", h);
+      // square.setCoords("true");
+
+      if (w > 0 && h > 0) {
+        square.set("width", w).set("height", h);
+        square.setCoords("true");
+      } else if (square.left - x < 0 && square.top - y < 0) {
+        console.log("4사분면");
+        square.set("width", w).set("height", h).set("scaleX", -1).set("scaleY", -1);
+        square.setCoords("true");
+      }
+
+      console.log(`x: ${x}, mouse.x: ${mouse.x}`);
+
       canvas.renderAll();
     });
 
@@ -125,12 +142,38 @@ const VideoCapture = (props) => {
         mousePressed = false;
       }
       square = canvas.getActiveObject();
-      canvas.add(square);
 
-      // imageCapture(square);
-
-      canvas.renderAll();
+      imageCapture(square);
+      console.log(square);
+      // coordinate(square);
+      // console.log(squareCoordinate);
+      // console.log(videoPlaceholderRef.current);
     });
+  };
+
+  const imageCapture = (square) => {
+    let w, h;
+    const canvas2 = document.createElement("canvas");
+
+    w = videoPlaceholderRef.current.offsetWidth;
+    h = videoPlaceholderRef.current.offsetHeight;
+
+    canvas2.width = w;
+    canvas2.height = h;
+
+    let ctx = canvas2.getContext("2d");
+    ctx.fillRect(0, 0, w, h);
+    ctx.drawImage(videoPlayerRef.current.getInternalPlayer(), 0, 0, w, h);
+
+    const newCanvas = document.createElement("canvas");
+    newCanvas.width = videoPlaceholderRef.current.offsetWidth;
+    newCanvas.height = videoPlaceholderRef.current.offsetHeight;
+
+    let newCtx = newCanvas.getContext("2d");
+    newCtx.drawImage(canvas2, square.left, square.top, square.width, square.height, 0, 0, newCanvas.width, newCanvas.height);
+
+    const dataURL = newCanvas.toDataURL();
+    console.log(dataURL);
   };
 
   const clearCanvas = (canvas) => {
@@ -143,6 +186,19 @@ const VideoCapture = (props) => {
     });
   };
 
+  const coordinate = (input) => {
+    console.log("coordinate");
+    console.log(input.left);
+    setSquareCoordinate({
+      ...squareCoordinate,
+      left: input.left,
+      top: input.top,
+      width: input.width,
+      height: input.height,
+    });
+    console.log(squareCoordinate);
+  };
+
   return (
     <div>
       {show ? (
@@ -150,8 +206,6 @@ const VideoCapture = (props) => {
           <canvas id="canvas" />
         </span>
       ) : null}
-      <canvas ref={canvas} />
-      <button onClick={fullImageCapture}> Capture </button>
     </div>
   );
 };
