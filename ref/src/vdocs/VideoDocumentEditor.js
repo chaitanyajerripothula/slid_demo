@@ -409,6 +409,7 @@ class VideoDocumentEditor extends React.Component {
                                     Screenshot <br />({isMacOs ? "Cmd + /" : "Ctrl + /"})
                                   </>
                                 )}
+                                )}
                               </Tooltip>
                             }
                           >

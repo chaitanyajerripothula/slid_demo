@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./editorController.module.css";
 import undoImg from "../../design/assets/slid_backward_icon.png";
 import redoImg from "../../design/assets/slid_forward_icon.png";
@@ -16,9 +16,12 @@ import Swal from "sweetalert2";
 const EditorController = (props) => {
   const { componentRef } = props;
   const [open, setOpen] = useState(false);
-  const [fontSize, setFontSize] = useState("");
+  const [fontSize, setFontSize] = useState("medium");
 
-  props.setEditorFontSize(fontSize);
+
+  useEffect(()=>{
+    props.setEditorFontSize(fontSize);
+  }, []);
 
   const renderPdfPrint = useReactToPrint({
     content: () => componentRef.current,
@@ -37,8 +40,8 @@ const EditorController = (props) => {
       target: document.getElementById("custom-target"),
       title: "준비중입니다!",
       text: "영상을 짧게 녹화할 수 있는 기능이 현재 준비 중입니다!\n슬리드의 업데이트들을 기대해 주세요. :)",
-      customClass: 'position-absolute',
-      position: "bottom-left",
+      customClass: "position-absolute",
+      position: "center",
       confirmButtonText: "확인",
       icon: "info",
       confirmButtonColor: "#2778c4",

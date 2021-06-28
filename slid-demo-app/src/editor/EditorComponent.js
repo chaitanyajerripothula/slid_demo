@@ -1,6 +1,7 @@
 import React from "react";
 import Editor from "./editor";
 import styles from "./editorComponent.module.css";
+import "./print.css";
 
 const EditorComponent = () => {
   return (

@@ -14,7 +14,7 @@ class Editor extends React.PureComponent {
     super(props);
     this.state = {
       undoInstance: this.setUndoRedoInstance,
-      fontSize: "small",
+      fontSize: "medium",
     };
   }
 
@@ -28,7 +28,7 @@ class Editor extends React.PureComponent {
   };
 
   insertImage = () => {
-    this.editorInstance.blocks.insert("image", { url: testImg }, {}, this.editorInstance.blocks.getCurrentBlockIndex(), true);
+    this.editorInstance.blocks.insert("image", { url: testImg }, {}, this.editorInstance.blocks.getCurrentBlockIndex()+1, true);
   };
 
   setFontSize = (size) => {

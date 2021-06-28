@@ -12,6 +12,10 @@ export const EDITOR_JS_TOOLS = {
     class: Header,
     inlineToolbar: true,
     shortcut: "CMD+SHIFT+H",
+    config : {
+      placeholder: "Enter a header",
+      defaultLevel: 4,
+    }
   },
   paragraph: { class: Paragraph, inlineToolbar: true },
   checkList: {
