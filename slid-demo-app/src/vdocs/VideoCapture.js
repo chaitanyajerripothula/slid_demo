@@ -62,7 +62,7 @@ const VideoCapture = (props) => {
       stroke: "blue",
       opacity: 1,
       strokeWidth: 3,
-      strokeDashArray: [20, 20],
+      strokeDashArray: [5, 5],
     });
     canvas.add(square);
     canvas.renderAll();
@@ -81,9 +81,8 @@ const VideoCapture = (props) => {
         top: y,
         fill: "rgb(255, 255, 255, 0.2)",
         stroke: "blue",
-        opacity: 1,
         strokeWidth: 3,
-        strokeDashArray: [15, 15],
+        strokeDashArray: [5, 5],
       });
 
       canvas.add(square);
@@ -120,19 +119,20 @@ const VideoCapture = (props) => {
         return false;
       }
 
-      square = canvas.getActiveObject();
+      // square = canvas.getActiveObject();
       // square.setCoords("true");
-
-      if (w > 0 && h > 0) {
-        square.set("width", w).set("height", h);
-        square.setCoords("true");
-      } else if (square.left - x < 0 && square.top - y < 0) {
-        console.log("4사분면");
-        square.set("width", w).set("height", h).set("scaleX", -1).set("scaleY", -1);
-        square.setCoords("true");
-      }
-
-      console.log(`x: ${x}, mouse.x: ${mouse.x}`);
+      console.log(`square.left: ${square.left}, x: ${x}, mouse.x: ${mouse.x}, square.top: ${square.top}, y: ${y}, mouse.y: ${mouse.y}`);
+      console.log(`width: ${w}, height: ${h}`);
+      square.set("width", w).set("height", h).set("scaleX", -1).set("scaleY", -1);
+      square.setCoords();
+      // if (square.left - mouse.x < 0 && square.top - mouse.y < 0) {
+      //   square.set("width", w).set("height", h);
+      //   square.setCoords("true");
+      // } else if (square.left - mouse.x > 0 && square.top - mouse.y > 0) {
+      //   console.log("4사분면");
+      //   square.set("width", w).set("height", h).set("scaleX", -1);
+      //   square.setCoords("true");
+      // }
 
       canvas.renderAll();
     });
@@ -142,12 +142,9 @@ const VideoCapture = (props) => {
         mousePressed = false;
       }
       square = canvas.getActiveObject();
+      console.log(square);
 
       imageCapture(square);
-      console.log(square);
-      // coordinate(square);
-      // console.log(squareCoordinate);
-      // console.log(videoPlaceholderRef.current);
     });
   };
 
@@ -184,19 +181,6 @@ const VideoCapture = (props) => {
         canvas.remove(o);
       }
     });
-  };
-
-  const coordinate = (input) => {
-    console.log("coordinate");
-    console.log(input.left);
-    setSquareCoordinate({
-      ...squareCoordinate,
-      left: input.left,
-      top: input.top,
-      width: input.width,
-      height: input.height,
-    });
-    console.log(squareCoordinate);
   };
 
   return (
