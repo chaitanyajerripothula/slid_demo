@@ -29,6 +29,7 @@ const VideoPlayer = (props) => {
     <div className={styles[`video-container`]}>
       <div className={`${styles[`video-placeholder-container`]}`}>
         <div id="video-size-check" ref={videoPlaceholderRef} className={`${styles[`video-placeholder`]}`}>
+          <VideoCapture show={show} capture={capture} coordinate={coordinate} squareCoordinate={squareCoordinate} videoPlayerRef={videoPlayerRef} videoPlaceholderRef={videoPlaceholderRef} />
           <ReactPlayer
             className={styles[`video-player`]}
             url="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
@@ -150,8 +151,6 @@ const VideoPlayer = (props) => {
         </div>
       </div>
       {/* Video Stamp */}
-
-      <VideoCapture show={show} capture={capture} coordinate={coordinate} squareCoordinate={squareCoordinate} videoPlayerRef={videoPlayerRef} videoPlaceholderRef={videoPlaceholderRef} />
     </div>
   );
 };

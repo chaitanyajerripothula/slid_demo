@@ -45,6 +45,7 @@ const VideoCapture = (props) => {
       width: videoPlaceholderRef.current.offsetWidth,
       height: videoPlaceholderRef.current.offsetHeight,
       backgroundColor: "transparent",
+      hoverCursor: "crosshair",
     });
     createBoundary(canvasRef.current);
   }, [show]);
@@ -64,8 +65,9 @@ const VideoCapture = (props) => {
       strokeWidth: 3,
       strokeDashArray: [5, 5],
     });
+
     canvas.add(square);
-    canvas.renderAll();
+    // canvas.renderAll();
 
     canvas.on("mouse:down", (event) => {
       clearCanvas(canvas);
@@ -79,6 +81,8 @@ const VideoCapture = (props) => {
         height: 0,
         left: x,
         top: y,
+        originX: "left",
+        originY: "top",
         fill: "rgb(255, 255, 255, 0.2)",
         stroke: "blue",
         strokeWidth: 3,
@@ -86,8 +90,8 @@ const VideoCapture = (props) => {
       });
 
       canvas.add(square);
-      canvas.renderAll();
-      canvas.setActiveObject(square);
+      // canvas.renderAll();
+      // canvas.setActiveObject(square);
     });
 
     canvas.on("mouse:move", (event) => {
@@ -96,7 +100,6 @@ const VideoCapture = (props) => {
       }
 
       const mouse = canvas.getPointer(event.e);
-
       console.log(`x: ${mouse.x}, y: ${mouse.y}`);
 
       if (mouse.x > videoPlaceholderRef.current.offsetWidth) {
@@ -123,8 +126,16 @@ const VideoCapture = (props) => {
       // square.setCoords("true");
       console.log(`square.left: ${square.left}, x: ${x}, mouse.x: ${mouse.x}, square.top: ${square.top}, y: ${y}, mouse.y: ${mouse.y}`);
       console.log(`width: ${w}, height: ${h}`);
-      square.set("width", w).set("height", h).set("scaleX", -1).set("scaleY", -1);
-      square.setCoords();
+      if (mouse.x < x) {
+        square.set("left", Math.abs(mouse.x));
+      }
+      if (mouse.y < y) {
+        square.set("top", Math.abs(mouse.y));
+      }
+
+      square.set("width", w).set("height", h);
+
+      // square.setCoords();
       // if (square.left - mouse.x < 0 && square.top - mouse.y < 0) {
       //   square.set("width", w).set("height", h);
       //   square.setCoords("true");
@@ -141,10 +152,12 @@ const VideoCapture = (props) => {
       if (mousePressed) {
         mousePressed = false;
       }
-      square = canvas.getActiveObject();
+      // square = canvas.getActiveObject();
+      canvas.add(square);
+      canvas.renderAll();
       console.log(square);
 
-      imageCapture(square);
+      // imageCapture(square);
     });
   };
 
@@ -175,8 +188,6 @@ const VideoCapture = (props) => {
 
   const clearCanvas = (canvas) => {
     canvas.getObjects().forEach((o) => {
-      console.log(o);
-      console.log(canvas.getObjects());
       if (o !== canvas.backgroundImage) {
         canvas.remove(o);
       }
