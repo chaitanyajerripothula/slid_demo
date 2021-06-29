@@ -3,6 +3,7 @@ import Split from 'react-split';
 import VideoPlayer from "../vdocs/VideoPlayer";
 import VideoDocumentEditor from "../vdocs/VideoDocumentEditor";
 import styles from "./VideoDocument.module.css";
+import './VideoDocument.css'
 
 const VideoDocument = (props) => {
   const {lang, isMacOs} = props;
@@ -56,11 +57,12 @@ const VideoDocument = (props) => {
   return (
     <div className={`${styles[`vdocs-container`]}`} id="slidDocument" ref={slidDoc}>
       <Split
-        className={`${styles[`split-wrapper`]} ${styles[`gutter-horizontal`]} d-flex`}
+        className={`${styles[`split-wrapper`]} d-flex`}
         sizes={[60, 40]}
         minSize={[(580, 330)]}
         expandToMin={false}
         gutterAlign="center"
+        gutterSize="7"
         snapOffset={30}
         dragInterval={1}
         direction="horizontal"
