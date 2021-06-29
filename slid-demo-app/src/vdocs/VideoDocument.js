@@ -10,12 +10,24 @@ const VideoDocument = (props) => {
   const [show, setShow] = useState(false);
   const [captureBtnClicked, setCaptureBtnClicked] = useState(false);
   const [isFullScreen, setIsFullScreen] = useState(false);
+  const [capture, setCapture] = useState(false);
+
   const slidDoc = useRef();
 
   const handleClose = () => {
     console.log("handleClose");
     setShow(false);
   };
+
+  const handleCaptureOn = () => {
+    console.log("handleCaptureOn");
+    setCapture(true);
+  };
+
+  const handleCaptureOff = () => {
+    setCapture(false);
+  };
+
   const handleShow = () => {
     console.log("handleShow");
     setShow(true);
@@ -55,7 +67,7 @@ const VideoDocument = (props) => {
   }
 
   return (
-    <div className={`${styles[`vdocs-container`]}`} id="slidDocument" ref={slidDoc}>
+    <div className={`${styles[`vdocs-container`]}`} ref={slidDoc}>
       <Split
         className={`${styles[`split-wrapper`]} d-flex`}
         sizes={[60, 40]}
@@ -68,8 +80,8 @@ const VideoDocument = (props) => {
         direction="horizontal"
         cursor="col-resize"
       >
-        <VideoPlayer show={show} isFullScreen={isFullScreen} setFullScreen={setFullScreen} captureBtnClicked={captureBtnClicked} fullImageCapture={fullImageCapture} lang={lang} isMacOs={isMacOs}/>
-        <VideoDocumentEditor show={show} handleClose={handleClose} handleShow={handleShow} fullImageCapture={fullImageCapture} />
+        <VideoPlayer show={show} isFullScreen={isFullScreen} setFullScreen={setFullScreen} captureBtnClicked={captureBtnClicked} fullImageCapture={fullImageCapture} lang={lang} isMacOs={isMacOs} />
+        <VideoDocumentEditor handleClose={handleClose} handleShow={handleShow} fullImageCapture={fullImageCapture} handleCaptureOn={handleCaptureOn}/>
       </Split>
     </div>
   );

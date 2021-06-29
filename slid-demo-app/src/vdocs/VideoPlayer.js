@@ -37,6 +37,7 @@ const VideoPlayer = (props) => {
       </div>
       <div className={`${styles[`video-placeholder-container`]}`}>
         <div id="video-size-check" ref={videoPlaceholderRef} className={`${styles[`video-placeholder`]}`}>
+          <VideoCapture show={show} videoPlayerRef={videoPlayerRef} videoPlaceholderRef={videoPlaceholderRef} captureBtnClicked={captureBtnClicked} fullImageCapture={fullImageCaptureRef} />
           <ReactPlayer
             className={styles[`video-player`]}
             url="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
@@ -177,11 +178,8 @@ const VideoPlayer = (props) => {
             </OverlayTrigger>
           </div>
         </div>
-
         {/* Video Stamp */}
-
       </div>
-      <VideoCapture show={show} videoPlayerRef={videoPlayerRef} videoPlaceholderRef={videoPlaceholderRef} captureBtnClicked={captureBtnClicked} fullImageCapture={fullImageCaptureRef} />
     </div>
   );
 };
