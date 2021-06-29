@@ -8,34 +8,37 @@ import Undo from "./utils/tools/undo";
 
 class Editor extends React.PureComponent {
   componentRef = React.createRef();
-  isSave = true;
+
+  async componentDidMount() {}
 
   constructor(props) {
     super(props);
     this.state = {
-      undoInstance: this.setUndoRedoInstance,
-      fontSize: "medium",
+      undoInstance: this.handleSetUndoRedoInstance,
+      fontSize: "small",
+      focusBlock: 0,
+      isSave: true,
     };
   }
 
-  setUndoRedoInstance = () => {
+  handleSetUndoRedoInstance = () => {
     const editor = this.editorInstance;
     this.undoInstance = new Undo({ editor });
   };
 
-  onChangeEditor = () => {
-    this.isSave = false;
+  handleChangeEditor = async () => {
+    if (this.state["isSave"]) {
+      this.setState({ isSave: false });
+      this.focusBlock = this.editorInstance.blocks.getCurrentBlockIndex();
+    }
+    await this.setState({ isSave: true });
   };
 
-  insertImage = () => {
-    this.editorInstance.blocks.insert("image", { url: testImg }, {}, this.editorInstance.blocks.getCurrentBlockIndex()+1, true);
+  handleInsertImage = () => {
+    this.editorInstance.blocks.insert("image", { url: testImg }, {}, this.focusBlock, true);
   };
 
-  setFontSize = (size) => {
-    this.setState({ fontSize: size ? size : "small" });
-  };
-
-  checkEditorBlockCount = () => {
+  handleCheckEditorBlockCount = () => {
     if (this.editorInstance.blocks.getBlocksCount() === 0) {
       this.editorInstance.blocks.insert(
         "paragraph",
@@ -49,54 +52,65 @@ class Editor extends React.PureComponent {
     }
   };
 
+  handleChangeTitle = (e) => {
+    if (e.target.value) {
+      document.title = e.target.value;
+    } else {
+      document.title = "제목 없음";
+    }
+  };
+
+  handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      if (!this.editorInstance || !this.editorInstance.blocks) return;
+      this.editorInstance.blocks.insert(
+        "paragraph",
+        {
+          text: "",
+        },
+        {},
+        0,
+        true
+      );
+      this.editorInstance.caret.setToFirstBlock();
+    }
+  };
+
+  handleSetFontSize = (size) => {
+    this.setState({ fontSize: size ? size : "small" });
+  };
+
   render() {
-    let { fontSize } = this.state;
-    document.title = "제목 없음";
-
-    const onChangeTitle = (e) => {
-      if (e.target.value) {
-        document.title = e.target.value;
-      } else {
-        document.title = "제목 없음";
-      }
-    };
-
-    const handleKeyPress = (e) => {
-      if (e.key === "Enter") {
-        if (!this.editorInstance || !this.editorInstance.blocks) return;
-        this.editorInstance.blocks.insert(
-          "paragraph",
-          {
-            text: "",
-          },
-          {},
-          0,
-          true
-        );
-        this.editorInstance.caret.setToFirstBlock();
-      }
-    };
+    let { fontSize, isSave } = this.state;
 
     return (
       <div>
         <div className={`${styles[`container`]}`}>
           <h1 className={`${styles[`font-${fontSize}`]}`}>
-            <input className={`${styles[`input-title`]}`} type="text" onChange={onChangeTitle} placeholder="제목을 입력하세요" autoComplete="false" autoFocus={true} onKeyPress={handleKeyPress} />
+            <input
+              className={`${styles[`input-title`]}`}
+              type="text"
+              onChange={this.handleChangeTitle}
+              placeholder="제목을 입력하세요."
+              autoComplete="false"
+              autoFocus={true}
+              onKeyPress={this.handleKeyPress}
+            />
           </h1>
           <div className={`${styles[`editor-container`]} ${styles[`font-${fontSize}`]}`} ref={this.componentRef}>
-            <EditorJs tools={EDITOR_JS_TOOLS} onReady={this.setUndoRedoInstance} onChange={this.onChangeEditor} instanceRef={(instance) => (this.editorInstance = instance)} />
+            <EditorJs tools={EDITOR_JS_TOOLS} onReady={this.handleSetUndoRedoInstance} onChange={this.handleChangeEditor} instanceRef={(instance) => (this.editorInstance = instance)} />
           </div>
         </div>
         <EditorController
-          insertImage={this.insertImage}
+          handleInsertImage={this.handleInsertImage}
           componentRef={this.componentRef}
-          setEditorFontSize={this.setFontSize}
+          handleSetFontSize={this.handleSetFontSize}
           undoEditor={() => {
             this.undoInstance.undo();
-            this.checkEditorBlockCount();
+            this.handleCheckEditorBlockCount();
           }}
           redoEditor={() => this.undoInstance.redo()}
-          isSave={this.isSave}
+          isSave={isSave}
         />
       </div>
     );

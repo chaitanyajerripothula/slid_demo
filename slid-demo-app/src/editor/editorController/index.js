@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import styles from "./editorController.module.css";
 import undoImg from "../../design/assets/slid_backward_icon.png";
 import redoImg from "../../design/assets/slid_forward_icon.png";
@@ -14,26 +14,25 @@ import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import Swal from "sweetalert2";
 
 const EditorController = (props) => {
-  const { componentRef } = props;
+  const { componentRef, isSave } = props;
   const [open, setOpen] = useState(false);
-  const [fontSize, setFontSize] = useState("medium");
+  const [fontSize, setFontSize] = useState("small");
 
-
-  useEffect(()=>{
-    props.setEditorFontSize(fontSize);
-  }, []);
+  useEffect(() => {
+    props.handleSetFontSize(fontSize);
+  }, [fontSize]);
 
   const renderPdfPrint = useReactToPrint({
     content: () => componentRef.current,
   });
 
-  const insertImage = () => {
-    props.insertImage();
-  };
+  const insertImage = useCallback(() => {
+    props.handleInsertImage();
+  }, []);
 
-  const openEditorSetting = () => {
+  const openEditorSetting = useCallback(() => {
     setOpen(!open);
-  };
+  }, [open]);
 
   const onClickRecordVideoBtn = () => {
     Swal.fire({
@@ -45,12 +44,14 @@ const EditorController = (props) => {
       confirmButtonText: "확인",
       icon: "info",
       confirmButtonColor: "#2778c4",
-    });
+    }).then(() => {});
   };
+
+  console.log(`isSave editorController : ${isSave}`);
 
   return (
     <div className={`${styles[`container`]}`}>
-      {open ? <EditorSetting setFontSize={setFontSize} /> : null}
+      {open ? <EditorSetting setFontSize={setFontSize} fontSize={fontSize} /> : null}
       <div className={`${styles[`video-document-editor-left-wrapper`]}`}>
         <div className={`${styles[`video-document-editor-undo-redo-container`]}`}>
           <img
@@ -122,7 +123,7 @@ const EditorController = (props) => {
       <div className={`${styles[`video-document-editor-right-wrapper`]}`}>
         <div className={`${styles[`video-document-editor-save-container`]}`}>
           <img className={`${styles[`video-document-editor-save-icon`]}`} src={saveImg} alt="saveImage" />
-          <span className={`${styles[`video-document-editor-text`]}`}>{props.isSave ? "저장완료" : "자동 저장 중..."}</span>
+          <span className={`${styles[`video-document-editor-text`]}`}>{isSave ? "저장완료" : "자동 저장 중..."}</span>
         </div>
         <div className={`${styles[`video-document-editor-download-container`]}`} onClick={renderPdfPrint}>
           <img className={`${styles[`video-document-editor-download-icon`]}`} src={downloadImg} alt="downloadImage" />

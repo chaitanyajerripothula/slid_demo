@@ -1,19 +1,19 @@
-
-
 @media print {
-    .editor_editor-container__EVe84 {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+  .cdx-simple-image {
+    width: 100%;
+    border: none;
+    align-self: center;
+    margin-bottom: 200px;
+    margin-top: 50px;
+  }
 
-    .cdx-simple-image {
-        width: 100%;
-        align-self: center;
-        max-height: 380px;
-    }
+  .ce-block__content {
+    max-width: 90%;
+    max-height: 100%;
+    margin-bottom: 2rem;
+  }
 
-    .ce-block__content {
-        max-width: unset;
-    }
+  .cdx-simple-image__picture img {
+    border-radius: 5px;
+  }
 }

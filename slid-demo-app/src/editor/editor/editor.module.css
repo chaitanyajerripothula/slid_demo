@@ -35,3 +35,7 @@
   width: 100%;
   color: black;
 }
+
+.codex-editor--narrow .codex-editor__redactor {
+  margin : 0 !important;
+}
