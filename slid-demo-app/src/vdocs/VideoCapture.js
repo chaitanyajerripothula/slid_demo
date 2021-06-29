@@ -46,12 +46,13 @@ const VideoCapture = (props) => {
       height: videoPlaceholderRef.current.offsetHeight,
       backgroundColor: "transparent",
       hoverCursor: "crosshair",
+      selection: false,
     });
-    createBoundary(canvasRef.current);
+    createBoundary();
   }, [show]);
 
   // 범위 지정 사각형 생성 함수
-  const createBoundary = (canvas) => {
+  const createBoundary = () => {
     let mousePressed = false;
     let x = 0;
     let y = 0;
@@ -66,19 +67,19 @@ const VideoCapture = (props) => {
       strokeDashArray: [5, 5],
     });
 
-    canvas.add(square);
+    canvasRef.current.add(square);
     // canvas.renderAll();
 
-    canvas.on("mouse:down", (event) => {
-      clearCanvas(canvas);
-      const mouse = canvas.getPointer(event.e);
+    canvasRef.current.on("mouse:down", (event) => {
+      clearCanvas(canvasRef.current);
+      const mouse = canvasRef.current.getPointer(event.e);
       mousePressed = true;
       x = mouse.x;
       y = mouse.y;
 
       square = new fabric.Rect({
-        width: 0,
-        height: 0,
+        width: mouse.x - x,
+        height: mouse.y - y,
         left: x,
         top: y,
         originX: "left",
@@ -87,19 +88,19 @@ const VideoCapture = (props) => {
         stroke: "blue",
         strokeWidth: 3,
         strokeDashArray: [5, 5],
+        angle: 0,
+        transparentCorners: false,
+        selectable: false,
       });
-
-      canvas.add(square);
-      // canvas.renderAll();
-      // canvas.setActiveObject(square);
+      canvasRef.current.add(square);
     });
 
-    canvas.on("mouse:move", (event) => {
+    canvasRef.current.on("mouse:move", (event) => {
       if (!mousePressed) {
-        return false;
+        return;
       }
 
-      const mouse = canvas.getPointer(event.e);
+      const mouse = canvasRef.current.getPointer(event.e);
       console.log(`x: ${mouse.x}, y: ${mouse.y}`);
 
       if (mouse.x > videoPlaceholderRef.current.offsetWidth) {
@@ -121,9 +122,6 @@ const VideoCapture = (props) => {
       if (!w || !h) {
         return false;
       }
-
-      // square = canvas.getActiveObject();
-      // square.setCoords("true");
       console.log(`square.left: ${square.left}, x: ${x}, mouse.x: ${mouse.x}, square.top: ${square.top}, y: ${y}, mouse.y: ${mouse.y}`);
       console.log(`width: ${w}, height: ${h}`);
       if (mouse.x < x) {
@@ -135,26 +133,13 @@ const VideoCapture = (props) => {
 
       square.set("width", w).set("height", h);
 
-      // square.setCoords();
-      // if (square.left - mouse.x < 0 && square.top - mouse.y < 0) {
-      //   square.set("width", w).set("height", h);
-      //   square.setCoords("true");
-      // } else if (square.left - mouse.x > 0 && square.top - mouse.y > 0) {
-      //   console.log("4사분면");
-      //   square.set("width", w).set("height", h).set("scaleX", -1);
-      //   square.setCoords("true");
-      // }
-
-      canvas.renderAll();
+      canvasRef.current.renderAll();
     });
 
-    canvas.on("mouse:up", (event) => {
+    canvasRef.current.on("mouse:up", (event) => {
       if (mousePressed) {
         mousePressed = false;
       }
-      // square = canvas.getActiveObject();
-      canvas.add(square);
-      canvas.renderAll();
       console.log(square);
 
       // imageCapture(square);
