@@ -13,6 +13,7 @@
     "react-bootstrap": "^1.6.1",
     "react-dom": "^17.0.2",
     "react-editor-js": "^1.9.0",
+    "react-resize-detector": "^6.7.3",
     "react-scripts": "4.0.3",
     "react-split-pane": "^2.0.3",
     "react-to-print": "^2.12.6",

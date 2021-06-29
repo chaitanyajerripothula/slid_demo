@@ -26,12 +26,12 @@ class Editor extends React.PureComponent {
     this.undoInstance = new Undo({ editor });
   };
 
-  handleChangeEditor = async () => {
+  handleChangeEditor = () => {
     if (this.state["isSave"]) {
       this.setState({ isSave: false });
       this.focusBlock = this.editorInstance.blocks.getCurrentBlockIndex();
     }
-    await this.setState({ isSave: true });
+    this.setState({ isSave: true });
   };
 
   handleInsertImage = () => {
