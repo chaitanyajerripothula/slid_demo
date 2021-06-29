@@ -12,12 +12,9 @@ const VideoDocumentEditor = (props) => {
       target: document.getElementById("toast-container"),
       title: "👈 캡쳐할 영역을 선택해주세요.",
       html: "<p style='margin-bottom: 8'>선택한 영역은 계속 유지됩니다.</p>" + "<span style='color:#DDDDDD; font-size: 15'>*영상의 크기를 조절하면 영역이 초기화 됩니다.</span>",
-      showCancelButton: true,
       showDenyButton: true,
       confirmButtonColor: "#3085d6",
       confirmButtonText: "영역 캡쳐",
-      cancelButtonText: "cancel",
-      denyButtonColor: "#3085d6",
       denyButtonText: "초기화",
       heightAuto: false,
     }).then((result) => {
@@ -39,7 +36,6 @@ const VideoDocumentEditor = (props) => {
         button
       </button>
       <button onClick={fullImageCapture}> FullCapture </button>
-      <div id="test"></div>
     </div>
   );
 };

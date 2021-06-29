@@ -3,8 +3,8 @@
     display: block;
     height: 100%;
     width: 100%;
-  }
+}
   
 .swal2-container {
-position: absolute !important;
+    position: absolute !important;
 }
