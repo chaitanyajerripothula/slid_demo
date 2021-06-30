@@ -3,7 +3,7 @@ import { fabric } from "fabric";
 import styles from "./VideoCapture.module.css";
 
 const VideoCapture = (props) => {
-  const { show, capture, videoPlayerRef, videoPlaceholderRef, captureBtnClicked, fullImageCapture } = props;
+  const { showSelectAreaCanvas, videoPlayerRef, videoPlaceholderRef, isCapturingFullScreen, setIsCapturingFullScreen } = props;
 
   const [squareCoordinate, setSquareCoordinate] = useState({
     left: "",
@@ -17,7 +17,7 @@ const VideoCapture = (props) => {
 
   // 영상 전체 캡처
   useEffect(() => {
-    if(captureBtnClicked) {
+    if(isCapturingFullScreen) {
       let w, h, ratio;
 
       ratio = videoPlayerRef.current.getInternalPlayer().videoWidth / videoPlayerRef.current.getInternalPlayer().videoHeight;
@@ -37,9 +37,9 @@ const VideoCapture = (props) => {
       let imageURL = canvas.current.toDataURL();
       console.log(imageURL);
 
-      fullImageCapture();
+      setIsCapturingFullScreen(false);
     }
-  }, [captureBtnClicked]);
+  }, [isCapturingFullScreen]);
 
   // 영역 지정 캡처
   useEffect(() => {
@@ -53,7 +53,7 @@ const VideoCapture = (props) => {
       selection: false,
     });
     createBoundary();
-  }, [show]);
+  }, [showSelectAreaCanvas]);
 
   // 범위 지정 사각형 생성 함수
   const createBoundary = () => {
@@ -185,7 +185,7 @@ const VideoCapture = (props) => {
 
   return (
     <div>
-      {show ? (
+      {showSelectAreaCanvas ? (
         <span className={styles[`fabric-canvas`]}>
           <canvas id="fabricCanvas" />
         </span>

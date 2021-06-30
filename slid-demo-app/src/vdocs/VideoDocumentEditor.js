@@ -4,10 +4,14 @@ import Swal from "sweetalert2";
 import "./VideoDocumentEditor.css";
 
 const VideoDocumentEditor = (props) => {
-  const { handleClose, handleShow, fullImageCapture, handleCaptureOn } = props;
+  const { setShowSelectAreaCanvas, setIsCapturingFullScreen, setCaptureSelectArea } = props;
+
+  const captureFullScreen = () => {
+    setIsCapturingFullScreen(true);
+  }
 
   const HandleClick = () => {
-    handleShow();
+    setShowSelectAreaCanvas(true)
     Swal.fire({
       target: document.getElementById("toast-container"),
       title: "👈 캡쳐할 영역을 선택해주세요.",
@@ -19,12 +23,12 @@ const VideoDocumentEditor = (props) => {
       heightAuto: false,
     }).then((result) => {
       if (result.isDenied) {
-        handleClose();
+        setShowSelectAreaCanvas(false);
       } else if (result.isConfirmed) {
-        handleCaptureOn();
-        handleClose();
+        setCaptureSelectArea(true)
+        setShowSelectAreaCanvas(false)
       } else {
-        handleClose();
+        setShowSelectAreaCanvas(false)
       }
     });
   };
@@ -35,7 +39,7 @@ const VideoDocumentEditor = (props) => {
       <button class="btn btn-success btn" onClick={HandleClick}>
         button
       </button>
-      <button onClick={fullImageCapture}> FullCapture </button>
+      <button onClick={captureFullScreen}> FullCapture </button>
     </div>
   );
 };

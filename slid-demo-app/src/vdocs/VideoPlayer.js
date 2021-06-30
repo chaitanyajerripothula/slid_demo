@@ -5,15 +5,43 @@ import VideoCapture from "./VideoCapture";
 import styles from "./VideoPlayer.module.css";
 
 const VideoPlayer = (props) => {
-  const { show, isFullScreen, setFullScreen, captureBtnClicked, fullImageCapture, lang, isMacOs } = props;
+  const { showSelectAreaCanvas, isCapturingFullScreen, setIsCapturingFullScreen, lang, isMacOs } = props;
 
-  const [isPlaying, setIsPlaying] = useState();
-  const [videoState, setVideoState] = useState();
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [videoState, setVideoState] = useState("available");
   const [playbackSpeed, setPlaybackSpeed] = useState(1);
   const [skipInterval, setSkipInterval] = useState(5);
+  const [isFullScreen, setIsFullScreen] = useState(false);
 
   const videoPlayerRef = useRef();
   const videoPlaceholderRef = useRef();
+
+  const setFullScreen = () => {
+    if(isFullScreen) {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      } else if (document.mozCancelFullScreen) {
+        document.mozCancelFullScreen();
+      } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+      } else if (document.msExitFullscreen) {
+        document.msExitFullscreen();
+      }
+      setIsFullScreen(false);
+    }
+    else {
+      if (document.body.requestFullscreen) {
+        document.body.requestFullscreen();
+      } else if (document.body.mozRequestFullScreen) {
+        document.body.mozRequestFullScreen();
+      } else if (document.body.webkitRequestFullscreen) {
+        document.body.webkitRequestFullscreen();
+      } else if (document.body.msRequestFullscreen) {
+        document.body.msRequestFullscreen();
+      }
+      setIsFullScreen(true);
+    }
+  }
 
   const toggleIsPlaying = () => {
     isPlaying ? setIsPlaying(false) : setIsPlaying(true);
@@ -24,10 +52,6 @@ const VideoPlayer = (props) => {
     videoPlayerRef.current.seekTo(currentTime + skipInterval);
   };
 
-  const fullImageCaptureRef = () => {
-    fullImageCapture();
-  }
-
   return (
     <div className={styles[`video-container`]}>
       <div className={styles[`video-view-controller-container`]}>
@@ -37,7 +61,7 @@ const VideoPlayer = (props) => {
       </div>
       <div className={`${styles[`video-placeholder-container`]}`}>
         <div id="video-size-check" ref={videoPlaceholderRef} className={`${styles[`video-placeholder`]}`}>
-          <VideoCapture show={show} videoPlayerRef={videoPlayerRef} videoPlaceholderRef={videoPlaceholderRef} captureBtnClicked={captureBtnClicked} fullImageCapture={fullImageCaptureRef} />
+          <VideoCapture showSelectAreaCanvas={showSelectAreaCanvas} videoPlayerRef={videoPlayerRef} videoPlaceholderRef={videoPlaceholderRef} isCapturingFullScreen={isCapturingFullScreen} setIsCapturingFullScreen={setIsCapturingFullScreen} />
           <ReactPlayer
             className={styles[`video-player`]}
             url="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
@@ -46,9 +70,7 @@ const VideoPlayer = (props) => {
             width="100%"
             height="100%"
             onReady={() => {
-              videoPlayerRef.current.forcePlay = () => {
-                setIsPlaying(true);
-              };
+              setIsPlaying(false);
             }}
             onPlay={() => {
               setIsPlaying(true);
@@ -64,7 +86,7 @@ const VideoPlayer = (props) => {
             config={{
               file: {
                 attributes: {
-                  oncontextmenu: (e) => e.preventDefault(),
+                  onContextMenu: (e) => e.preventDefault(),
                   controlsList: "nodownload",
                   crossOrigin: "anonymous",
                 },

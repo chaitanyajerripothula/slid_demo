@@ -5,9 +5,7 @@ import {isMacOs} from 'react-device-detect';
 const App = () => {
   const [ lang, setLang ] = useState("en");
   
-  useEffect(async ()=>{
-    // language 설정
-    // window browser 이용
+  useEffect(()=>{
     setLang(navigator.language || navigator.userLanguage);
   }, []);
 

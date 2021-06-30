@@ -7,64 +7,11 @@ import './VideoDocument.css'
 
 const VideoDocument = (props) => {
   const {lang, isMacOs} = props;
-  const [show, setShow] = useState(false);
-  const [captureBtnClicked, setCaptureBtnClicked] = useState(false);
-  const [isFullScreen, setIsFullScreen] = useState(false);
-  const [capture, setCapture] = useState(false);
+  const [showSelectAreaCanvas, setShowSelectAreaCanvas] = useState(false);
+  const [isCapturingFullScreen, setIsCapturingFullScreen] = useState(false);
+  const [captureSelectArea, setCaptureSelectArea] = useState(false);
 
   const slidDoc = useRef();
-
-  const handleClose = () => {
-    console.log("handleClose");
-    setShow(false);
-  };
-
-  const handleCaptureOn = () => {
-    console.log("handleCaptureOn");
-    setCapture(true);
-  };
-
-  const handleCaptureOff = () => {
-    setCapture(false);
-  };
-
-  const handleShow = () => {
-    console.log("handleShow");
-    setShow(true);
-  };
-
-  const setFullScreen = () => {
-    if(isFullScreen) {
-      console.log("작게");
-      if (document.exitFullscreen) {
-        document.exitFullscreen();
-      } else if (document.mozCancelFullScreen) {
-        document.mozCancelFullScreen();
-      } else if (document.webkitExitFullscreen) {
-        document.webkitExitFullscreen();
-      } else if (document.msExitFullscreen) {
-        document.msExitFullscreen();
-      }
-      setIsFullScreen(false);
-    }
-    else {
-      console.log("크게");
-      if (slidDoc.current.requestFullscreen) {
-        slidDoc.current.requestFullscreen();
-      } else if (slidDoc.current.mozRequestFullScreen) {
-        slidDoc.current.mozRequestFullScreen();
-      } else if (slidDoc.current.webkitRequestFullscreen) {
-        slidDoc.current.webkitRequestFullscreen();
-      } else if (slidDoc.current.msRequestFullscreen) {
-        slidDoc.current.msRequestFullscreen();
-      }
-      setIsFullScreen(true);
-    }
-  }
-
-  const fullImageCapture = () => {
-    captureBtnClicked ? (setCaptureBtnClicked(false)) : (setCaptureBtnClicked(true));
-  }
 
   return (
     <div className={`${styles[`vdocs-container`]}`} ref={slidDoc}>
@@ -80,8 +27,8 @@ const VideoDocument = (props) => {
         direction="horizontal"
         cursor="col-resize"
       >
-        <VideoPlayer show={show} isFullScreen={isFullScreen} setFullScreen={setFullScreen} captureBtnClicked={captureBtnClicked} fullImageCapture={fullImageCapture} lang={lang} isMacOs={isMacOs} />
-        <VideoDocumentEditor handleClose={handleClose} handleShow={handleShow} fullImageCapture={fullImageCapture} handleCaptureOn={handleCaptureOn}/>
+        <VideoPlayer captureSelectArea={captureSelectArea} showSelectAreaCanvas={showSelectAreaCanvas} isCapturingFullScreen={isCapturingFullScreen} setIsCapturingFullScreen={setIsCapturingFullScreen} lang={lang} isMacOs={isMacOs} />
+        <VideoDocumentEditor setShowSelectAreaCanvas={setShowSelectAreaCanvas} setIsCapturingFullScreen={setIsCapturingFullScreen} setCaptureSelectArea={setCaptureSelectArea} />
       </Split>
     </div>
   );
