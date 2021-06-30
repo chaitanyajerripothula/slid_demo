@@ -14,7 +14,7 @@ import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import Swal from "sweetalert2";
 
 const EditorController = (props) => {
-  const { componentRef, isSave } = props;
+  const { componentRef, isSaving } = props;
   const [open, setOpen] = useState(false);
   const [fontSize, setFontSize] = useState("small");
 
@@ -47,7 +47,7 @@ const EditorController = (props) => {
     }).then(() => {});
   };
 
-  console.log(`isSave editorController : ${isSave}`);
+  console.log(`isSave editorController : ${isSaving}`);
 
   return (
     <div className={`${styles[`container`]}`}>
@@ -123,7 +123,7 @@ const EditorController = (props) => {
       <div className={`${styles[`video-document-editor-right-wrapper`]}`}>
         <div className={`${styles[`video-document-editor-save-container`]}`}>
           <img className={`${styles[`video-document-editor-save-icon`]}`} src={saveImg} alt="saveImage" />
-          <span className={`${styles[`video-document-editor-text`]}`}>{isSave ? "저장완료" : "자동 저장 중..."}</span>
+          <span className={`${styles[`video-document-editor-text`]}`}>{isSaving ? "저장완료" : "자동 저장 중..."}</span>
         </div>
         <div className={`${styles[`video-document-editor-download-container`]}`} onClick={renderPdfPrint}>
           <img className={`${styles[`video-document-editor-download-icon`]}`} src={downloadImg} alt="downloadImage" />

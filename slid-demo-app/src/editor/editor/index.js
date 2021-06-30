@@ -8,6 +8,7 @@ import Undo from "./utils/tools/undo";
 
 class Editor extends React.PureComponent {
   componentRef = React.createRef();
+  noteSavingTimeoutId = 1;
 
   async componentDidMount() {}
 
@@ -16,8 +17,8 @@ class Editor extends React.PureComponent {
     this.state = {
       undoInstance: this.handleSetUndoRedoInstance,
       fontSize: "small",
-      focusBlock: 0,
-      isSave: true,
+      lastFocusedBlockIndex: 0,
+      isSaving: true,
     };
   }
 
@@ -27,15 +28,23 @@ class Editor extends React.PureComponent {
   };
 
   handleChangeEditor = () => {
-    if (this.state["isSave"]) {
-      this.setState({ isSave: false });
-      this.focusBlock = this.editorInstance.blocks.getCurrentBlockIndex();
+    if (this.state["isSaving"]) {
+      clearTimeout(this.noteSavingTimeoutId);
     }
-    this.setState({ isSave: true });
+    this.setState({ isSaving: false });
+    this.noteSavingTimeoutId = setTimeout(() => {
+      this.setState({ isSaving: true });
+    }, 2000);
+
+    this.setState({ lastFocusedBlockIndex: this.editorInstance.blocks.getCurrentBlockIndex() });
   };
 
   handleInsertImage = () => {
-    this.editorInstance.blocks.insert("image", { url: testImg }, {}, this.focusBlock, true);
+    if (this.editorInstance.blocks.getCurrentBlockIndex() === -1) {
+      this.editorInstance.blocks.insert("image", { url: testImg }, {}, this.state["lastFocusedBlockIndex"], true);
+    } else {
+      this.editorInstance.blocks.insert("image", { url: testImg }, {}, this.editorInstance.blocks.getCurrentBlockIndex(), true);
+    }
   };
 
   handleCheckEditorBlockCount = () => {
@@ -81,7 +90,7 @@ class Editor extends React.PureComponent {
   };
 
   render() {
-    let { fontSize, isSave } = this.state;
+    let { fontSize, isSaving } = this.state;
 
     return (
       <div>
@@ -110,7 +119,7 @@ class Editor extends React.PureComponent {
             this.handleCheckEditorBlockCount();
           }}
           redoEditor={() => this.undoInstance.redo()}
-          isSave={isSave}
+          isSaving={isSaving}
         />
       </div>
     );
