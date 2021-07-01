@@ -5,11 +5,19 @@ import styles from "./editor.module.css";
 import testImg from "./utils/tools/blocks/simpleImage/img_test.png";
 import EditorController from "../editorController";
 import Undo from "./utils/tools/undo";
-import { doc } from "prettier";
 
 class Editor extends React.PureComponent {
   componentRef = React.createRef();
   noteSavingTimeoutId = 1;
+  ceBlocks = document.getElementsByClassName("ce-block");
+
+  handleAddListener() {
+    for (let index = 0; index < this.ceBlocks.length; index++) {
+      this.ceBlocks[index].addEventListener("focusout", (event) => {
+        this.setState({ lastFocusedBlockIndex: index});
+      });
+    }
+  }
 
   async componentDidMount() {}
 
@@ -43,7 +51,7 @@ class Editor extends React.PureComponent {
 
   handleInsertImage = () => {
     if (this.editorInstance.blocks.getCurrentBlockIndex() === -1) {
-      this.editorInstance.blocks.insert("image", { url: testImg }, {}, this.state["lastFocusedBlockIndex"], true);
+      this.editorInstance.blocks.insert("image", { url: testImg }, {}, this.state["lastFocusedBlockIndex"] + 1, true);
     } else {
       this.editorInstance.blocks.insert("image", { url: testImg }, {}, this.editorInstance.blocks.getCurrentBlockIndex() + 1, true);
     }
@@ -93,7 +101,7 @@ class Editor extends React.PureComponent {
 
   render() {
     let { fontSize, isSaving } = this.state;
-
+    this.handleAddListener();
     return (
       <div>
         <div className={`${styles[`container`]}`}>
