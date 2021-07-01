@@ -11,13 +11,13 @@ class Editor extends React.PureComponent {
   noteSavingTimeoutId = 1;
   ceBlocks = document.getElementsByClassName("ce-block");
 
-  handleAddListener() {
+  handleAddListener = () => {
     for (let index = 0; index < this.ceBlocks.length; index++) {
       this.ceBlocks[index].addEventListener("focusout", (event) => {
-        this.setState({ lastFocusedBlockIndex: index});
+        this.setState({ lastFocusedBlockIndex: index });
       });
     }
-  }
+  };
 
   async componentDidMount() {}
 
