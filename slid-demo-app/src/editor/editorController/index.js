@@ -47,8 +47,6 @@ const EditorController = (props) => {
     }).then(() => {});
   };
 
-  console.log(`isSave editorController : ${isSaving}`);
-
   return (
     <div className={`${styles[`container`]}`}>
       {open ? <EditorSetting setFontSize={setFontSize} fontSize={fontSize} /> : null}

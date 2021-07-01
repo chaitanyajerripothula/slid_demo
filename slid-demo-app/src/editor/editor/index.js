@@ -5,6 +5,7 @@ import styles from "./editor.module.css";
 import testImg from "./utils/tools/blocks/simpleImage/img_test.png";
 import EditorController from "../editorController";
 import Undo from "./utils/tools/undo";
+import { doc } from "prettier";
 
 class Editor extends React.PureComponent {
   componentRef = React.createRef();
@@ -32,18 +33,19 @@ class Editor extends React.PureComponent {
       clearTimeout(this.noteSavingTimeoutId);
     }
     this.setState({ isSaving: false });
+
     this.noteSavingTimeoutId = setTimeout(() => {
       this.setState({ isSaving: true });
     }, 2000);
 
-    this.setState({ lastFocusedBlockIndex: this.editorInstance.blocks.getCurrentBlockIndex() });
+    this.setState({ lastFocusedBlockIndex: this.editorInstance.blocks.getCurrentBlockIndex() === -1 ? this.state["lastFocusedBlockIndex"] : this.editorInstance.blocks.getCurrentBlockIndex() });
   };
 
   handleInsertImage = () => {
     if (this.editorInstance.blocks.getCurrentBlockIndex() === -1) {
       this.editorInstance.blocks.insert("image", { url: testImg }, {}, this.state["lastFocusedBlockIndex"], true);
     } else {
-      this.editorInstance.blocks.insert("image", { url: testImg }, {}, this.editorInstance.blocks.getCurrentBlockIndex(), true);
+      this.editorInstance.blocks.insert("image", { url: testImg }, {}, this.editorInstance.blocks.getCurrentBlockIndex() + 1, true);
     }
   };
 
