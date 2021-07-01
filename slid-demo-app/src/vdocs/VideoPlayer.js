@@ -17,7 +17,21 @@ const VideoPlayer = (props) => {
   const videoPlaceholderRef = useRef();
 
   const setFullScreen = () => {
-    if(isFullScreen) {
+    if(document.fullscreenElement == null) {
+      if (document.body.requestFullscreen) {
+        document.body.requestFullscreen();
+      } else if (document.body.mozRequestFullScreen) {
+        document.body.mozRequestFullScreen();
+      } else if (document.body.webkitRequestFullscreen) {
+        document.body.webkitRequestFullscreen();
+      } else if (document.body.msRequestFullscreen) {
+        document.body.msRequestFullscreen();
+      }
+      let toastContainer = document.getElementById("toast-container");
+      toastContainer.style.backgroundColor = "white";
+      setIsFullScreen(true);
+    }
+    else {
       if (document.exitFullscreen) {
         document.exitFullscreen();
       } else if (document.mozCancelFullScreen) {
@@ -28,18 +42,6 @@ const VideoPlayer = (props) => {
         document.msExitFullscreen();
       }
       setIsFullScreen(false);
-    }
-    else {
-      if (document.body.requestFullscreen) {
-        document.body.requestFullscreen();
-      } else if (document.body.mozRequestFullScreen) {
-        document.body.mozRequestFullScreen();
-      } else if (document.body.webkitRequestFullscreen) {
-        document.body.webkitRequestFullscreen();
-      } else if (document.body.msRequestFullscreen) {
-        document.body.msRequestFullscreen();
-      }
-      setIsFullScreen(true);
     }
   }
 
