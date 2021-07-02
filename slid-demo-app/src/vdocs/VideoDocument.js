@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import Split from 'react-split';
 import VideoPlayer from "../vdocs/VideoPlayer";
 import VideoDocumentEditor from "../vdocs/VideoDocumentEditor";
@@ -11,17 +11,14 @@ const VideoDocument = (props) => {
   const [isCapturingFullScreen, setIsCapturingFullScreen] = useState(false);
   const [captureSelectArea, setCaptureSelectArea] = useState(false);
 
-  const slidDoc = useRef();
-
   return (
-    <div className={`${styles[`vdocs-container`]}`} ref={slidDoc}>
+    <div className={`${styles[`vdocs-container`]}`}>
       <Split
         className={`${styles[`split-wrapper`]} d-flex`}
         sizes={[60, 40]}
         minSize={[(580, 330)]}
         expandToMin={false}
         gutterAlign="center"
-        gutterSize="7"
         snapOffset={30}
         dragInterval={1}
         direction="horizontal"
