@@ -3,10 +3,12 @@ import Editor from "./editor";
 import styles from "./editorComponent.module.css";
 import "./print.css";
 
-const EditorComponent = () => {
+const EditorComponent = (props) => {
+  const { setIsCapturingOneClick } = props;
+
   return (
     <div id="custom-target" className={`${styles[`container`]}`}>
-      <Editor />
+      <Editor setIsCapturingOneClick={setIsCapturingOneClick}/>
     </div>
   );
 };

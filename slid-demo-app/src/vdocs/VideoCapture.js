@@ -18,10 +18,10 @@ const VideoCapture = (props) => {
   useEffect(()=>{
     let w, h, ratio;
 
-    ratio = videoPlayerRef.current.getInternalPlayer().videoWidth / videoPlayerRef.current.getInternalPlayer().videoHeight;
-
+    ratio = videoPlaceholderRef.current.offsetWidth / videoPlaceholderRef.current.offsetHeight;
     h = 375;
     w = parseInt(h * ratio, 10);
+    //w = 630;
 
     setSquareCoordinate(0, 0, w, h);
   }, []);
@@ -29,14 +29,21 @@ const VideoCapture = (props) => {
   // 영상 전체 캡처
   useEffect(() => {
     if(isCapturingOneClick) {
-      const ctx = canvas.current.getContext('2d');
-      ctx.fillRect(0, 0, w, h);
-      ctx.drawImage(videoPlayerRef.current.getInternalPlayer(), 0, 0, w, h)
+      console.log("냐옹");
+
+      const capturingCanvas = document.createElement("canvas");
+      capturingCanvas.width = videoPlaceholderRef.current.offsetWidth;
+      capturingCanvas.height = videoPlaceholderRef.current.offsetHeight;
+
+      const ctx = capturingCanvas.getContext('2d');
+      //ctx.fillRect(0, 0, w, h);
+      ctx.drawImage(videoPlayerRef.current.getInternalPlayer(), squareCoordinate.left, squareCoordinate.top, squareCoordinate.width, squareCoordinate.height);
+
+      const imageUrl = capturingCanvas.toDataURL();
+      console.log(imageUrl);
       
-      //const frame = captureVideoFrame(this.player.getInternalPlayer())
-      //let imageURL = frame.dataUri
-      let imageURL = canvas.current.toDataURL();
-      console.log(imageURL);
+      // //const frame = captureVideoFrame(this.player.getInternalPlayer())
+      // //let imageURL = frame.dataUri
 
       setIsCapturingOneClick(false);
     }
@@ -191,8 +198,6 @@ const VideoCapture = (props) => {
           <canvas id="fabricCanvas" />
         </span>
       ) : null}
-
-      {/* <canvas ref={canvas}/> */}
     </div>
     );
   };

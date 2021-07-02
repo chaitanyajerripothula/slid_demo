@@ -8,7 +8,7 @@ import './VideoDocument.css'
 const VideoDocument = (props) => {
   const {lang, isMacOs} = props;
   const [showSelectAreaCanvas, setShowSelectAreaCanvas] = useState(false);
-  const [isCapturingFullScreen, setIsCapturingFullScreen] = useState(false);
+  const [isCapturingOneClick, setIsCapturingOneClick] = useState(false);
   const [captureSelectArea, setCaptureSelectArea] = useState(false);
 
   return (
@@ -16,7 +16,8 @@ const VideoDocument = (props) => {
       <Split
         className={`${styles[`split-wrapper`]} d-flex`}
         sizes={[60, 40]}
-        minSize={[(580, 330)]}
+        minSize={[580, 330]}
+        // maxSize={[1260,708]}
         expandToMin={false}
         gutterAlign="center"
         snapOffset={30}
@@ -24,8 +25,8 @@ const VideoDocument = (props) => {
         direction="horizontal"
         cursor="col-resize"
       >
-        <VideoPlayer captureSelectArea={captureSelectArea} showSelectAreaCanvas={showSelectAreaCanvas} isCapturingFullScreen={isCapturingFullScreen} setIsCapturingFullScreen={setIsCapturingFullScreen} lang={lang} isMacOs={isMacOs} />
-        <VideoDocumentEditor setShowSelectAreaCanvas={setShowSelectAreaCanvas} setIsCapturingFullScreen={setIsCapturingFullScreen} setCaptureSelectArea={setCaptureSelectArea} />
+        <VideoPlayer captureSelectArea={captureSelectArea} showSelectAreaCanvas={showSelectAreaCanvas} isCapturingOneClick={isCapturingOneClick} setIsCapturingOneClick={setIsCapturingOneClick} lang={lang} isMacOs={isMacOs} />
+        <VideoDocumentEditor setShowSelectAreaCanvas={setShowSelectAreaCanvas} setIsCapturingOneClick={setIsCapturingOneClick} setCaptureSelectArea={setCaptureSelectArea} />
       </Split>
     </div>
   );

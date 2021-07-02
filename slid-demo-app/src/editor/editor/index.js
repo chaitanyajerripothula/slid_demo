@@ -100,6 +100,7 @@ class Editor extends React.PureComponent {
   };
 
   render() {
+    const { setIsCapturingOneClick } = this.props;
     let { fontSize, isSaving } = this.state;
     this.handleAddListener();
     return (
@@ -130,6 +131,7 @@ class Editor extends React.PureComponent {
           }}
           redoEditor={() => this.undoInstance.redo()}
           isSaving={isSaving}
+          setIsCapturingOneClick = {setIsCapturingOneClick}
         />
       </div>
     );

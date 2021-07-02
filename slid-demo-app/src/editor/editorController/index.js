@@ -14,7 +14,7 @@ import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import Swal from "sweetalert2";
 
 const EditorController = (props) => {
-  const { componentRef, isSaving } = props;
+  const { componentRef, isSaving, setIsCapturingOneClick } = props;
   const [open, setOpen] = useState(false);
   const [fontSize, setFontSize] = useState("small");
 
@@ -46,6 +46,10 @@ const EditorController = (props) => {
       heightAuto: false,
     }).then(() => {});
   };
+
+  const captureOneClick = () => {
+    setIsCapturingOneClick(true);
+  }
 
   return (
     <div className={`${styles[`container`]}`}>
@@ -100,7 +104,8 @@ const EditorController = (props) => {
             </Tooltip>
           }
         >
-          <button className={`${styles[`video-document-editor-capture-btn`]} btn btn-primary`} onClick={insertImage}>
+          <button className={`${styles[`video-document-editor-capture-btn`]} btn btn-primary`} 
+          onClick={() => {insertImage(); captureOneClick();}}>
             <img className={`${styles[`video-document-editor-capture-icon`]}`} src={captureImg} alt="captureImage" />
           </button>
         </OverlayTrigger>

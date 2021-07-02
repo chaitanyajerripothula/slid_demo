@@ -4,10 +4,10 @@ import React from "react";
 import EditorComponent from "../editor/EditorComponent";
 
 const VideoDocumentEditor = (props) => {
-  const { setShowSelectAreaCanvas, setIsCapturingFullScreen, setCaptureSelectArea } = props;
+  const { setShowSelectAreaCanvas, setIsCapturingOneClick, setCaptureSelectArea } = props;
 
-  const captureFullScreen = () => {
-    setIsCapturingFullScreen(true);
+  const captureOneClick = () => {
+    setIsCapturingOneClick(true);
   }
 
   const HandleClick = () => {
@@ -35,11 +35,11 @@ const VideoDocumentEditor = (props) => {
 
   return (
     <div id="toast-container">
-      <EditorComponent />
+      <EditorComponent setIsCapturingOneClick={setIsCapturingOneClick}/>
       {/*<button className="btn btn-success btn" onClick={HandleClick}>
         button
       </button>
-      <button onClick={captureFullScreen}> FullCapture </button>*/}
+      <button onClick={captureOneClick}> FullCapture </button>*/}
     </div>
   );
 };
