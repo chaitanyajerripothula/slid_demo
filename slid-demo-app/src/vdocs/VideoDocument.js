@@ -1,17 +1,35 @@
-import React from "react";
-import SplitPane from "react-split-pane";
+import React, { useState, useRef } from "react";
+import Split from 'react-split';
 import VideoPlayer from "../vdocs/VideoPlayer";
 import VideoDocumentEditor from "../vdocs/VideoDocumentEditor";
+import styles from "./VideoDocument.module.css";
+import './VideoDocument.css'
 
-const VideoDocument = () => {
+const VideoDocument = (props) => {
+  const {lang, isMacOs} = props;
+  const [showSelectAreaCanvas, setShowSelectAreaCanvas] = useState(false);
+  const [isCapturingFullScreen, setIsCapturingFullScreen] = useState(false);
+  const [captureSelectArea, setCaptureSelectArea] = useState(false);
+
+  const slidDoc = useRef();
+
   return (
-    <div>
-      <SplitPane sizes={[60, 40]} minSize={[(580, 330)]} expandToMin={false}
-             gutterAlign="center" snapOffset={30} dragInterval={1}
-             direction="horizontal" cursor="col-resize">
-        <VideoPlayer />
-        <VideoDocumentEditor />
-      </SplitPane>
+    <div className={`${styles[`vdocs-container`]}`} ref={slidDoc}>
+      <Split
+        className={`${styles[`split-wrapper`]} d-flex`}
+        sizes={[60, 40]}
+        minSize={[(580, 330)]}
+        expandToMin={false}
+        gutterAlign="center"
+        gutterSize="7"
+        snapOffset={30}
+        dragInterval={1}
+        direction="horizontal"
+        cursor="col-resize"
+      >
+        <VideoPlayer captureSelectArea={captureSelectArea} showSelectAreaCanvas={showSelectAreaCanvas} isCapturingFullScreen={isCapturingFullScreen} setIsCapturingFullScreen={setIsCapturingFullScreen} lang={lang} isMacOs={isMacOs} />
+        <VideoDocumentEditor setShowSelectAreaCanvas={setShowSelectAreaCanvas} setIsCapturingFullScreen={setIsCapturingFullScreen} setCaptureSelectArea={setCaptureSelectArea} />
+      </Split>
     </div>
   );
 };
