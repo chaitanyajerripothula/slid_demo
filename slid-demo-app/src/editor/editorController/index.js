@@ -36,14 +36,14 @@ const EditorController = (props) => {
 
   const onClickRecordVideoBtn = () => {
     Swal.fire({
-      target: document.getElementById("custom-target"),
+      target: document.getElementById("toast-container"),
       title: "준비중입니다!",
       html: `<p>영상을 짧게 녹화할 수 있는 기능이 현재 준비 중입니다!</p><p>슬리드의 업데이트들을 기대해 주세요. :)</p>`,
-      customClass: "position-absolute",
       position: "center",
       confirmButtonText: "확인",
       icon: "info",
       confirmButtonColor: "#2778c4",
+      heightAuto: false,
     }).then(() => {});
   };
 
