@@ -5,7 +5,7 @@ import VideoCapture from "./VideoCapture";
 import styles from "./VideoPlayer.module.css";
 
 const VideoPlayer = (props) => {
-  const { showSelectAreaCanvas, isCapturingFullScreen, setIsCapturingFullScreen, lang, isMacOs } = props;
+  const { showSelectAreaCanvas, isCapturingOneClick, setIsCapturingOneClick, lang, isMacOs } = props;
 
   const [isPlaying, setIsPlaying] = useState(false);
   const [videoState, setVideoState] = useState("available");
@@ -63,7 +63,7 @@ const VideoPlayer = (props) => {
       </div>
       <div className={`${styles[`video-placeholder-container`]}`}>
         <div id="video-size-check" ref={videoPlaceholderRef} className={`${styles[`video-placeholder`]}`}>
-          <VideoCapture showSelectAreaCanvas={showSelectAreaCanvas} videoPlayerRef={videoPlayerRef} videoPlaceholderRef={videoPlaceholderRef} isCapturingFullScreen={isCapturingFullScreen} setIsCapturingFullScreen={setIsCapturingFullScreen} />
+          <VideoCapture showSelectAreaCanvas={showSelectAreaCanvas} videoPlayerRef={videoPlayerRef} videoPlaceholderRef={videoPlaceholderRef} isCapturingOneClick={isCapturingOneClick} setIsCapturingOneClick={setIsCapturingOneClick} />
           <ReactPlayer
             className={styles[`video-player`]}
             url="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"

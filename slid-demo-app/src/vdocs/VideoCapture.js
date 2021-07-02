@@ -3,31 +3,32 @@ import { fabric } from "fabric";
 import styles from "./VideoCapture.module.css";
 
 const VideoCapture = (props) => {
-  const { showSelectAreaCanvas, videoPlayerRef, videoPlaceholderRef, isCapturingFullScreen, setIsCapturingFullScreen } = props;
+  const { showSelectAreaCanvas, videoPlayerRef, videoPlaceholderRef, isCapturingOneClick, setIsCapturingOneClick } = props;
 
   const [squareCoordinate, setSquareCoordinate] = useState({
-    left: "",
-    top: "",
-    width: "",
-    height: "",
+    left: 0,
+    top: 0,
+    width: 0,
+    height: 0
   });
 
   const canvas = useRef();
   const canvasRef = useRef();
 
+  useEffect(()=>{
+    let w, h, ratio;
+
+    ratio = videoPlayerRef.current.getInternalPlayer().videoWidth / videoPlayerRef.current.getInternalPlayer().videoHeight;
+
+    h = 375;
+    w = parseInt(h * ratio, 10);
+
+    setSquareCoordinate(0, 0, w, h);
+  }, []);
+
   // 영상 전체 캡처
   useEffect(() => {
-    if(isCapturingFullScreen) {
-      let w, h, ratio;
-
-      ratio = videoPlayerRef.current.getInternalPlayer().videoWidth / videoPlayerRef.current.getInternalPlayer().videoHeight;
-
-      h = 300
-      w = parseInt(h * ratio, 10);
-
-      canvas.current.width = w;
-      canvas.current.height = h;
-
+    if(isCapturingOneClick) {
       const ctx = canvas.current.getContext('2d');
       ctx.fillRect(0, 0, w, h);
       ctx.drawImage(videoPlayerRef.current.getInternalPlayer(), 0, 0, w, h)
@@ -37,9 +38,9 @@ const VideoCapture = (props) => {
       let imageURL = canvas.current.toDataURL();
       console.log(imageURL);
 
-      setIsCapturingFullScreen(false);
+      setIsCapturingOneClick(false);
     }
-  }, [isCapturingFullScreen]);
+  }, [isCapturingOneClick]);
 
   // 영역 지정 캡처
   useEffect(() => {
