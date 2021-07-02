@@ -1,0 +1,19 @@
+@media print {
+  .cdx-simple-image {
+    width: 100%;
+    border: none;
+    align-self: center;
+    margin-bottom: 200px;
+    margin-top: 50px;
+  }
+
+  .ce-block__content {
+    max-width: 90%;
+    max-height: 100%;
+    margin-bottom: 2rem;
+  }
+
+  .cdx-simple-image__picture img {
+    border-radius: 5px;
+  }
+}

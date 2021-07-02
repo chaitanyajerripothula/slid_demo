@@ -1,7 +1,6 @@
-import React from "react";
-import EditorComponent from "../editor/EditorComponent";
 import Swal from "sweetalert2";
 import "./VideoDocumentEditor.css";
+import React from "react";
 
 const VideoDocumentEditor = (props) => {
   const { setShowSelectAreaCanvas, setIsCapturingFullScreen, setCaptureSelectArea } = props;

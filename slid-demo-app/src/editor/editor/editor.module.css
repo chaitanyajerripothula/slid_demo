@@ -1,0 +1,40 @@
+.container {
+  height: 700px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+  padding: 20px 40px 0;
+  background: #ffffff;
+}
+.editor-container {
+  box-sizing: border-box;
+  background: #ffffff;
+}
+
+.font-small {
+  font-size: 1rem;
+}
+
+.font-medium {
+  font-size: 1.2rem;
+}
+
+.font-large {
+  font-size: 1.5rem;
+}
+
+.input-title {
+  border: none;
+  outline: none;
+  -webkit-appearance: none;
+  background: none;
+  font-weight: 400;
+  font-size: 1.8em;
+  width: 100%;
+  color: black;
+}
+
+.codex-editor--narrow .codex-editor__redactor {
+  margin : 0 !important;
+}
