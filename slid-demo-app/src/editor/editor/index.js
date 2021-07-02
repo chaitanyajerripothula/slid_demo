@@ -121,6 +121,8 @@ class Editor extends React.PureComponent {
           </div>
         </div>
         <EditorController
+          setShowSelectAreaCanvas={this.props.setShowSelectAreaCanvas}
+          setCaptureSelectArea={this.props.setCaptureSelectArea}
           handleInsertImage={this.handleInsertImage}
           componentRef={this.componentRef}
           handleSetFontSize={this.handleSetFontSize}
