@@ -3,7 +3,7 @@ import React from "react";
 import EditorComponent from "../editor/EditorComponent";
 
 const VideoDocumentEditor = (props) => {
-  const { setShowSelectAreaCanvas, setIsCapturingFullScreen, setCaptureSelectArea } = props;
+  const { selectAreaCoordinate, captureImgUrl, setSelectAreaCoordinate, setShowSelectAreaCanvas, setCaptureImgUrl, setIsCapturingFullScreen, setCaptureSelectArea } = props;
 
   const captureFullScreen = () => {
     setIsCapturingFullScreen(true);
@@ -11,7 +11,14 @@ const VideoDocumentEditor = (props) => {
 
   return (
     <div id="toast-container">
-      <EditorComponent setShowSelectAreaCanvas={setShowSelectAreaCanvas} setCaptureSelectArea={setCaptureSelectArea} />
+      <EditorComponent
+        selectAreaCoordinate={selectAreaCoordinate}
+        captureImgUrl={captureImgUrl}
+        setSelectAreaCoordinate={setSelectAreaCoordinate}
+        setShowSelectAreaCanvas={setShowSelectAreaCanvas}
+        setCaptureSelectArea={setCaptureSelectArea}
+        setCaptureImgUrl={setCaptureImgUrl}
+      />
       {/*<button className="btn btn-success btn" onClick={HandleClick}>
         button
       </button>

@@ -4,11 +4,18 @@ import styles from "./editorComponent.module.css";
 import "./print.css";
 
 const EditorComponent = (props) => {
-  const { setShowSelectAreaCanvas, setCaptureSelectArea } = props;
+  const { selectAreaCoordinate, captureImgUrl, setSelectAreaCoordinate, setShowSelectAreaCanvas, setCaptureSelectArea, setCaptureImgUrl } = props;
 
   return (
     <div id="custom-target" className={`${styles[`container`]}`}>
-      <Editor setShowSelectAreaCanvas={setShowSelectAreaCanvas} setCaptureSelectArea={setCaptureSelectArea} />
+      <Editor
+        selectAreaCoordinate={selectAreaCoordinate}
+        captureImgUrl={captureImgUrl}
+        setSelectAreaCoordinate={setSelectAreaCoordinate}
+        setShowSelectAreaCanvas={setShowSelectAreaCanvas}
+        setCaptureSelectArea={setCaptureSelectArea}
+        setCaptureImgUrl={setCaptureImgUrl}
+      />
     </div>
   );
 };

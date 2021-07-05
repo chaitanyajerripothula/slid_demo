@@ -5,7 +5,7 @@ import VideoCapture from "./VideoCapture";
 import styles from "./VideoPlayer.module.css";
 
 const VideoPlayer = (props) => {
-  const { showSelectAreaCanvas, isCapturingFullScreen, setIsCapturingFullScreen, lang, isMacOs } = props;
+  const { selectAreaCoordinate, setSelectAreaCoordinate, setCaptureImgUrl, showSelectAreaCanvas, isCapturingFullScreen, setIsCapturingFullScreen, lang, isMacOs } = props;
 
   const [isPlaying, setIsPlaying] = useState(false);
   const [videoState, setVideoState] = useState("available");
@@ -17,7 +17,7 @@ const VideoPlayer = (props) => {
   const videoPlaceholderRef = useRef();
 
   const setFullScreen = () => {
-    if(isFullScreen) {
+    if (isFullScreen) {
       if (document.exitFullscreen) {
         document.exitFullscreen();
       } else if (document.mozCancelFullScreen) {
@@ -28,8 +28,7 @@ const VideoPlayer = (props) => {
         document.msExitFullscreen();
       }
       setIsFullScreen(false);
-    }
-    else {
+    } else {
       if (document.body.requestFullscreen) {
         document.body.requestFullscreen();
       } else if (document.body.mozRequestFullScreen) {
@@ -41,7 +40,7 @@ const VideoPlayer = (props) => {
       }
       setIsFullScreen(true);
     }
-  }
+  };
 
   const toggleIsPlaying = () => {
     isPlaying ? setIsPlaying(false) : setIsPlaying(true);
@@ -55,14 +54,23 @@ const VideoPlayer = (props) => {
   return (
     <div className={styles[`video-container`]}>
       <div className={styles[`video-view-controller-container`]}>
-        <img alt={`slid close button`} src={`../../design/assets/slid_video_close_icon.png`} className={styles[`video-view-icon`]}/>
-        <img alt={`slid fullScreen button`} src={`../../design/assets/slid_video_${isFullScreen ? "shrink" : "expand"}_icon.png`}
-        className={styles[`video-view-icon`]} onClick={setFullScreen} />
+        <img alt={`slid close button`} src={`../../design/assets/slid_video_close_icon.png`} className={styles[`video-view-icon`]} />
+        <img alt={`slid fullScreen button`} src={`../../design/assets/slid_video_${isFullScreen ? "shrink" : "expand"}_icon.png`} className={styles[`video-view-icon`]} onClick={setFullScreen} />
       </div>
       <div className={`${styles[`video-placeholder-container`]}`}>
         <div id="video-size-check" ref={videoPlaceholderRef} className={`${styles[`video-placeholder`]}`}>
-          <VideoCapture showSelectAreaCanvas={showSelectAreaCanvas} videoPlayerRef={videoPlayerRef} videoPlaceholderRef={videoPlaceholderRef} isCapturingFullScreen={isCapturingFullScreen} setIsCapturingFullScreen={setIsCapturingFullScreen} />
+          <VideoCapture
+            selectAreaCoordinate={selectAreaCoordinate}
+            setSelectAreaCoordinate={setSelectAreaCoordinate}
+            setCaptureImgUrl={setCaptureImgUrl}
+            showSelectAreaCanvas={showSelectAreaCanvas}
+            videoPlayerRef={videoPlayerRef}
+            videoPlaceholderRef={videoPlaceholderRef}
+            isCapturingFullScreen={isCapturingFullScreen}
+            setIsCapturingFullScreen={setIsCapturingFullScreen}
+          />
           <ReactPlayer
+            id="videoPlayer"
             className={styles[`video-player`]}
             url="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
             playing={isPlaying}
@@ -150,12 +158,12 @@ const VideoPlayer = (props) => {
         </div>
         <div>
           <div className={styles[`control-container`]}>
-            <OverlayTrigger 
-              placement={"top"} 
+            <OverlayTrigger
+              placement={"top"}
               overlay={
-                <Tooltip className={`shortcut-tooltip`}>
-                  {lang === "ko-KR" ? `${skipInterval}초 뒤로 (${isMacOs ? "Cmd + J" : "Alt + J"})` : `Rewind (${isMacOs ? "Cmd + J" : "Alt + J"})`}
-                </Tooltip>}>
+                <Tooltip className={`shortcut-tooltip`}>{lang === "ko-KR" ? `${skipInterval}초 뒤로 (${isMacOs ? "Cmd + J" : "Alt + J"})` : `Rewind (${isMacOs ? "Cmd + J" : "Alt + J"})`}</Tooltip>
+              }
+            >
               <button
                 className={`${styles[`skip-btn`]} ${styles[`skip-backward-btn`]} btn btn-secondary`}
                 onClick={() => {
@@ -166,29 +174,33 @@ const VideoPlayer = (props) => {
               </button>
             </OverlayTrigger>
 
-            <OverlayTrigger 
-              placement={"top"} 
+            <OverlayTrigger
+              placement={"top"}
               overlay={
                 <Tooltip className={`shortcut-tooltip`}>
-                  {{ isPlaying } 
+                  {{ isPlaying }
                     ? lang === "ko-KR"
                       ? `일시정지 (${isMacOs ? "Cmd + K" : "Alt + K"})`
                       : `Pause (${isMacOs ? "Cmd + K" : "Alt + K"})`
                     : lang === "ko-KR"
                     ? `재생 (${isMacOs ? "Cmd + K" : "Alt + K"})`
                     : `Play (${isMacOs ? "Cmd + K" : "Alt + K"})`}
-                  </Tooltip>}>
+                </Tooltip>
+              }
+            >
               <button className={`${styles[`play-btn`]} btn btn-light`} onClick={toggleIsPlaying}>
                 <img alt={`play pause button`} className={styles[`video-icon`]} src={`../../design/assets/slid_${isPlaying ? "pause" : "play"}_btn_icon.png`} />
               </button>
             </OverlayTrigger>
 
-            <OverlayTrigger 
-              placement={"top"} 
+            <OverlayTrigger
+              placement={"top"}
               overlay={
                 <Tooltip className={`shortcut-tooltip`}>
                   {lang === "ko-KR" ? `${skipInterval}초 앞으로 (${isMacOs ? "Cmd + L" : "Alt + L"})` : `Fast-forward (${isMacOs ? "Cmd + L" : "Alt + L"})`}
-                </Tooltip>}>
+                </Tooltip>
+              }
+            >
               <button
                 className={`${styles[`skip-btn`]} ${styles[`skip-forward-btn`]} btn btn-secondary`}
                 onClick={() => {

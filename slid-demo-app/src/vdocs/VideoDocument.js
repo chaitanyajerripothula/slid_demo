@@ -1,15 +1,22 @@
 import React, { useState } from "react";
-import Split from 'react-split';
+import Split from "react-split";
 import VideoPlayer from "../vdocs/VideoPlayer";
 import VideoDocumentEditor from "../vdocs/VideoDocumentEditor";
 import styles from "./VideoDocument.module.css";
-import './VideoDocument.css'
+import "./VideoDocument.css";
 
 const VideoDocument = (props) => {
-  const {lang, isMacOs} = props;
+  const { lang, isMacOs } = props;
   const [showSelectAreaCanvas, setShowSelectAreaCanvas] = useState(false);
   const [isCapturingFullScreen, setIsCapturingFullScreen] = useState(false);
   const [captureSelectArea, setCaptureSelectArea] = useState(false);
+  const [selectAreaCoordinate, setSelectAreaCoordinate] = useState({
+    left: "",
+    top: "",
+    width: "",
+    height: "",
+  });
+  const [captureImgUrl, setCaptureImgUrl] = useState();
 
   return (
     <div className={`${styles[`vdocs-container`]}`}>
@@ -24,8 +31,26 @@ const VideoDocument = (props) => {
         direction="horizontal"
         cursor="col-resize"
       >
-        <VideoPlayer captureSelectArea={captureSelectArea} showSelectAreaCanvas={showSelectAreaCanvas} isCapturingFullScreen={isCapturingFullScreen} setIsCapturingFullScreen={setIsCapturingFullScreen} lang={lang} isMacOs={isMacOs} />
-        <VideoDocumentEditor setShowSelectAreaCanvas={setShowSelectAreaCanvas} setIsCapturingFullScreen={setIsCapturingFullScreen} setCaptureSelectArea={setCaptureSelectArea} />
+        <VideoPlayer
+          captureSelectArea={captureSelectArea}
+          showSelectAreaCanvas={showSelectAreaCanvas}
+          isCapturingFullScreen={isCapturingFullScreen}
+          setIsCapturingFullScreen={setIsCapturingFullScreen}
+          setSelectAreaCoordinate={setSelectAreaCoordinate}
+          setCaptureImgUrl={setCaptureImgUrl}
+          lang={lang}
+          isMacOs={isMacOs}
+          selectAreaCoordinate={selectAreaCoordinate}
+        />
+        <VideoDocumentEditor
+          selectAreaCoordinate={selectAreaCoordinate}
+          captureImgUrl={captureImgUrl}
+          setSelectAreaCoordinate={setSelectAreaCoordinate}
+          setShowSelectAreaCanvas={setShowSelectAreaCanvas}
+          setIsCapturingFullScreen={setIsCapturingFullScreen}
+          setCaptureSelectArea={setCaptureSelectArea}
+          setCaptureImgUrl={setCaptureImgUrl}
+        />
       </Split>
     </div>
   );

@@ -121,8 +121,12 @@ class Editor extends React.PureComponent {
           </div>
         </div>
         <EditorController
+          selectAreaCoordinate={this.props.selectAreaCoordinate}
+          captureImgUrl={this.props.captureImgUrl}
+          setSelectAreaCoordinate={this.props.setSelectAreaCoordinate}
           setShowSelectAreaCanvas={this.props.setShowSelectAreaCanvas}
           setCaptureSelectArea={this.props.setCaptureSelectArea}
+          setCaptureImgUrl={this.props.setCaptureImgUrl}
           handleInsertImage={this.handleInsertImage}
           componentRef={this.componentRef}
           handleSetFontSize={this.handleSetFontSize}

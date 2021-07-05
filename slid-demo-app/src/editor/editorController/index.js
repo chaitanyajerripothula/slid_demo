@@ -14,13 +14,17 @@ import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import Swal from "sweetalert2";
 
 const EditorController = (props) => {
-  const { componentRef, isSaving, setShowSelectAreaCanvas, setCaptureSelectArea } = props;
+  const { componentRef, isSaving, selectAreaCoordinate, captureImgUrl, setShowSelectAreaCanvas, setCaptureSelectArea, setCaptureImgUrl, setSelectAreaCoordinate } = props;
   const [open, setOpen] = useState(false);
   const [fontSize, setFontSize] = useState("small");
 
   useEffect(() => {
     props.handleSetFontSize(fontSize);
   }, [fontSize]);
+
+  useEffect(() => {
+    console.log(captureImgUrl);
+  }, [captureImgUrl]);
 
   const renderPdfPrint = useReactToPrint({
     content: () => componentRef.current,
@@ -33,6 +37,47 @@ const EditorController = (props) => {
   const openEditorSetting = useCallback(() => {
     setOpen(!open);
   }, [open]);
+
+  const imageCapture = () => {
+    let w, h;
+    const videoImageCanvas = document.createElement("canvas");
+
+    let videoSize = document.getElementById("video-size-check");
+    w = videoSize.offsetWidth;
+    h = videoSize.offsetHeight;
+
+    videoImageCanvas.width = w;
+    videoImageCanvas.height = h;
+
+    let ctx = videoImageCanvas.getContext("2d");
+    let video = document.getElementsByTagName("video");
+    console.log(video[0]);
+    ctx.fillRect(0, 0, w, h);
+    ctx.drawImage(video[0], 0, 0, w, h);
+
+    const captureImageCanvas = document.createElement("canvas");
+    captureImageCanvas.width = selectAreaCoordinate.width;
+    captureImageCanvas.height = selectAreaCoordinate.height;
+
+    let newCtx = captureImageCanvas.getContext("2d");
+    newCtx.drawImage(
+      videoImageCanvas,
+      selectAreaCoordinate.left,
+      selectAreaCoordinate.top,
+      selectAreaCoordinate.width,
+      selectAreaCoordinate.height,
+      0,
+      0,
+      captureImageCanvas.width,
+      captureImageCanvas.height
+    );
+
+    console.log(captureImageCanvas.toDataURL());
+
+    setCaptureImgUrl({
+      url: captureImageCanvas.toDataURL(),
+    });
+  };
 
   const onClickRecordVideoBtn = () => {
     Swal.fire({
@@ -60,9 +105,19 @@ const EditorController = (props) => {
       heightAuto: false,
     }).then((result) => {
       if (result.isDenied) {
+        let videoSize = document.getElementById("video-size-check");
+        console.log(videoSize.offsetWidth);
+        setSelectAreaCoordinate({
+          left: 0,
+          top: 0,
+          width: videoSize.offsetWidth - 3,
+          height: videoSize.offsetHeight - 3,
+        });
         setShowSelectAreaCanvas(false);
       } else if (result.isConfirmed) {
         setCaptureSelectArea(true);
+
+        imageCapture();
         setShowSelectAreaCanvas(false);
       } else {
         setShowSelectAreaCanvas(false);
