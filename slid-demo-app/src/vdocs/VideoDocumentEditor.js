@@ -4,7 +4,7 @@ import React from "react";
 import EditorComponent from "../editor/EditorComponent";
 
 const VideoDocumentEditor = (props) => {
-  const { setShowSelectAreaCanvas, setIsCapturingOneClick, setCaptureSelectArea } = props;
+  const { setShowSelectAreaCanvas, setIsCapturingOneClick, setCaptureSelectArea, capturedImageUrl } = props;
 
   const captureOneClick = () => {
     setIsCapturingOneClick(true);
@@ -35,7 +35,7 @@ const VideoDocumentEditor = (props) => {
 
   return (
     <div id="toast-container">
-      <EditorComponent setIsCapturingOneClick={setIsCapturingOneClick}/>
+      <EditorComponent setIsCapturingOneClick={setIsCapturingOneClick} capturedImageUrl={capturedImageUrl}/>
       {/*<button className="btn btn-success btn" onClick={HandleClick}>
         button
       </button>

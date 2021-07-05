@@ -3,7 +3,7 @@ import { fabric } from "fabric";
 import styles from "./VideoCapture.module.css";
 
 const VideoCapture = (props) => {
-  const { showSelectAreaCanvas, videoPlayerRef, videoPlaceholderRef, isCapturingOneClick, setIsCapturingOneClick } = props;
+  const { showSelectAreaCanvas, videoPlayerRef, videoPlaceholderRef, isCapturingOneClick, setIsCapturingOneClick, setCapturedImageUrl } = props;
 
   const [squareCoordinate, setSquareCoordinate] = useState({
     left: 0,
@@ -18,34 +18,42 @@ const VideoCapture = (props) => {
   useEffect(()=>{
     let w, h, ratio;
 
-    ratio = videoPlaceholderRef.current.offsetWidth / videoPlaceholderRef.current.offsetHeight;
-    h = 375;
-    w = parseInt(h * ratio, 10);
-    //w = 630;
+    //ratio = videoPlaceholderRef.current.offsetWidth / videoPlaceholderRef.current.offsetHeight;
+    //h = 375;
+    //w = parseInt(h * ratio, 10);
+    w = videoPlaceholderRef.current.offsetWidth;
+    h = videoPlaceholderRef.current.offsetHeight;
 
-    setSquareCoordinate(0, 0, w, h);
+    setSquareCoordinate({
+      ...squareCoordinate,
+      left: 0,
+      top: 0,
+      width: w,
+      height: h
+    });
   }, []);
 
   // 영상 전체 캡처
   useEffect(() => {
     if(isCapturingOneClick) {
-      console.log("냐옹");
-
       const capturingCanvas = document.createElement("canvas");
       capturingCanvas.width = videoPlaceholderRef.current.offsetWidth;
       capturingCanvas.height = videoPlaceholderRef.current.offsetHeight;
 
       const ctx = capturingCanvas.getContext('2d');
-      //ctx.fillRect(0, 0, w, h);
-      ctx.drawImage(videoPlayerRef.current.getInternalPlayer(), squareCoordinate.left, squareCoordinate.top, squareCoordinate.width, squareCoordinate.height);
+      //ctx.fillRect(0, 0, squareCoordinate.width, squareCoordinate.height);
+      ctx.drawImage(videoPlayerRef.current.getInternalPlayer(), squareCoordinate.left, squareCoordinate.top, squareCoordinate.width, squareCoordinate.height); 
 
       const imageUrl = capturingCanvas.toDataURL();
+      setCapturedImageUrl(imageUrl);
       console.log(imageUrl);
+
+      setIsCapturingOneClick(false);
+      
+      console.log("setImageUrl");
       
       // //const frame = captureVideoFrame(this.player.getInternalPlayer())
       // //let imageURL = frame.dataUri
-
-      setIsCapturingOneClick(false);
     }
   }, [isCapturingOneClick]);
 

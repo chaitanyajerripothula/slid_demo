@@ -49,12 +49,14 @@ class Editor extends React.PureComponent {
     this.setState({ lastFocusedBlockIndex: this.editorInstance.blocks.getCurrentBlockIndex() === -1 ? this.state["lastFocusedBlockIndex"] : this.editorInstance.blocks.getCurrentBlockIndex() });
   };
 
-  handleInsertImage = () => {
+  handleInsertImage = (props) => {
     if (this.editorInstance.blocks.getCurrentBlockIndex() === -1) {
       this.editorInstance.blocks.insert("image", { url: testImg }, {}, this.state["lastFocusedBlockIndex"] + 1, true);
     } else {
       this.editorInstance.blocks.insert("image", { url: testImg }, {}, this.editorInstance.blocks.getCurrentBlockIndex() + 1, true);
     }
+    console.log("handleInsertImage");
+    //console.log(props.capturedImageUrl);
   };
 
   handleCheckEditorBlockCount = () => {

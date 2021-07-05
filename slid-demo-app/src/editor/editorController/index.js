@@ -49,6 +49,7 @@ const EditorController = (props) => {
 
   const captureOneClick = () => {
     setIsCapturingOneClick(true);
+    console.log("captureOneClick");
   }
 
   return (
@@ -105,7 +106,10 @@ const EditorController = (props) => {
           }
         >
           <button className={`${styles[`video-document-editor-capture-btn`]} btn btn-primary`} 
-          onClick={() => {insertImage(); captureOneClick();}}>
+          onClick={() => {
+            insertImage(); 
+            captureOneClick();}
+            }>
             <img className={`${styles[`video-document-editor-capture-icon`]}`} src={captureImg} alt="captureImage" />
           </button>
         </OverlayTrigger>

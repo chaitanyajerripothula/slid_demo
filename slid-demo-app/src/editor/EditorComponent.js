@@ -4,11 +4,11 @@ import styles from "./editorComponent.module.css";
 import "./print.css";
 
 const EditorComponent = (props) => {
-  const { setIsCapturingOneClick } = props;
+  const { setIsCapturingOneClick, capturedImageUrl} = props;
 
   return (
     <div id="custom-target" className={`${styles[`container`]}`}>
-      <Editor setIsCapturingOneClick={setIsCapturingOneClick}/>
+      <Editor setIsCapturingOneClick={setIsCapturingOneClick} capturedImageUrl={capturedImageUrl}/>
     </div>
   );
 };

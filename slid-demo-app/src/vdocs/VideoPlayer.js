@@ -5,7 +5,7 @@ import VideoCapture from "./VideoCapture";
 import styles from "./VideoPlayer.module.css";
 
 const VideoPlayer = (props) => {
-  const { showSelectAreaCanvas, isCapturingOneClick, setIsCapturingOneClick, lang, isMacOs } = props;
+  const { showSelectAreaCanvas, isCapturingOneClick, setIsCapturingOneClick, lang, isMacOs, setCapturedImageUrl} = props;
 
   const [isPlaying, setIsPlaying] = useState(false);
   const [videoState, setVideoState] = useState("available");
@@ -15,6 +15,11 @@ const VideoPlayer = (props) => {
 
   const videoPlayerRef = useRef();
   const videoPlaceholderRef = useRef();
+
+  const goBackHistory = () => {
+    window.history.back();
+    console.log("back");
+  }
 
   const setFullScreen = () => {
     if(document.fullscreenElement == null) {
@@ -57,13 +62,13 @@ const VideoPlayer = (props) => {
   return (
     <div className={styles[`video-container`]}>
       <div className={styles[`video-view-controller-container`]}>
-        <img alt={`slid close button`} src={`../../design/assets/slid_video_close_icon.png`} className={styles[`video-view-icon`]}/>
+        <img alt={`slid close button`} src={`../../design/assets/slid_video_close_icon.png`} className={styles[`video-view-icon`]} onClick={goBackHistory}/>
         <img alt={`slid fullScreen button`} src={`../../design/assets/slid_video_${isFullScreen ? "shrink" : "expand"}_icon.png`}
         className={styles[`video-view-icon`]} onClick={setFullScreen} />
       </div>
       <div className={`${styles[`video-placeholder-container`]}`}>
         <div id="video-size-check" ref={videoPlaceholderRef} className={`${styles[`video-placeholder`]}`}>
-          <VideoCapture showSelectAreaCanvas={showSelectAreaCanvas} videoPlayerRef={videoPlayerRef} videoPlaceholderRef={videoPlaceholderRef} isCapturingOneClick={isCapturingOneClick} setIsCapturingOneClick={setIsCapturingOneClick} />
+          <VideoCapture showSelectAreaCanvas={showSelectAreaCanvas} videoPlayerRef={videoPlayerRef} videoPlaceholderRef={videoPlaceholderRef} isCapturingOneClick={isCapturingOneClick} setIsCapturingOneClick={setIsCapturingOneClick} setCapturedImageUrl={setCapturedImageUrl} />
           <ReactPlayer
             className={styles[`video-player`]}
             url="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"

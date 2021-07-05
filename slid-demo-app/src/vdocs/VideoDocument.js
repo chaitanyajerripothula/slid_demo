@@ -10,6 +10,7 @@ const VideoDocument = (props) => {
   const [showSelectAreaCanvas, setShowSelectAreaCanvas] = useState(false);
   const [isCapturingOneClick, setIsCapturingOneClick] = useState(false);
   const [captureSelectArea, setCaptureSelectArea] = useState(false);
+  const [capturedImageUrl, setCapturedImageUrl] = useState('');
 
   return (
     <div className={`${styles[`vdocs-container`]}`}>
@@ -25,8 +26,8 @@ const VideoDocument = (props) => {
         direction="horizontal"
         cursor="col-resize"
       >
-        <VideoPlayer captureSelectArea={captureSelectArea} showSelectAreaCanvas={showSelectAreaCanvas} isCapturingOneClick={isCapturingOneClick} setIsCapturingOneClick={setIsCapturingOneClick} lang={lang} isMacOs={isMacOs} />
-        <VideoDocumentEditor setShowSelectAreaCanvas={setShowSelectAreaCanvas} setIsCapturingOneClick={setIsCapturingOneClick} setCaptureSelectArea={setCaptureSelectArea} />
+        <VideoPlayer captureSelectArea={captureSelectArea} showSelectAreaCanvas={showSelectAreaCanvas} isCapturingOneClick={isCapturingOneClick} setIsCapturingOneClick={setIsCapturingOneClick} lang={lang} isMacOs={isMacOs} setCapturedImageUrl={setCapturedImageUrl} />
+        <VideoDocumentEditor setShowSelectAreaCanvas={setShowSelectAreaCanvas} setIsCapturingOneClick={setIsCapturingOneClick} setCaptureSelectArea={setCaptureSelectArea} capturedImageUrl={capturedImageUrl}/>
       </Split>
     </div>
   );
