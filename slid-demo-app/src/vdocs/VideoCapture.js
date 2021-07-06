@@ -3,61 +3,41 @@ import { fabric } from "fabric";
 import styles from "./VideoCapture.module.css";
 
 const VideoCapture = (props) => {
-  const { showSelectAreaCanvas, videoPlayerRef, videoPlaceholderRef, isCapturingOneClick, setIsCapturingOneClick, setCapturedImageUrl } = props;
-
-  const [squareCoordinate, setSquareCoordinate] = useState({
-    left: 0,
-    top: 0,
-    width: 0,
-    height: 0
-  });
-
-  const canvas = useRef();
+  const { selectAreaCoordinate, setSelectAreaCoordinate, setCaptureImgUrl, showSelectAreaCanvas, videoPlayerRef, videoPlaceholderRef, isCapturingOneClick, setIsCapturingOneClick } = props;
   const canvasRef = useRef();
 
-  useEffect(()=>{
-    let w, h, ratio;
+  // useEffect(()=>{
+  //   let w, h, ratio;
 
-    //ratio = videoPlaceholderRef.current.offsetWidth / videoPlaceholderRef.current.offsetHeight;
-    //h = 375;
-    //w = parseInt(h * ratio, 10);
-    w = videoPlaceholderRef.current.offsetWidth;
-    h = videoPlaceholderRef.current.offsetHeight;
+  //   //ratio = videoPlaceholderRef.current.offsetWidth / videoPlaceholderRef.current.offsetHeight;
+  //   //h = 375;
+  //   //w = parseInt(h * ratio, 10);
+  //   w = videoPlaceholderRef.current.offsetWidth;
+  //   h = videoPlaceholderRef.current.offsetHeight;
 
-    setSquareCoordinate({
-      ...squareCoordinate,
-      left: 0,
-      top: 0,
-      width: w,
-      height: h
-    });
-  }, []);
+  //   setselectAreaCoordinate({
+  //     ...selectAreaCoordinate,
+  //     left: 0,
+  //     top: 0,
+  //     width: w,
+  //     height: h
+  //   });
+  // }, []);
 
-  // 영상 전체 캡처
+  // 영상 캡처
   useEffect(() => {
-    if(isCapturingOneClick) {
-      const capturingCanvas = document.createElement("canvas");
-      capturingCanvas.width = videoPlaceholderRef.current.offsetWidth;
-      capturingCanvas.height = videoPlaceholderRef.current.offsetHeight;
-
-      const ctx = capturingCanvas.getContext('2d');
-      //ctx.fillRect(0, 0, squareCoordinate.width, squareCoordinate.height);
-      ctx.drawImage(videoPlayerRef.current.getInternalPlayer(), squareCoordinate.left, squareCoordinate.top, squareCoordinate.width, squareCoordinate.height); 
-
-      const imageUrl = capturingCanvas.toDataURL();
-      setCapturedImageUrl(imageUrl);
-      console.log(imageUrl);
-
+    if (isCapturingOneClick) {
+      imageCapture();
       setIsCapturingOneClick(false);
-      
+
       console.log("setImageUrl");
-      
+
       // //const frame = captureVideoFrame(this.player.getInternalPlayer())
       // //let imageURL = frame.dataUri
     }
   }, [isCapturingOneClick]);
 
-  // 영역 지정 캡처
+  // 영역 지정 캡처 화면 생성
   useEffect(() => {
     canvasRef.current = new fabric.Canvas("fabricCanvas", {
       left: videoPlaceholderRef.current.left,
@@ -71,24 +51,55 @@ const VideoCapture = (props) => {
     createBoundary();
   }, [showSelectAreaCanvas]);
 
+  // 캡쳐 사각형 좌표 저장
+  useEffect(() => {
+    console.log(selectAreaCoordinate);
+  }, [selectAreaCoordinate]);
+
   // 범위 지정 사각형 생성 함수
   const createBoundary = () => {
     let mousePressed = false;
     let x = 0;
     let y = 0;
 
-    let square = new fabric.Rect({
-      width: videoPlaceholderRef.current.offsetWidth - 3,
-      height: videoPlaceholderRef.current.offsetHeight - 3,
-      fill: "rgb(255, 255, 255, 0.2)",
-      stroke: "blue",
-      opacity: 1,
-      strokeWidth: 3,
-      strokeDashArray: [5, 5],
-    });
+    let square;
+    if (selectAreaCoordinate.width === "" && selectAreaCoordinate.height === "") {
+      console.log("no selectAreaCoordinate");
+      console.log(`height: ${videoPlaceholderRef.current.offsetHeight} left: ${videoPlaceholderRef.current.left}`);
+      square = new fabric.Rect({
+        left: 0,
+        top: 0,
+        width: videoPlaceholderRef.current.offsetWidth - 3,
+        height: videoPlaceholderRef.current.offsetHeight - 3,
+        fill: "rgb(255, 255, 255, 0.2)",
+        stroke: "blue",
+        opacity: 1,
+        strokeWidth: 3,
+        strokeDashArray: [5, 5],
+      });
+
+      setSelectAreaCoordinate({
+        left: square.left,
+        top: square.top,
+        width: square.width,
+        height: square.height,
+      });
+    } else {
+      console.log("yes selectAreaCoordinate");
+      square = new fabric.Rect({
+        left: selectAreaCoordinate.left,
+        top: selectAreaCoordinate.top,
+        width: selectAreaCoordinate.width,
+        height: selectAreaCoordinate.height,
+        fill: "rgb(255, 255, 255, 0.2)",
+        stroke: "blue",
+        opacity: 1,
+        strokeWidth: 3,
+        strokeDashArray: [5, 5],
+      });
+    }
 
     canvasRef.current.add(square);
-    // canvas.renderAll();
 
     canvasRef.current.on("mouse:down", (event) => {
       clearCanvas(canvasRef.current);
@@ -142,8 +153,6 @@ const VideoCapture = (props) => {
       if (!w || !h) {
         return false;
       }
-      console.log(`square.left: ${square.left}, x: ${x}, mouse.x: ${mouse.x}, square.top: ${square.top}, y: ${y}, mouse.y: ${mouse.y}`);
-      console.log(`width: ${w}, height: ${h}`);
       if (mouse.x < x) {
         square.set("left", Math.abs(mouse.x));
       }
@@ -160,42 +169,56 @@ const VideoCapture = (props) => {
       if (mousePressed) {
         mousePressed = false;
       }
-      console.log(square);
-
-      // imageCapture(square);
+      setSelectAreaCoordinate({
+        left: square.left,
+        top: square.top,
+        width: square.width,
+        height: square.height,
+      });
     });
   };
 
-  const imageCapture = (square) => {
+  const imageCapture = () => {
+    console.log("imageCapture");
     let w, h;
-    const canvas2 = document.createElement("canvas");
+    const videoImageCanvas = document.createElement("canvas");
 
     w = videoPlaceholderRef.current.offsetWidth;
     h = videoPlaceholderRef.current.offsetHeight;
 
-    canvas2.width = w;
-    canvas2.height = h;
+    videoImageCanvas.width = w;
+    videoImageCanvas.height = h;
 
-    let ctx = canvas2.getContext("2d");
+    let ctx = videoImageCanvas.getContext("2d");
     ctx.fillRect(0, 0, w, h);
     ctx.drawImage(videoPlayerRef.current.getInternalPlayer(), 0, 0, w, h);
 
-    const newCanvas = document.createElement("canvas");
-    newCanvas.width = videoPlaceholderRef.current.offsetWidth;
-    newCanvas.height = videoPlaceholderRef.current.offsetHeight;
+    const captureImageCanvas = document.createElement("canvas");
+    captureImageCanvas.width = selectAreaCoordinate.width;
+    captureImageCanvas.height = selectAreaCoordinate.height;
 
-    let newCtx = newCanvas.getContext("2d");
-    newCtx.drawImage(canvas2, square.left, square.top, square.width, square.height, 0, 0, newCanvas.width, newCanvas.height);
+    let newCtx = captureImageCanvas.getContext("2d");
+    newCtx.drawImage(
+      videoImageCanvas,
+      selectAreaCoordinate.left,
+      selectAreaCoordinate.top,
+      selectAreaCoordinate.width,
+      selectAreaCoordinate.height,
+      0,
+      0,
+      captureImageCanvas.width,
+      captureImageCanvas.height
+    );
 
-    const dataURL = newCanvas.toDataURL();
-    console.log(dataURL);
+    setCaptureImgUrl(captureImageCanvas.toDataURL());
   };
 
   const clearCanvas = (canvas) => {
     canvas.getObjects().forEach((o) => {
-      if (o !== canvas.backgroundImage) {
-        canvas.remove(o);
-      }
+      canvas.remove(o);
+      // if (o !== canvas.backgroundImage) {
+      //   canvas.remove(o);
+      // }
     });
   };
 
@@ -207,7 +230,7 @@ const VideoCapture = (props) => {
         </span>
       ) : null}
     </div>
-    );
-  };
+  );
+};
 
 export default VideoCapture;

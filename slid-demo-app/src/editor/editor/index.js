@@ -51,12 +51,11 @@ class Editor extends React.PureComponent {
 
   handleInsertImage = () => {
     if (this.editorInstance.blocks.getCurrentBlockIndex() === -1) {
-      this.editorInstance.blocks.insert("image", { url: this.props.capturedImageUrl }, {}, this.state["lastFocusedBlockIndex"] + 1, true);
+      this.editorInstance.blocks.insert("image", { url: this.props.captureImgUrl }, {}, this.state["lastFocusedBlockIndex"] + 1, true);
     } else {
-      this.editorInstance.blocks.insert("image", { url: this.props.capturedImageUrl }, {}, this.editorInstance.blocks.getCurrentBlockIndex() + 1, true);
+      this.editorInstance.blocks.insert("image", { url: this.props.captureImgUrl }, {}, this.editorInstance.blocks.getCurrentBlockIndex() + 1, true);
     }
     console.log("handleInsertImage");
-    console.log("URL " + this.props.capturedImageUrl);
   };
 
   handleCheckEditorBlockCount = () => {
@@ -124,6 +123,12 @@ class Editor extends React.PureComponent {
           </div>
         </div>
         <EditorController
+          selectAreaCoordinate={this.props.selectAreaCoordinate}
+          captureImgUrl={this.props.captureImgUrl}
+          setSelectAreaCoordinate={this.props.setSelectAreaCoordinate}
+          setShowSelectAreaCanvas={this.props.setShowSelectAreaCanvas}
+          setCaptureSelectArea={this.props.setCaptureSelectArea}
+          setCaptureImgUrl={this.props.setCaptureImgUrl}
           handleInsertImage={this.handleInsertImage}
           componentRef={this.componentRef}
           handleSetFontSize={this.handleSetFontSize}
