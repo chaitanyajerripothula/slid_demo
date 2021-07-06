@@ -11,16 +11,6 @@ class Editor extends React.PureComponent {
   noteSavingTimeoutId = 1;
   ceBlocks = document.getElementsByClassName("ce-block");
 
-  handleAddListener = () => {
-    for (let index = 0; index < this.ceBlocks.length; index++) {
-      this.ceBlocks[index].addEventListener("focusout", (event) => {
-        this.setState({ lastFocusedBlockIndex: index });
-      });
-    }
-  };
-
-  async componentDidMount() {}
-
   constructor(props) {
     super(props);
     this.state = {
@@ -30,6 +20,16 @@ class Editor extends React.PureComponent {
       isSaving: true,
     };
   }
+
+  async componentDidMount() {}
+
+  handleAddListener = () => {
+    for (let index = 0; index < this.ceBlocks.length; index++) {
+      this.ceBlocks[index].addEventListener("focusout", (event) => {
+        this.setState({ lastFocusedBlockIndex: index });
+      });
+    }
+  };
 
   handleSetUndoRedoInstance = () => {
     const editor = this.editorInstance;
@@ -101,6 +101,8 @@ class Editor extends React.PureComponent {
 
   render() {
     let { fontSize, isSaving } = this.state;
+    const {width} = this.props;
+
     this.handleAddListener();
     return (
       <div>
@@ -130,6 +132,7 @@ class Editor extends React.PureComponent {
           }}
           redoEditor={() => this.undoInstance.redo()}
           isSaving={isSaving}
+          width={width}
         />
       </div>
     );

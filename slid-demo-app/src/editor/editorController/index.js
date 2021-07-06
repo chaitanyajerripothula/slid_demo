@@ -14,7 +14,7 @@ import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import Swal from "sweetalert2";
 
 const EditorController = (props) => {
-  const { componentRef, isSaving } = props;
+  const { componentRef, isSaving, width } = props;
   const [open, setOpen] = useState(false);
   const [fontSize, setFontSize] = useState("small");
 
@@ -50,6 +50,36 @@ const EditorController = (props) => {
   return (
     <div className={`${styles[`container`]}`}>
       {open ? <EditorSetting setFontSize={setFontSize} fontSize={fontSize} /> : null}
+      {width > 400 ? null : (
+        <div className={`${styles[`video-document-editor-width-400`]}`} >
+          <OverlayTrigger
+            defaultShow={false}
+            placement={"top"}
+            overlay={
+              <Tooltip>
+                <div>영역 지정</div>
+              </Tooltip>
+            }
+          >
+            <button className={`${styles[`video-document-editor-capture-option-btn`]} btn btn-light`}>
+              <img className={`${styles[`video-document-editor-capture-option-icon`]}`} src={areaCaptureImg} alt="areaCaptureImage" />
+            </button>
+          </OverlayTrigger>
+          <OverlayTrigger
+            defaultShow={false}
+            placement={"top"}
+            overlay={
+              <Tooltip>
+                <div>클립 녹화</div>
+              </Tooltip>
+            }
+          >
+            <button className={`${styles[`video-document-editor-capture-option-btn`]} btn btn-light`} onClick={onClickRecordVideoBtn}>
+              <img className={`${styles[`video-document-editor-recording-icon`]}`} src={recordingImg} alt="recordingImg" />
+            </button>
+          </OverlayTrigger>
+        </div>
+      )}
       <div className={`${styles[`video-document-editor-left-wrapper`]}`}>
         <div className={`${styles[`video-document-editor-undo-redo-container`]}`}>
           <img
@@ -75,19 +105,21 @@ const EditorController = (props) => {
         </div>
       </div>
       <div className={`${styles[`video-document-editor-center-wrapper`]}`}>
-        <OverlayTrigger
-          defaultShow={false}
-          placement={"top"}
-          overlay={
-            <Tooltip>
-              <div>영역 지정</div>
-            </Tooltip>
-          }
-        >
-          <button className={`${styles[`video-document-editor-capture-option-btn`]} btn btn-light`}>
-            <img className={`${styles[`video-document-editor-capture-option-icon`]}`} src={areaCaptureImg} alt="areaCaptureImage" />
-          </button>
-        </OverlayTrigger>
+        {width > 400 ? (
+          <OverlayTrigger
+            defaultShow={false}
+            placement={"top"}
+            overlay={
+              <Tooltip>
+                <div>영역 지정</div>
+              </Tooltip>
+            }
+          >
+            <button className={`${styles[`video-document-editor-capture-option-btn`]} btn btn-light`}>
+              <img className={`${styles[`video-document-editor-capture-option-icon`]}`} src={areaCaptureImg} alt="areaCaptureImage" />
+            </button>
+          </OverlayTrigger>
+        ) : null}
         <OverlayTrigger
           defaultShow={false}
           placement={"top"}
@@ -104,19 +136,21 @@ const EditorController = (props) => {
             <img className={`${styles[`video-document-editor-capture-icon`]}`} src={captureImg} alt="captureImage" />
           </button>
         </OverlayTrigger>
-        <OverlayTrigger
-          defaultShow={false}
-          placement={"top"}
-          overlay={
-            <Tooltip>
-              <div>클립 녹화</div>
-            </Tooltip>
-          }
-        >
-          <button className={`${styles[`video-document-editor-capture-option-btn`]} btn btn-light`} onClick={onClickRecordVideoBtn}>
-            <img className={`${styles[`video-document-editor-recording-icon`]}`} src={recordingImg} alt="recordingImg" />
-          </button>
-        </OverlayTrigger>
+        {width > 400 ? (
+          <OverlayTrigger
+            defaultShow={false}
+            placement={"top"}
+            overlay={
+              <Tooltip>
+                <div>클립 녹화</div>
+              </Tooltip>
+            }
+          >
+            <button className={`${styles[`video-document-editor-capture-option-btn`]} btn btn-light`} onClick={onClickRecordVideoBtn}>
+              <img className={`${styles[`video-document-editor-recording-icon`]}`} src={recordingImg} alt="recordingImg" />
+            </button>
+          </OverlayTrigger>
+        ) : null}
       </div>
       <div className={`${styles[`video-document-editor-right-wrapper`]}`}>
         <div className={`${styles[`video-document-editor-save-container`]}`}>

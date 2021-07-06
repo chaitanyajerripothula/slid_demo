@@ -136,3 +136,19 @@
   width: 30px;
   height: auto;
 }
+
+.video-document-editor-width-400 {
+  width: fit-content;
+  height: 50px;
+  min-width: unset;
+  z-index: 1000;
+  left: 50% !important;
+  bottom: 8% !important;
+  transform: translate(-50%) !important;
+  display: flex;
+  insert: auto auto 0px 0px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  background: #ffffff;
+  position: absolute;
+  border-radius: 5px !important;
+}
