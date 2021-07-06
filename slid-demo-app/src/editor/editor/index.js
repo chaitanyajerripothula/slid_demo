@@ -49,14 +49,14 @@ class Editor extends React.PureComponent {
     this.setState({ lastFocusedBlockIndex: this.editorInstance.blocks.getCurrentBlockIndex() === -1 ? this.state["lastFocusedBlockIndex"] : this.editorInstance.blocks.getCurrentBlockIndex() });
   };
 
-  handleInsertImage = (props) => {
+  handleInsertImage = () => {
     if (this.editorInstance.blocks.getCurrentBlockIndex() === -1) {
-      this.editorInstance.blocks.insert("image", { url: testImg }, {}, this.state["lastFocusedBlockIndex"] + 1, true);
+      this.editorInstance.blocks.insert("image", { url: this.props.capturedImageUrl }, {}, this.state["lastFocusedBlockIndex"] + 1, true);
     } else {
-      this.editorInstance.blocks.insert("image", { url: testImg }, {}, this.editorInstance.blocks.getCurrentBlockIndex() + 1, true);
+      this.editorInstance.blocks.insert("image", { url: this.props.capturedImageUrl }, {}, this.editorInstance.blocks.getCurrentBlockIndex() + 1, true);
     }
     console.log("handleInsertImage");
-    //console.log(props.capturedImageUrl);
+    console.log("URL " + this.props.capturedImageUrl);
   };
 
   handleCheckEditorBlockCount = () => {
@@ -133,7 +133,7 @@ class Editor extends React.PureComponent {
           }}
           redoEditor={() => this.undoInstance.redo()}
           isSaving={isSaving}
-          setIsCapturingOneClick = {setIsCapturingOneClick}
+          setIsCapturingOneClick={setIsCapturingOneClick}
         />
       </div>
     );
