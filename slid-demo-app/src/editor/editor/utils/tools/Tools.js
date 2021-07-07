@@ -1,69 +1,72 @@
-import Header from "./blocks/header/index";
-import Paragraph from "./blocks/paragraph/index";
-import CheckList from "@editorjs/checklist";
-import CodeTool from "./blocks/code/index";
-import Marker from "./marker/index";
-import NestedList from "./blocks/nestedList/index";
-import Underline from "./underline/index";
-import SimpleImage from "./blocks/simpleImage/index";
-import InlineCode from "./inlineCode/index";
+import Paragraph from "../blocks/paragraph/index";
+import List from "../blocks/list/index";
+import NestedList from "../blocks/nestedList";
+import Checklist from "@editorjs/checklist";
+import Header from "../blocks/header/index";
+import Loader from "../blocks/loader/index";
+import Image from "../blocks/image/index";
+import VideoLoader from "../blocks/videoLoader/index";
+import Underline from "../tools/underline/index";
+import Marker from "../tools/marker/index";
+import InlineCode from "../tools/inlineCode/index";
+import Color from "../tools/textColor/index";
+import Video from "../blocks/video/index";
+import LaTeXTool from "../blocks/latex";
+import CodeTool from "../blocks/code";
+import BlockList from "../blocks/blockList";
 
-export const EDITOR_JS_TOOLS = {
-  header: {
-    class: Header,
-    inlineToolbar: true,
-    shortcut: "CMD+SHIFT+H",
-    config: {
-      placeholder: "Enter a header",
-      levels: [4],
-      defaultLevel: 4,
-    },
-  },
-  paragraph: {
-    class: Paragraph,
-    inlineToolbar: true,
-    config: {
-      preserveBlank: true,
-      convertBlock: ({ blockIndex, blockType, value }) => {
-        this.convertBlock({ blockIndex, blockType, value });
-      },
-      // 자동형식변환기능 -> false(현재 demo 페이지에서 보이지 않는 기능임으로 임시적으로 false 처리)
-      checkIsAutoFormatActive: () => {
-        return false;
-      },
-    },
-  },
-  checkList: {
-    class: CheckList,
-    inlineToolbar: true,
-  },
-  codeTool: {
-    class: CodeTool,
-    shortcut: "CMD+SHIFT+C",
-    config: {
-      convertBlock: ({ blockIndex, blockType, value }) => {
-        this.convertBlock({ blockIndex, blockType, value });
-      },
-    },
-  },
-  marker: {
-    class: Marker,
-    shortcut: "CMD+SHIFT+M",
+const Tools = {
+  list: {
+    class: List,
   },
   nestedList: {
     class: NestedList,
-    inlineToolbar: false,
-    shortcut: "CMD+SHIFT+L",
   },
-  image: {
-    class: SimpleImage,
+  blockList: {
+    class: BlockList,
+  },
+  paragraph: {
+    class: Paragraph,
+  },
+  header: {
+    class: Header,
   },
   underline: {
     class: Underline,
-    shortcut: "CMD+SHIFT+U",
+    shortcut: "CMD+U",
+  },
+  marker: {
+    class: Marker,
+    shortcut: "CMD+SHIFT+H",
   },
   inlineCode: {
     class: InlineCode,
     shortcut: "CMD+E",
   },
+  textColor: {
+    class: Color,
+  },
+  loader: {
+    class: Loader,
+  },
+  image: {
+    class: Image,
+  },
+  video: {
+    class: Video,
+  },
+  videoLoader: {
+    class: VideoLoader,
+  },
+  Math: {
+    class: LaTeXTool,
+  },
+  codeTool: {
+    class: CodeTool,
+  },
+  checklist: {
+    class: Checklist,
+  },
 };
+
+export default Tools;

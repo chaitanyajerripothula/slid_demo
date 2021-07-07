@@ -1,0 +1,28 @@
+.cdx-block-list {
+  margin: 0;
+  outline: none;
+
+  padding-top: 2.5px;
+  padding-bottom: 2.5px;
+}
+.cdx-block-list__item {
+  padding: 0 0 0 0;
+  line-height: 1.6em;
+}
+.cdx-block-list--unordered {
+  /* list-style: disc; */
+  list-style: none;
+}
+.cdx-block-list--unordered > .cdx-block-list__item::before {
+  margin-right: 5px;
+  content: "•";
+}
+.cdx-block-list--ordered {
+  list-style: decimal;
+}
+.cdx-block-list-settings {
+  display: flex;
+}
+.cdx-block-list-settings .cdx-settings-button {
+  width: 50%;
+}
