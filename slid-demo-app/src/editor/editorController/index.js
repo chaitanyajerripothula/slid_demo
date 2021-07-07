@@ -14,7 +14,7 @@ import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import Swal from "sweetalert2";
 
 const EditorController = (props) => {
-  const { componentRef, isSaving, width } = props;
+  const { componentRef, isSaving, editorWidth } = props;
   const [open, setOpen] = useState(false);
   const [fontSize, setFontSize] = useState("small");
 
@@ -50,8 +50,8 @@ const EditorController = (props) => {
   return (
     <div className={`${styles[`container`]}`}>
       {open ? <EditorSetting setFontSize={setFontSize} fontSize={fontSize} /> : null}
-      {width > 400 ? null : (
-        <div className={`${styles[`video-document-editor-width-400`]}`} >
+      {editorWidth > 400 ? null : (
+        <div className={`${styles[`video-document-editor-setting-popup`]}`} >
           <OverlayTrigger
             defaultShow={false}
             placement={"top"}
@@ -105,7 +105,7 @@ const EditorController = (props) => {
         </div>
       </div>
       <div className={`${styles[`video-document-editor-center-wrapper`]}`}>
-        {width > 400 ? (
+        {editorWidth > 400 ? (
           <OverlayTrigger
             defaultShow={false}
             placement={"top"}
@@ -136,7 +136,7 @@ const EditorController = (props) => {
             <img className={`${styles[`video-document-editor-capture-icon`]}`} src={captureImg} alt="captureImage" />
           </button>
         </OverlayTrigger>
-        {width > 400 ? (
+        {editorWidth > 400 ? (
           <OverlayTrigger
             defaultShow={false}
             placement={"top"}

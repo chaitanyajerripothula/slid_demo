@@ -44,7 +44,7 @@ class Editor extends React.PureComponent {
 
     this.noteSavingTimeoutId = setTimeout(() => {
       this.setState({ isSaving: true });
-    }, 2000);
+    }, 300);
 
     this.setState({ lastFocusedBlockIndex: this.editorInstance.blocks.getCurrentBlockIndex() === -1 ? this.state["lastFocusedBlockIndex"] : this.editorInstance.blocks.getCurrentBlockIndex() });
   };
@@ -132,7 +132,7 @@ class Editor extends React.PureComponent {
           }}
           redoEditor={() => this.undoInstance.redo()}
           isSaving={isSaving}
-          width={width}
+          editorWidth={width}
         />
       </div>
     );
