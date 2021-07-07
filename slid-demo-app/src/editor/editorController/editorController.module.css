@@ -146,7 +146,7 @@
   min-width: unset;
   z-index: 10;
   left: 50% !important;
-  bottom: 8.5% !important;
+  top: -60% !important;
   transform: translate(-50%) !important;
   display: flex;
   align-items: center;

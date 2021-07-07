@@ -106,18 +106,18 @@ class Editor extends React.PureComponent {
     this.handleAddListener();
     return (
       <div className={`${styles[`container`]}`}>
-        <h1 className={`${styles[`font-${fontSize}`]}`}>
-          <input
-            className={`${styles[`input-title`]}`}
-            type="text"
-            onChange={this.handleChangeTitle}
-            placeholder="제목을 입력하세요."
-            autoComplete="false"
-            autoFocus={true}
-            onKeyPress={this.handleKeyPress}
-          />
-        </h1>
         <div className={`${styles[`editor-container`]} ${styles[`font-${fontSize}`]}`} ref={this.componentRef}>
+          <h1 className={`${styles[`font-${fontSize}`]}`}>
+            <input
+                className={`${styles[`input-title`]}`}
+                type="text"
+                onChange={this.handleChangeTitle}
+                placeholder="제목을 입력하세요."
+                autoComplete="false"
+                autoFocus={true}
+                onKeyPress={this.handleKeyPress}
+            />
+          </h1>
           <EditorJs
             className={`${styles[`editor-js`]}`}
             tools={EDITOR_JS_TOOLS}
