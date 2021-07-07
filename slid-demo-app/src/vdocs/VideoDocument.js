@@ -4,6 +4,9 @@ import VideoPlayer from "../vdocs/VideoPlayer";
 import VideoDocumentEditor from "../vdocs/VideoDocumentEditor";
 import styles from "./VideoDocument.module.css";
 import "./VideoDocument.css";
+import { withResizeDetector } from 'react-resize-detector';
+
+const VideoPlayerSizeDetector = withResizeDetector(VideoPlayer);
 
 const VideoDocument = (props) => {
   const { lang, isMacOs } = props;
@@ -31,7 +34,7 @@ const VideoDocument = (props) => {
         direction="horizontal"
         cursor="col-resize"
       >
-        <VideoPlayer
+        <VideoPlayerSizeDetector
           captureSelectArea={captureSelectArea}
           showSelectAreaCanvas={showSelectAreaCanvas}
           isCapturingOneClick={isCapturingOneClick}

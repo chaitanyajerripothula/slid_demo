@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ReactPlayer from "react-player";
 import { Dropdown, OverlayTrigger, Tooltip } from "react-bootstrap";
 import VideoCapture from "./VideoCapture";
@@ -15,6 +15,16 @@ const VideoPlayer = (props) => {
 
   const videoPlayerRef = useRef();
   const videoPlaceholderRef = useRef();
+
+  useEffect(() => {
+    console.log("test : " + props.width);
+    setSelectAreaCoordinate({
+      left: 0,
+      top: 0,
+      width: videoPlaceholderRef.current.offsetWidth - 2,
+      height: videoPlaceholderRef.current.offsetHeight - 2,
+    })
+  }, [props.width]);
 
   const goBackHistory = () => {
     window.history.back();

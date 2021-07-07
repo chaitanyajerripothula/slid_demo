@@ -6,10 +6,6 @@ const VideoCapture = (props) => {
   const { selectAreaCoordinate, setSelectAreaCoordinate, setCaptureImgUrl, showSelectAreaCanvas, videoPlayerRef, videoPlaceholderRef, isCapturingOneClick, setIsCapturingOneClick } = props;
   const canvasRef = useRef();
 
-  useEffect(() => {
-    videoPlaceholderRef.current.addEventListener('resize', handleCanvasResize)
-  }, []);
-
   // 영상 캡처
   useEffect(() => {
     if (isCapturingOneClick) {
@@ -39,18 +35,6 @@ const VideoCapture = (props) => {
   useEffect(() => {
     console.log(selectAreaCoordinate);
   }, [selectAreaCoordinate]);
-
-  const handleCanvasResize = () => {
-    console.log("캔버스 리사이즈");
-    if(videoPlaceholderRef.current.offsetWidth!=null) {
-      setSelectAreaCoordinate({
-        left: 0,
-        top: 0,
-        width: videoPlaceholderRef.current.offsetWidth - 2,
-        height: videoPlaceholderRef.current.offsetHeight - 2,
-      })
-    }
-  }
 
   // 범위 지정 사각형 생성 함수
   const createBoundary = () => {
