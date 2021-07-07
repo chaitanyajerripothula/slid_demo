@@ -6,31 +6,15 @@ const VideoCapture = (props) => {
   const { selectAreaCoordinate, setSelectAreaCoordinate, setCaptureImgUrl, showSelectAreaCanvas, videoPlayerRef, videoPlaceholderRef, isCapturingOneClick, setIsCapturingOneClick } = props;
   const canvasRef = useRef();
 
-  // useEffect(()=>{
-  //   let w, h, ratio;
-
-  //   //ratio = videoPlaceholderRef.current.offsetWidth / videoPlaceholderRef.current.offsetHeight;
-  //   //h = 375;
-  //   //w = parseInt(h * ratio, 10);
-  //   w = videoPlaceholderRef.current.offsetWidth;
-  //   h = videoPlaceholderRef.current.offsetHeight;
-
-  //   setselectAreaCoordinate({
-  //     ...selectAreaCoordinate,
-  //     left: 0,
-  //     top: 0,
-  //     width: w,
-  //     height: h
-  //   });
-  // }, []);
+  useEffect(() => {
+    videoPlaceholderRef.current.addEventListener('resize', handleCanvasResize)
+  }, []);
 
   // 영상 캡처
   useEffect(() => {
     if (isCapturingOneClick) {
       imageCapture();
       setIsCapturingOneClick(false);
-
-      console.log("setImageUrl");
 
       // //const frame = captureVideoFrame(this.player.getInternalPlayer())
       // //let imageURL = frame.dataUri
@@ -44,7 +28,7 @@ const VideoCapture = (props) => {
       top: videoPlaceholderRef.current.top,
       width: videoPlaceholderRef.current.offsetWidth,
       height: videoPlaceholderRef.current.offsetHeight,
-      backgroundColor: "transparent",
+      backgroundColor: "pink",
       hoverCursor: "crosshair",
       selection: false,
     });
@@ -55,6 +39,18 @@ const VideoCapture = (props) => {
   useEffect(() => {
     console.log(selectAreaCoordinate);
   }, [selectAreaCoordinate]);
+
+  const handleCanvasResize = () => {
+    console.log("캔버스 리사이즈");
+    if(videoPlaceholderRef.current.offsetWidth!=null) {
+      setSelectAreaCoordinate({
+        left: 0,
+        top: 0,
+        width: videoPlaceholderRef.current.offsetWidth - 2,
+        height: videoPlaceholderRef.current.offsetHeight - 2,
+      })
+    }
+  }
 
   // 범위 지정 사각형 생성 함수
   const createBoundary = () => {
@@ -69,8 +65,8 @@ const VideoCapture = (props) => {
       square = new fabric.Rect({
         left: 0,
         top: 0,
-        width: videoPlaceholderRef.current.offsetWidth - 3,
-        height: videoPlaceholderRef.current.offsetHeight - 3,
+        width: videoPlaceholderRef.current.offsetWidth - 2,
+        height: videoPlaceholderRef.current.offsetHeight - 2,
         fill: "rgb(255, 255, 255, 0.2)",
         stroke: "blue",
         opacity: 1,

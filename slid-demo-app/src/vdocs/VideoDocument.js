@@ -24,7 +24,6 @@ const VideoDocument = (props) => {
         className={`${styles[`split-wrapper`]} d-flex`}
         sizes={[60, 40]}
         minSize={[580, 330]}
-        // maxSize={[1260,708]}
         expandToMin={false}
         gutterAlign="center"
         snapOffset={30}

@@ -18,7 +18,6 @@ const VideoPlayer = (props) => {
 
   const goBackHistory = () => {
     window.history.back();
-    console.log("back");
   };
 
   const setFullScreen = () => {
@@ -61,7 +60,7 @@ const VideoPlayer = (props) => {
   return (
     <div className={styles[`video-container`]}>
       <div className={styles[`video-view-controller-container`]}>
-        <img alt={`slid close button`} src={`../../design/assets/slid_video_close_icon.png`} className={styles[`video-view-icon`]} />
+        <img alt={`slid close button`} src={`../../design/assets/slid_video_close_icon.png`} className={styles[`video-view-icon`]} onClick={goBackHistory} />
         <img alt={`slid fullScreen button`} src={`../../design/assets/slid_video_${isFullScreen ? "shrink" : "expand"}_icon.png`} className={styles[`video-view-icon`]} onClick={setFullScreen} />
       </div>
       <div className={`${styles[`video-placeholder-container`]}`}>
