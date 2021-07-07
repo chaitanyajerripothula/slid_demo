@@ -8,7 +8,7 @@ const AdaptiveWithDetector = withResizeDetector(Editor);
 
 const EditorComponent = () => {
   return (
-    <div id="custom-target" className={`${styles[`container`]}`}>
+    <div className={`${styles[`container`]}`}>
       <AdaptiveWithDetector />
     </div>
   );

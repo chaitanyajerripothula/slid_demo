@@ -101,27 +101,32 @@ class Editor extends React.PureComponent {
 
   render() {
     let { fontSize, isSaving } = this.state;
-    const {width} = this.props;
+    const { width } = this.props;
 
     this.handleAddListener();
     return (
-      <div>
-        <div className={`${styles[`container`]}`}>
-          <h1 className={`${styles[`font-${fontSize}`]}`}>
-            <input
-              className={`${styles[`input-title`]}`}
-              type="text"
-              onChange={this.handleChangeTitle}
-              placeholder="제목을 입력하세요."
-              autoComplete="false"
-              autoFocus={true}
-              onKeyPress={this.handleKeyPress}
-            />
-          </h1>
-          <div className={`${styles[`editor-container`]} ${styles[`font-${fontSize}`]}`} ref={this.componentRef}>
-            <EditorJs tools={EDITOR_JS_TOOLS} onReady={this.handleSetUndoRedoInstance} onChange={this.handleChangeEditor} instanceRef={(instance) => (this.editorInstance = instance)} />
-          </div>
+      <div className={`${styles[`container`]}`}>
+        <h1 className={`${styles[`font-${fontSize}`]}`}>
+          <input
+            className={`${styles[`input-title`]}`}
+            type="text"
+            onChange={this.handleChangeTitle}
+            placeholder="제목을 입력하세요."
+            autoComplete="false"
+            autoFocus={true}
+            onKeyPress={this.handleKeyPress}
+          />
+        </h1>
+        <div className={`${styles[`editor-container`]} ${styles[`font-${fontSize}`]}`} ref={this.componentRef}>
+          <EditorJs
+            className={`${styles[`editor-js`]}`}
+            tools={EDITOR_JS_TOOLS}
+            onReady={this.handleSetUndoRedoInstance}
+            onChange={this.handleChangeEditor}
+            instanceRef={(instance) => (this.editorInstance = instance)}
+          />
         </div>
+
         <EditorController
           handleInsertImage={this.handleInsertImage}
           componentRef={this.componentRef}

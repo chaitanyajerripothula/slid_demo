@@ -5,6 +5,9 @@
   justify-content: space-between;
   background: #ffffff;
   box-shadow: 0 -5px 10px hsl(0, 0%, 97%);
+  position: absolute;
+  width: 100%;
+  bottom : 0;
 }
 
 .video-document-editor-left-wrapper {
