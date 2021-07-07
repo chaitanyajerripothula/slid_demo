@@ -27,6 +27,9 @@ export default class DragDrop {
     this.startBlock = null;
     this.endBlock = null;
 
+    this.initPositionY = null;
+
+    this.setMouseDownListener();
     this.setDragListener();
     this.setDropListener();
 
@@ -62,12 +65,13 @@ export default class DragDrop {
   }
 
   scrollOnDrag = (e) => {
-    const maxScrollSpeed = 30;
-    const containerHeight = window.innerHeight;
-    if (e.y > containerHeight / 3 && e.y < (containerHeight * 2) / 3) {
-      this.scrollSpeed = 0;
-    } else {
-      this.scrollSpeed = ((2 * maxScrollSpeed) / containerHeight) * (e.y - containerHeight / 2);
+    let distanceFromOrigin;
+
+    distanceFromOrigin = Math.abs(e.y - this.initPositionY);
+    if (e.y > this.initPositionY) {
+      this.scrollSpeed = distanceFromOrigin / 10;
+    } else if (e.y < this.initPositionY) {
+      this.scrollSpeed = -distanceFromOrigin / 10;
     }
 
     this.editorContainer.scrollTop += this.scrollSpeed;
@@ -99,6 +103,20 @@ export default class DragDrop {
       var evt = document.createEvent("MouseEvents");
       evt.initEvent("mouseup", true, true);
       document.dispatchEvent(evt);
+    });
+  }
+
+  /**
+   * Sets the drop events listener.
+   * set init position of the target
+   */
+  setMouseDownListener() {
+    this.holder.addEventListener("mousedown", (event) => {
+      const { target } = event;
+      if (this.holder.contains(target)) {
+        // set initial mouse position.
+        this.initPositionY = event.clientY;
+      }
     });
   }
 
