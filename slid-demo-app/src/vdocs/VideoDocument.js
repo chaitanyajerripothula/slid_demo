@@ -32,7 +32,13 @@ const VideoDocument = (props) => {
           lang={lang}
           isMacOs={isMacOs}
         />
-        <VideoDocumentEditor setShowSelectAreaCanvas={setShowSelectAreaCanvas} setIsCapturingFullScreen={setIsCapturingFullScreen} setCaptureSelectArea={setCaptureSelectArea} />
+        <VideoDocumentEditor
+          setShowSelectAreaCanvas={setShowSelectAreaCanvas}
+          setIsCapturingFullScreen={setIsCapturingFullScreen}
+          setCaptureSelectArea={setCaptureSelectArea}
+          lang={lang}
+          isMacOs={isMacOs}
+        />
       </Split>
     </div>
   );

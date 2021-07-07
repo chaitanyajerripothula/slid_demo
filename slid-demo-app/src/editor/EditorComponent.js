@@ -6,10 +6,11 @@ import { withResizeDetector } from "react-resize-detector";
 
 const AdaptiveWithDetector = withResizeDetector(Editor);
 
-const EditorComponent = () => {
+const EditorComponent = (props) => {
+    const {lang, isMacOs} = props;
   return (
     <div className={`${styles[`container`]}`}>
-      <AdaptiveWithDetector />
+      <AdaptiveWithDetector lang={lang} isMacOs={isMacOs}/>
     </div>
   );
 };

@@ -75,7 +75,7 @@ class Editor extends React.PureComponent {
     if (e.target.value) {
       document.title = e.target.value;
     } else {
-      document.title = "제목 없음";
+      document.title = this.props.lang === "ko-KR" ? "제목 없음" : "Untitle";
     }
   };
 
@@ -101,23 +101,22 @@ class Editor extends React.PureComponent {
 
   render() {
     let { fontSize, isSaving } = this.state;
-    const { width } = this.props;
-
+    const { width, lang, isMacOs } = this.props;
     this.handleAddListener();
     return (
       <div className={`${styles[`container`]}`}>
+        <h1 className={`${styles[`font-${fontSize}`]}`}>
+          <input
+            className={`${styles[`input-title`]}`}
+            type="text"
+            onChange={this.handleChangeTitle}
+            placeholder={lang === "ko-KR" ? "제목을 입력하세요" : "Enter title"}
+            autoComplete="false"
+            autoFocus={true}
+            onKeyPress={this.handleKeyPress}
+          />
+        </h1>
         <div className={`${styles[`editor-container`]} ${styles[`font-${fontSize}`]}`} ref={this.componentRef}>
-          <h1 className={`${styles[`font-${fontSize}`]}`}>
-            <input
-                className={`${styles[`input-title`]}`}
-                type="text"
-                onChange={this.handleChangeTitle}
-                placeholder="제목을 입력하세요."
-                autoComplete="false"
-                autoFocus={true}
-                onKeyPress={this.handleKeyPress}
-            />
-          </h1>
           <EditorJs
             className={`${styles[`editor-js`]}`}
             tools={EDITOR_JS_TOOLS}
@@ -138,6 +137,8 @@ class Editor extends React.PureComponent {
           redoEditor={() => this.undoInstance.redo()}
           isSaving={isSaving}
           editorWidth={width}
+          lang={lang}
+          isMacOs={isMacOs}
         />
       </div>
     );
