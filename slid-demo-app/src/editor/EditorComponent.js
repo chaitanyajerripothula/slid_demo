@@ -4,13 +4,13 @@ import styles from "./editorComponent.module.css";
 import "./print.css";
 import { withResizeDetector } from "react-resize-detector";
 
-const AdaptiveWithDetector = withResizeDetector(Editor);
+const EditorAdaptiveWithDetector = withResizeDetector(Editor);
 
 const EditorComponent = (props) => {
-    const {lang, isMacOs} = props;
+  const { lang, isMacOs } = props;
   return (
     <div className={`${styles[`container`]}`}>
-      <AdaptiveWithDetector lang={lang} isMacOs={isMacOs}/>
+      <EditorAdaptiveWithDetector lang={lang} isMacOs={isMacOs} />
     </div>
   );
 };
