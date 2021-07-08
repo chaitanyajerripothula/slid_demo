@@ -4,14 +4,14 @@ import React from "react";
 import EditorComponent from "../editor/EditorComponent";
 
 const VideoDocumentEditor = (props) => {
-  const { setShowSelectAreaCanvas, setIsCapturingFullScreen, setCaptureSelectArea } = props;
+  const { setShowSelectAreaCanvas, setIsCapturingFullScreen, setCaptureSelectArea, lang, isMacOs } = props;
 
   const captureFullScreen = () => {
     setIsCapturingFullScreen(true);
-  }
+  };
 
   const HandleClick = () => {
-    setShowSelectAreaCanvas(true)
+    setShowSelectAreaCanvas(true);
     Swal.fire({
       target: document.getElementById("toast-container"),
       title: "👈 캡쳐할 영역을 선택해주세요.",
@@ -25,21 +25,17 @@ const VideoDocumentEditor = (props) => {
       if (result.isDenied) {
         setShowSelectAreaCanvas(false);
       } else if (result.isConfirmed) {
-        setCaptureSelectArea(true)
-        setShowSelectAreaCanvas(false)
+        setCaptureSelectArea(true);
+        setShowSelectAreaCanvas(false);
       } else {
-        setShowSelectAreaCanvas(false)
+        setShowSelectAreaCanvas(false);
       }
     });
   };
 
   return (
     <div id="toast-container">
-      <EditorComponent />
-      {/*<button className="btn btn-success btn" onClick={HandleClick}>
-        button
-      </button>
-      <button onClick={captureFullScreen}> FullCapture </button>*/}
+      <EditorComponent lang={lang} isMacOs={isMacOs} />
     </div>
   );
 };

@@ -11,16 +11,6 @@ class Editor extends React.PureComponent {
   noteSavingTimeoutId = 1;
   ceBlocks = document.getElementsByClassName("ce-block");
 
-  handleAddListener = () => {
-    for (let index = 0; index < this.ceBlocks.length; index++) {
-      this.ceBlocks[index].addEventListener("focusout", (event) => {
-        this.setState({ lastFocusedBlockIndex: index });
-      });
-    }
-  };
-
-  async componentDidMount() {}
-
   constructor(props) {
     super(props);
     this.state = {
@@ -30,6 +20,16 @@ class Editor extends React.PureComponent {
       isSaving: true,
     };
   }
+
+  async componentDidMount() {}
+
+  handleAddListener = () => {
+    for (let index = 0; index < this.ceBlocks.length; index++) {
+      this.ceBlocks[index].addEventListener("focusout", (event) => {
+        this.setState({ lastFocusedBlockIndex: index });
+      });
+    }
+  };
 
   handleSetUndoRedoInstance = () => {
     const editor = this.editorInstance;
@@ -44,7 +44,7 @@ class Editor extends React.PureComponent {
 
     this.noteSavingTimeoutId = setTimeout(() => {
       this.setState({ isSaving: true });
-    }, 2000);
+    }, 300);
 
     this.setState({ lastFocusedBlockIndex: this.editorInstance.blocks.getCurrentBlockIndex() === -1 ? this.state["lastFocusedBlockIndex"] : this.editorInstance.blocks.getCurrentBlockIndex() });
   };
@@ -75,7 +75,7 @@ class Editor extends React.PureComponent {
     if (e.target.value) {
       document.title = e.target.value;
     } else {
-      document.title = "제목 없음";
+      document.title = this.props.lang === "ko-KR" ? "제목 없음" : "Untitle";
     }
   };
 
@@ -101,25 +101,31 @@ class Editor extends React.PureComponent {
 
   render() {
     let { fontSize, isSaving } = this.state;
+    const { width, lang, isMacOs } = this.props;
     this.handleAddListener();
     return (
-      <div>
-        <div className={`${styles[`container`]}`}>
-          <h1 className={`${styles[`font-${fontSize}`]}`}>
-            <input
-              className={`${styles[`input-title`]}`}
-              type="text"
-              onChange={this.handleChangeTitle}
-              placeholder="제목을 입력하세요."
-              autoComplete="false"
-              autoFocus={true}
-              onKeyPress={this.handleKeyPress}
-            />
-          </h1>
-          <div className={`${styles[`editor-container`]} ${styles[`font-${fontSize}`]}`} ref={this.componentRef}>
-            <EditorJs tools={EDITOR_JS_TOOLS} onReady={this.handleSetUndoRedoInstance} onChange={this.handleChangeEditor} instanceRef={(instance) => (this.editorInstance = instance)} />
-          </div>
+      <div className={`${styles[`container`]}`}>
+        <h1 className={`${styles[`font-${fontSize}`]}`}>
+          <input
+            className={`${styles[`input-title`]}`}
+            type="text"
+            onChange={this.handleChangeTitle}
+            placeholder={lang === "ko-KR" ? "제목을 입력하세요" : "Enter title"}
+            autoComplete="false"
+            autoFocus={true}
+            onKeyPress={this.handleKeyPress}
+          />
+        </h1>
+        <div className={`${styles[`editor-container`]} ${styles[`font-${fontSize}`]}`} ref={this.componentRef}>
+          <EditorJs
+            className={`${styles[`editor-js`]}`}
+            tools={EDITOR_JS_TOOLS}
+            onReady={this.handleSetUndoRedoInstance}
+            onChange={this.handleChangeEditor}
+            instanceRef={(instance) => (this.editorInstance = instance)}
+          />
         </div>
+
         <EditorController
           handleInsertImage={this.handleInsertImage}
           componentRef={this.componentRef}
@@ -130,6 +136,9 @@ class Editor extends React.PureComponent {
           }}
           redoEditor={() => this.undoInstance.redo()}
           isSaving={isSaving}
+          editorWidth={width}
+          lang={lang}
+          isMacOs={isMacOs}
         />
       </div>
     );

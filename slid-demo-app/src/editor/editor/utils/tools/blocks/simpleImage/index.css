@@ -6,6 +6,8 @@
   width: 100%;
   position: relative;
   max-height: 375px;
+  display: flex;
+  justify-content: center;
 }
 
 .cdx-simple-image .cdx-loader {
@@ -18,7 +20,8 @@
 
 .cdx-simple-image img {
   max-width: 100%;
-  vertical-align: bottom;
+  max-height: 368px;
+  align-self: center;
 }
 
 .cdx-simple-image__picture--with-background {
@@ -48,16 +51,19 @@
 }
 
 .ce-block {
-  padding: .4em 0;
+  padding: 0.4em 0;
 }
 
-.ce-block__content{
+.ce-block__content {
   position: relative;
-  max-width: 650px;
-
+  max-width: unset;
 }
 
 .cdx-block {
   padding: 0 !important;
   margin-bottom: 1rem;
+}
+
+.codex-editor .ce-block__content, .codex-editor .ce-toolbar__content {
+  max-width: none;
 }
