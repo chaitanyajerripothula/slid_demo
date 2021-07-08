@@ -16,10 +16,6 @@ const VideoDocumentEditor = (props) => {
         setCaptureImgUrl={setCaptureImgUrl}
         setIsCapturingOneClick={setIsCapturingOneClick}
       />
-      {/*<button className="btn btn-success btn" onClick={HandleClick}>
-        button
-      </button>
-      <button onClick={captureOneClick}> FullCapture </button>*/}
     </div>
   );
 };

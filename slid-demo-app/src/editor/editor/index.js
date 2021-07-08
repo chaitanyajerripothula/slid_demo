@@ -55,7 +55,6 @@ class Editor extends React.PureComponent {
     } else {
       this.editorInstance.blocks.insert("image", { url: this.props.captureImgUrl }, {}, this.editorInstance.blocks.getCurrentBlockIndex() + 1, true);
     }
-    console.log("handleInsertImage");
   };
 
   handleCheckEditorBlockCount = () => {
@@ -101,7 +100,6 @@ class Editor extends React.PureComponent {
   };
 
   render() {
-    const { setIsCapturingOneClick } = this.props;
     let { fontSize, isSaving } = this.state;
     this.handleAddListener();
     return (
@@ -138,7 +136,7 @@ class Editor extends React.PureComponent {
           }}
           redoEditor={() => this.undoInstance.redo()}
           isSaving={isSaving}
-          setIsCapturingOneClick={setIsCapturingOneClick}
+          setIsCapturingOneClick={this.props.setIsCapturingOneClick}
         />
       </div>
     );

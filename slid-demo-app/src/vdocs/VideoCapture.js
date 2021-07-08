@@ -31,11 +31,6 @@ const VideoCapture = (props) => {
     createBoundary();
   }, [showSelectAreaCanvas]);
 
-  // 캡쳐 사각형 좌표 저장
-  useEffect(() => {
-    console.log(selectAreaCoordinate);
-  }, [selectAreaCoordinate]);
-
   // 범위 지정 사각형 생성 함수
   const createBoundary = () => {
     let mousePressed = false;
@@ -44,8 +39,6 @@ const VideoCapture = (props) => {
 
     let square;
     if (selectAreaCoordinate.width === "" && selectAreaCoordinate.height === "") {
-      console.log("no selectAreaCoordinate");
-      console.log(`height: ${videoPlaceholderRef.current.offsetHeight} left: ${videoPlaceholderRef.current.left}`);
       square = new fabric.Rect({
         left: 0,
         top: 0,
@@ -65,7 +58,6 @@ const VideoCapture = (props) => {
         height: square.height,
       });
     } else {
-      console.log("yes selectAreaCoordinate");
       square = new fabric.Rect({
         left: selectAreaCoordinate.left,
         top: selectAreaCoordinate.top,
@@ -112,7 +104,6 @@ const VideoCapture = (props) => {
       }
 
       const mouse = canvasRef.current.getPointer(event.e);
-      console.log(`x: ${mouse.x}, y: ${mouse.y}`);
 
       if (mouse.x > videoPlaceholderRef.current.offsetWidth) {
         mouse.x = videoPlaceholderRef.current.offsetWidth;
@@ -159,7 +150,6 @@ const VideoCapture = (props) => {
   };
 
   const imageCapture = () => {
-    console.log("imageCapture");
     let w, h;
     const videoImageCanvas = document.createElement("canvas");
 
