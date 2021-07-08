@@ -57,6 +57,11 @@ export const EDITOR_JS_TOOLS = {
   },
   image: {
     class: SimpleImage,
+    config: {
+      onDragAndDropImageBlock: (params) => {
+        this.onDragAndDropImageBlock(params);
+      },
+    },
   },
   underline: {
     class: Underline,

@@ -5,6 +5,7 @@ import styles from "./editor.module.css";
 import testImg from "./utils/tools/blocks/simpleImage/img_test.png";
 import EditorController from "../editorController";
 import Undo from "./utils/tools/undo";
+import DragDrop from "./utils/tools/dragDrop";
 
 class Editor extends React.PureComponent {
   componentRef = React.createRef();
@@ -14,7 +15,6 @@ class Editor extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      undoInstance: this.handleSetUndoRedoInstance,
       fontSize: "small",
       lastFocusedBlockIndex: 0,
       isSaving: true,
@@ -34,6 +34,10 @@ class Editor extends React.PureComponent {
   handleSetUndoRedoInstance = () => {
     const editor = this.editorInstance;
     this.undoInstance = new Undo({ editor });
+  };
+
+  handleSetDragAndDropInstance = () => {
+    this.dragAndDropInstance = new DragDrop(this.editorInstance);
   };
 
   handleChangeEditor = () => {
@@ -75,7 +79,7 @@ class Editor extends React.PureComponent {
     if (e.target.value) {
       document.title = e.target.value;
     } else {
-      document.title = this.props.lang === "ko-KR" ? "제목 없음" : "Untitle";
+      document.title = this.props.lang === "ko-KR" ? "제목 없음" : "Untitled";
     }
   };
 
@@ -104,28 +108,32 @@ class Editor extends React.PureComponent {
     const { width, lang, isMacOs } = this.props;
     this.handleAddListener();
     return (
-      <div className={`${styles[`container`]}`}>
-        <h1 className={`${styles[`font-${fontSize}`]}`}>
-          <input
-            className={`${styles[`input-title`]}`}
-            type="text"
-            onChange={this.handleChangeTitle}
-            placeholder={lang === "ko-KR" ? "제목을 입력하세요" : "Enter title"}
-            autoComplete="false"
-            autoFocus={true}
-            onKeyPress={this.handleKeyPress}
-          />
-        </h1>
-        <div className={`${styles[`editor-container`]} ${styles[`font-${fontSize}`]}`} ref={this.componentRef}>
-          <EditorJs
-            className={`${styles[`editor-js`]}`}
-            tools={EDITOR_JS_TOOLS}
-            onReady={this.handleSetUndoRedoInstance}
-            onChange={this.handleChangeEditor}
-            instanceRef={(instance) => (this.editorInstance = instance)}
-          />
+      <div>
+        <div id="editor-container" className={`${styles[`container`]}`}>
+          <h1 className={`${styles[`font-${fontSize}`]}`}>
+            <input
+              className={`${styles[`input-title`]}`}
+              type="text"
+              onChange={this.handleChangeTitle}
+              placeholder={lang === "ko-KR" ? "제목을 입력하세요" : "Enter title"}
+              autoComplete="false"
+              autoFocus={true}
+              onKeyPress={this.handleKeyPress}
+            />
+          </h1>
+          <div className={`${styles[`editor-container`]} ${styles[`font-${fontSize}`]}`} ref={this.componentRef}>
+            <EditorJs
+              className={`${styles[`editor-js`]}`}
+              tools={EDITOR_JS_TOOLS}
+              onReady={() => {
+                this.handleSetUndoRedoInstance();
+                this.handleSetDragAndDropInstance();
+              }}
+              onChange={this.handleChangeEditor}
+              instanceRef={(instance) => (this.editorInstance = instance)}
+            />
+          </div>
         </div>
-
         <EditorController
           handleInsertImage={this.handleInsertImage}
           componentRef={this.componentRef}

@@ -9,6 +9,7 @@ import "./index.css";
  *
  * @typedef {object} SimpleImageData
  * @description Tool's input and output data format
+ * @description Tool's input and output data format
  * @property {string} url — image URL
  * @property {string} caption — image caption
  * @property {boolean} withBorder - should image be rendered with border
@@ -26,13 +27,14 @@ export default class SimpleImage {
    *   api - Editor.js API
    *   readOnly - read-only mode flag
    */
-  constructor({ data, config, api, readOnly }) {
+  constructor({ data, config, api, readOnly, block }) {
     /**
      * Editor.js API
      */
     this.api = api;
     this.readOnly = readOnly;
     this.config = config;
+    this.block = block;
     /**
      * When block is only constructing,
      * current block points to previous block.
@@ -113,6 +115,10 @@ export default class SimpleImage {
       imageHolder = this._make("div", this.CSS.imageHolder),
       image = this._make("img");
 
+    image.setAttribute("blockType", "image");
+    wrapper.draggable = true;
+    image.draggable = true;
+    image.contentEditable = false;
     wrapper.appendChild(loader);
 
     if (this.data.url) {
@@ -138,6 +144,16 @@ export default class SimpleImage {
 
     return wrapper;
   }
+
+  moved(event) {
+    const currentScrollTop = document.getElementById("editor-container").scrollTop;
+    if (event.detail.fromIndex < event.detail.toIndex) {
+      document.getElementById("editor-container").scrollTop = currentScrollTop + 100;
+    } else {
+      document.getElementById("editor-container").scrollTop = currentScrollTop - 100;
+    }
+  }
+
 
   /**
    * @public
@@ -206,12 +222,20 @@ export default class SimpleImage {
   onPaste(event) {
     switch (event.type) {
       case "tag": {
-        const img = event.detail.data;
+        if (event.detail.data.hasAttribute("blockType")) {
+          switch (event.detail.data.getAttribute("blockType")) {
+            case "image":
+              this.api.blocks.delete();
+              return;
 
-        this.data = {
-          url: img.src,
-        };
-        break;
+            default:
+              this.api.blocks.delete();
+              return;
+          }
+        } else {
+          this.api.blocks.delete();
+          return;
+        }
       }
 
       case "pattern": {
