@@ -3,52 +3,28 @@ import { fabric } from "fabric";
 import styles from "./VideoCapture.module.css";
 
 const VideoCapture = (props) => {
-  const { showSelectAreaCanvas, videoPlayerRef, videoPlaceholderRef, isCapturingFullScreen, setIsCapturingFullScreen } = props;
-
-  const [squareCoordinate, setSquareCoordinate] = useState({
-    left: "",
-    top: "",
-    width: "",
-    height: "",
-  });
-
-  const canvas = useRef();
+  const { selectAreaCoordinate, setSelectAreaCoordinate, setCaptureImgUrl, showSelectAreaCanvas, videoPlayerRef, videoPlaceholderRef, isCapturingOneClick, setIsCapturingOneClick } = props;
   const canvasRef = useRef();
 
-  // 영상 전체 캡처
+  // 영상 캡처
   useEffect(() => {
-    if(isCapturingFullScreen) {
-      let w, h, ratio;
+    if (isCapturingOneClick) {
+      imageCapture();
+      setIsCapturingOneClick(false);
 
-      ratio = videoPlayerRef.current.getInternalPlayer().videoWidth / videoPlayerRef.current.getInternalPlayer().videoHeight;
-
-      h = 300
-      w = parseInt(h * ratio, 10);
-
-      canvas.current.width = w;
-      canvas.current.height = h;
-
-      const ctx = canvas.current.getContext('2d');
-      ctx.fillRect(0, 0, w, h);
-      ctx.drawImage(videoPlayerRef.current.getInternalPlayer(), 0, 0, w, h)
-      
-      //const frame = captureVideoFrame(this.player.getInternalPlayer())
-      //let imageURL = frame.dataUri
-      let imageURL = canvas.current.toDataURL();
-      console.log(imageURL);
-
-      setIsCapturingFullScreen(false);
+      // //const frame = captureVideoFrame(this.player.getInternalPlayer())
+      // //let imageURL = frame.dataUri
     }
-  }, [isCapturingFullScreen]);
+  }, [isCapturingOneClick]);
 
-  // 영역 지정 캡처
+  // 영역 지정 캡처 화면 생성
   useEffect(() => {
     canvasRef.current = new fabric.Canvas("fabricCanvas", {
       left: videoPlaceholderRef.current.left,
       top: videoPlaceholderRef.current.top,
       width: videoPlaceholderRef.current.offsetWidth,
       height: videoPlaceholderRef.current.offsetHeight,
-      backgroundColor: "transparent",
+      backgroundColor: "pink",
       hoverCursor: "crosshair",
       selection: false,
     });
@@ -61,18 +37,41 @@ const VideoCapture = (props) => {
     let x = 0;
     let y = 0;
 
-    let square = new fabric.Rect({
-      width: videoPlaceholderRef.current.offsetWidth - 3,
-      height: videoPlaceholderRef.current.offsetHeight - 3,
-      fill: "rgb(255, 255, 255, 0.2)",
-      stroke: "blue",
-      opacity: 1,
-      strokeWidth: 3,
-      strokeDashArray: [5, 5],
-    });
+    let square;
+    if (selectAreaCoordinate.width === "" && selectAreaCoordinate.height === "") {
+      square = new fabric.Rect({
+        left: 0,
+        top: 0,
+        width: videoPlaceholderRef.current.offsetWidth - 2,
+        height: videoPlaceholderRef.current.offsetHeight - 2,
+        fill: "rgb(255, 255, 255, 0.2)",
+        stroke: "blue",
+        opacity: 1,
+        strokeWidth: 3,
+        strokeDashArray: [5, 5],
+      });
+
+      setSelectAreaCoordinate({
+        left: square.left,
+        top: square.top,
+        width: square.width,
+        height: square.height,
+      });
+    } else {
+      square = new fabric.Rect({
+        left: selectAreaCoordinate.left,
+        top: selectAreaCoordinate.top,
+        width: selectAreaCoordinate.width,
+        height: selectAreaCoordinate.height,
+        fill: "rgb(255, 255, 255, 0.2)",
+        stroke: "blue",
+        opacity: 1,
+        strokeWidth: 3,
+        strokeDashArray: [5, 5],
+      });
+    }
 
     canvasRef.current.add(square);
-    // canvas.renderAll();
 
     canvasRef.current.on("mouse:down", (event) => {
       clearCanvas(canvasRef.current);
@@ -105,7 +104,6 @@ const VideoCapture = (props) => {
       }
 
       const mouse = canvasRef.current.getPointer(event.e);
-      console.log(`x: ${mouse.x}, y: ${mouse.y}`);
 
       if (mouse.x > videoPlaceholderRef.current.offsetWidth) {
         mouse.x = videoPlaceholderRef.current.offsetWidth;
@@ -126,8 +124,6 @@ const VideoCapture = (props) => {
       if (!w || !h) {
         return false;
       }
-      console.log(`square.left: ${square.left}, x: ${x}, mouse.x: ${mouse.x}, square.top: ${square.top}, y: ${y}, mouse.y: ${mouse.y}`);
-      console.log(`width: ${w}, height: ${h}`);
       if (mouse.x < x) {
         square.set("left", Math.abs(mouse.x));
       }
@@ -144,42 +140,55 @@ const VideoCapture = (props) => {
       if (mousePressed) {
         mousePressed = false;
       }
-      console.log(square);
-
-      // imageCapture(square);
+      setSelectAreaCoordinate({
+        left: square.left,
+        top: square.top,
+        width: square.width,
+        height: square.height,
+      });
     });
   };
 
-  const imageCapture = (square) => {
+  const imageCapture = () => {
     let w, h;
-    const canvas2 = document.createElement("canvas");
+    const videoImageCanvas = document.createElement("canvas");
 
     w = videoPlaceholderRef.current.offsetWidth;
     h = videoPlaceholderRef.current.offsetHeight;
 
-    canvas2.width = w;
-    canvas2.height = h;
+    videoImageCanvas.width = w;
+    videoImageCanvas.height = h;
 
-    let ctx = canvas2.getContext("2d");
+    let ctx = videoImageCanvas.getContext("2d");
     ctx.fillRect(0, 0, w, h);
     ctx.drawImage(videoPlayerRef.current.getInternalPlayer(), 0, 0, w, h);
 
-    const newCanvas = document.createElement("canvas");
-    newCanvas.width = videoPlaceholderRef.current.offsetWidth;
-    newCanvas.height = videoPlaceholderRef.current.offsetHeight;
+    const captureImageCanvas = document.createElement("canvas");
+    captureImageCanvas.width = selectAreaCoordinate.width;
+    captureImageCanvas.height = selectAreaCoordinate.height;
 
-    let newCtx = newCanvas.getContext("2d");
-    newCtx.drawImage(canvas2, square.left, square.top, square.width, square.height, 0, 0, newCanvas.width, newCanvas.height);
+    let newCtx = captureImageCanvas.getContext("2d");
+    newCtx.drawImage(
+      videoImageCanvas,
+      selectAreaCoordinate.left,
+      selectAreaCoordinate.top,
+      selectAreaCoordinate.width,
+      selectAreaCoordinate.height,
+      0,
+      0,
+      captureImageCanvas.width,
+      captureImageCanvas.height
+    );
 
-    const dataURL = newCanvas.toDataURL();
-    console.log(dataURL);
+    setCaptureImgUrl(captureImageCanvas.toDataURL());
   };
 
   const clearCanvas = (canvas) => {
     canvas.getObjects().forEach((o) => {
-      if (o !== canvas.backgroundImage) {
-        canvas.remove(o);
-      }
+      canvas.remove(o);
+      // if (o !== canvas.backgroundImage) {
+      //   canvas.remove(o);
+      // }
     });
   };
 
@@ -190,10 +199,8 @@ const VideoCapture = (props) => {
           <canvas id="fabricCanvas" />
         </span>
       ) : null}
-
-      {/* <canvas ref={canvas}/> */}
     </div>
-    );
-  };
+  );
+};
 
 export default VideoCapture;

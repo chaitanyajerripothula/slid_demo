@@ -64,6 +64,12 @@
   margin-bottom: 1rem;
 }
 
+//.cdx-simple-image__picture {
+//  display: flex;
+//  justify-content: center;
+//  max-height: 369px;
+//}
+
 .codex-editor .ce-block__content, .codex-editor .ce-toolbar__content {
   max-width: none;
 }

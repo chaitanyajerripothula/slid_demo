@@ -14,7 +14,7 @@ import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import Swal from "sweetalert2";
 
 const EditorController = (props) => {
-  const { componentRef, isSaving, editorWidth, lang, isMacOs } = props;
+  const { componentRef, isSaving, selectAreaCoordinate, captureImgUrl, setShowSelectAreaCanvas, setCaptureSelectArea, setCaptureImgUrl, setSelectAreaCoordinate, setIsCapturingOneClick, editorWidth, lang, isMacOs } = props;
   const [open, setOpen] = useState(false);
   const [fontSize, setFontSize] = useState("small");
 
@@ -45,6 +45,48 @@ const EditorController = (props) => {
       confirmButtonColor: "#2778c4",
       heightAuto: false,
     }).then(() => {});
+  };
+
+  const captureOneClick = () => {
+    setIsCapturingOneClick(true);
+  };
+  useEffect(() => {
+    if (captureImgUrl !== "") {
+      insertImage();
+    }
+  }, [captureImgUrl]);
+
+  const onClickAreaSelectBtn = () => {
+    setShowSelectAreaCanvas(true);
+    Swal.fire({
+      target: document.getElementById("toast-container"),
+      title: "👈 캡쳐할 영역을 선택해주세요.",
+      html: "<p style={margin-bottom: 8}>선택한 영역은 계속 유지됩니다.</p>" + "<span style='color:#DDDDDD; font-size: 15'>*영상의 크기를 조절하면 영역이 초기화 됩니다.</span>",
+      showDenyButton: true,
+      confirmButtonColor: "#3085d6",
+      confirmButtonText: "영역 캡쳐",
+      denyButtonText: "초기화",
+      heightAuto: false,
+    }).then((result) => {
+      if (result.isDenied) {
+        let videoSize = document.getElementById("video-size-check");
+        console.log(videoSize.offsetWidth);
+        setSelectAreaCoordinate({
+          left: 0,
+          top: 0,
+          width: videoSize.offsetWidth - 3,
+          height: videoSize.offsetHeight - 3,
+        });
+        setShowSelectAreaCanvas(false);
+      } else if (result.isConfirmed) {
+        setCaptureSelectArea(true);
+        captureOneClick();
+        //setTimeout(insertImage, 10);
+        setShowSelectAreaCanvas(false);
+      } else {
+        setShowSelectAreaCanvas(false);
+      }
+    });
   };
 
   return (
@@ -91,7 +133,7 @@ const EditorController = (props) => {
       <div className={`${styles[`video-document-editor-center-wrapper`]}`}>
         {editorWidth > 400 ? (
           <OverlayTrigger defaultShow={false} placement={"top"} overlay={<Tooltip>{lang === "ko-KR" ? "영역 지정" : "Set capture area"}</Tooltip>}>
-            <button className={`${styles[`video-document-editor-capture-option-btn`]} btn btn-light`}>
+            <button className={`${styles[`video-document-editor-capture-option-btn`]} btn btn-light`} onClick={onClickAreaSelectBtn}>
               <img className={`${styles[`video-document-editor-capture-option-icon`]}`} src={areaCaptureImg} alt="areaCaptureImage" />
             </button>
           </OverlayTrigger>
@@ -113,10 +155,17 @@ const EditorController = (props) => {
             </Tooltip>
           }
         >
-          <button className={`${styles[`video-document-editor-capture-btn`]} btn btn-primary`} onClick={insertImage}>
+          <button
+            className={`${styles[`video-document-editor-capture-btn`]} btn btn-primary`}
+            onClick={() => {
+              captureOneClick();
+              //setTimeout(insertImage, 10);
+            }}
+          >
             <img className={`${styles[`video-document-editor-capture-icon`]}`} src={captureImg} alt="captureImage" />
           </button>
         </OverlayTrigger>
+        
         {editorWidth > 400 ? (
           <OverlayTrigger defaultShow={false} placement={"top"} overlay={<Tooltip>{lang === "ko-KR" ? "클립 녹화" : "Clip recording"} </Tooltip>}>
             <button className={`${styles[`video-document-editor-capture-option-btn`]} btn btn-light`} onClick={onClickRecordVideoBtn}>
