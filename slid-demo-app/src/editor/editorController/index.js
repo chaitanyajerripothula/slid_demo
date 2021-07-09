@@ -95,7 +95,6 @@ const EditorController = (props) => {
       } else if (result.isConfirmed) {
         setCaptureSelectArea(true);
         captureOneClick();
-        //setTimeout(insertImage, 10);
         setShowSelectAreaCanvas(false);
       } else {
         setShowSelectAreaCanvas(false);
@@ -173,7 +172,6 @@ const EditorController = (props) => {
             className={`${styles[`video-document-editor-capture-btn`]} btn btn-primary`}
             onClick={() => {
               captureOneClick();
-              //setTimeout(insertImage, 10);
             }}
           >
             <img className={`${styles[`video-document-editor-capture-icon`]}`} src={captureImg} alt="captureImage" />
