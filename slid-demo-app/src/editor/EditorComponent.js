@@ -4,7 +4,6 @@ import styles from "./editorComponent.module.css";
 import "./print.css";
 import { withResizeDetector } from "react-resize-detector";
 
-
 const EditorAdaptiveWithDetector = withResizeDetector(Editor);
 
 const EditorComponent = (props) => {
@@ -20,9 +19,10 @@ const EditorComponent = (props) => {
         setCaptureSelectArea={setCaptureSelectArea}
         setCaptureImgUrl={setCaptureImgUrl}
         setIsCapturingOneClick={setIsCapturingOneClick}
-        lang={lang} 
+        lang={lang}
         isMacOs={isMacOs}
       />
+    </div>
   );
 };
 
