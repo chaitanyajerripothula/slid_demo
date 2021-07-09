@@ -24,7 +24,7 @@ const VideoCapture = (props) => {
       top: videoPlaceholderRef.current.top,
       width: videoPlaceholderRef.current.offsetWidth,
       height: videoPlaceholderRef.current.offsetHeight,
-      backgroundColor: "pink",
+      backgroundColor: "transparent",
       hoverCursor: "crosshair",
       selection: false,
     });

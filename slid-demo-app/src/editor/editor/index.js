@@ -129,6 +129,7 @@ class Editor extends React.PureComponent {
         <EditorController
           selectAreaCoordinate={this.props.selectAreaCoordinate}
           captureImgUrl={this.props.captureImgUrl}
+          isCapturingOneClick={this.props.isCapturingOneClick}
           setSelectAreaCoordinate={this.props.setSelectAreaCoordinate}
           setShowSelectAreaCanvas={this.props.setShowSelectAreaCanvas}
           setCaptureSelectArea={this.props.setCaptureSelectArea}

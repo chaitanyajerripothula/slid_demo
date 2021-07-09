@@ -4,7 +4,7 @@ import VideoPlayer from "../vdocs/VideoPlayer";
 import VideoDocumentEditor from "../vdocs/VideoDocumentEditor";
 import styles from "./VideoDocument.module.css";
 import "./VideoDocument.css";
-import { withResizeDetector } from 'react-resize-detector';
+import { withResizeDetector } from "react-resize-detector";
 
 const VideoPlayerSizeDetector = withResizeDetector(VideoPlayer);
 
@@ -48,6 +48,7 @@ const VideoDocument = (props) => {
         <VideoDocumentEditor
           selectAreaCoordinate={selectAreaCoordinate}
           captureImgUrl={captureImgUrl}
+          isCapturingOneClick={isCapturingOneClick}
           setSelectAreaCoordinate={setSelectAreaCoordinate}
           setShowSelectAreaCanvas={setShowSelectAreaCanvas}
           setIsCapturingOneClick={setIsCapturingOneClick}

@@ -14,7 +14,21 @@ import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import Swal from "sweetalert2";
 
 const EditorController = (props) => {
-  const { componentRef, isSaving, selectAreaCoordinate, captureImgUrl, setShowSelectAreaCanvas, setCaptureSelectArea, setCaptureImgUrl, setSelectAreaCoordinate, setIsCapturingOneClick, editorWidth, lang, isMacOs } = props;
+  const {
+    componentRef,
+    isSaving,
+    selectAreaCoordinate,
+    captureImgUrl,
+    isCapturingOneClick,
+    setShowSelectAreaCanvas,
+    setCaptureSelectArea,
+    setCaptureImgUrl,
+    setSelectAreaCoordinate,
+    setIsCapturingOneClick,
+    editorWidth,
+    lang,
+    isMacOs,
+  } = props;
   const [open, setOpen] = useState(false);
   const [fontSize, setFontSize] = useState("small");
 
@@ -51,10 +65,10 @@ const EditorController = (props) => {
     setIsCapturingOneClick(true);
   };
   useEffect(() => {
-    if (captureImgUrl !== "") {
+    if (captureImgUrl !== "" && isCapturingOneClick === false) {
       insertImage();
     }
-  }, [captureImgUrl]);
+  }, [isCapturingOneClick]);
 
   const onClickAreaSelectBtn = () => {
     setShowSelectAreaCanvas(true);
@@ -95,7 +109,7 @@ const EditorController = (props) => {
       {editorWidth > 400 ? null : (
         <div className={`${styles[`video-document-editor-setting-popup`]}`}>
           <OverlayTrigger defaultShow={false} placement={"top"} overlay={<Tooltip>{lang === "ko-KR" ? "영역 지정" : "Set capture area"}</Tooltip>}>
-            <button className={`${styles[`video-document-editor-capture-option-btn`]} btn btn-light`}>
+            <button className={`${styles[`video-document-editor-capture-option-btn`]} btn btn-light`} onClick={onClickAreaSelectBtn}>
               <img className={`${styles[`video-document-editor-capture-option-icon`]}`} src={areaCaptureImg} alt="areaCaptureImage" />
             </button>
           </OverlayTrigger>
@@ -165,7 +179,7 @@ const EditorController = (props) => {
             <img className={`${styles[`video-document-editor-capture-icon`]}`} src={captureImg} alt="captureImage" />
           </button>
         </OverlayTrigger>
-        
+
         {editorWidth > 400 ? (
           <OverlayTrigger defaultShow={false} placement={"top"} overlay={<Tooltip>{lang === "ko-KR" ? "클립 녹화" : "Clip recording"} </Tooltip>}>
             <button className={`${styles[`video-document-editor-capture-option-btn`]} btn btn-light`} onClick={onClickRecordVideoBtn}>
@@ -177,7 +191,7 @@ const EditorController = (props) => {
       <div className={`${styles[`video-document-editor-right-wrapper`]}`}>
         <div className={`${styles[`video-document-editor-save-container`]}`}>
           <img className={`${styles[`video-document-editor-save-icon`]}`} src={saveImg} alt="saveImage" />
-          <span className={`${styles[`video-document-editor-text`]}`}>{isSaving ?(lang === "ko-KR" ? "저장 완료" : "Auto Saved") : lang === "ko-KR" ? "자동 저장 중..." : "Saving..."}</span>
+          <span className={`${styles[`video-document-editor-text`]}`}>{isSaving ? (lang === "ko-KR" ? "저장 완료" : "Auto Saved") : lang === "ko-KR" ? "자동 저장 중..." : "Saving..."}</span>
         </div>
         <div className={`${styles[`video-document-editor-download-container`]}`} onClick={renderPdfPrint}>
           <img className={`${styles[`video-document-editor-download-icon`]}`} src={downloadImg} alt="downloadImage" />
