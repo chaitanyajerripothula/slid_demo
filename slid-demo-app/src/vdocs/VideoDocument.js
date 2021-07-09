@@ -53,6 +53,8 @@ const VideoDocument = (props) => {
           setIsCapturingOneClick={setIsCapturingOneClick}
           setCaptureSelectArea={setCaptureSelectArea}
           setCaptureImgUrl={setCaptureImgUrl}
+          lang={lang}
+          isMacOs={isMacOs}
         />
       </Split>
     </div>

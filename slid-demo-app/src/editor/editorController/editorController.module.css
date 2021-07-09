@@ -5,6 +5,9 @@
   justify-content: space-between;
   background: #ffffff;
   box-shadow: 0 -5px 10px hsl(0, 0%, 97%);
+  position: absolute;
+  width: 100%;
+  bottom : 0;
 }
 
 .video-document-editor-left-wrapper {
@@ -135,4 +138,28 @@
 .video-document-editor-recording-icon {
   width: 30px;
   height: auto;
+}
+
+.video-document-editor-setting-popup {
+  width: fit-content;
+  height: 50px;
+  min-width: unset;
+  z-index: 10;
+  left: 50% !important;
+  top: -60% !important;
+  transform: translate(-50%) !important;
+  display: flex;
+  align-items: center;
+  insert: auto auto 0px 0px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  background: #ffffff;
+  position: absolute;
+  border-radius: 5px !important;
+}
+
+.video-document-editor-setting-popup button {
+  width: 34px;
+  height: 34px;
+  margin: 0 10px;
+  padding: 0.5rem 0;
 }

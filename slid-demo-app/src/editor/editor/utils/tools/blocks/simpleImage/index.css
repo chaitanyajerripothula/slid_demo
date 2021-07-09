@@ -6,6 +6,8 @@
   width: 100%;
   position: relative;
   max-height: 375px;
+  display: flex;
+  justify-content: center;
 }
 
 .cdx-simple-image .cdx-loader {
@@ -18,7 +20,8 @@
 
 .cdx-simple-image img {
   max-width: 100%;
-  vertical-align: bottom;
+  max-height: 368px;
+  align-self: center;
 }
 
 .cdx-simple-image__picture--with-background {
@@ -53,7 +56,7 @@
 
 .ce-block__content {
   position: relative;
-  max-width: 650px;
+  max-width: unset;
 }
 
 .cdx-block {
@@ -61,8 +64,12 @@
   margin-bottom: 1rem;
 }
 
-.cdx-simple-image__picture {
-  display: flex;
-  justify-content: center;
-  max-height: 369px;
+//.cdx-simple-image__picture {
+//  display: flex;
+//  justify-content: center;
+//  max-height: 369px;
+//}
+
+.codex-editor .ce-block__content, .codex-editor .ce-toolbar__content {
+  max-width: none;
 }
