@@ -65,7 +65,7 @@ const EditorController = (props) => {
     setIsCapturingOneClick(true);
   };
   useEffect(() => {
-    if (captureImgUrl !== "" && isCapturingOneClick === false) {
+    if (captureImgUrl.url !== "" && isCapturingOneClick === false) {
       insertImage();
     }
   }, [isCapturingOneClick]);

@@ -30,9 +30,10 @@ export default class SimpleImage {
     /**
      * Editor.js API
      */
+    this.config = config;
     this.api = api;
     this.readOnly = readOnly;
-    this.config = config;
+
     /**
      * When block is only constructing,
      * current block points to previous block.

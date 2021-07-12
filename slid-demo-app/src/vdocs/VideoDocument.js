@@ -19,7 +19,10 @@ const VideoDocument = (props) => {
     width: "",
     height: "",
   });
-  const [captureImgUrl, setCaptureImgUrl] = useState("");
+  const [captureImgUrl, setCaptureImgUrl] = useState({
+    url: "",
+    time: "",
+  });
 
   return (
     <div className={`${styles[`vdocs-container`]}`}>
@@ -44,6 +47,7 @@ const VideoDocument = (props) => {
           lang={lang}
           isMacOs={isMacOs}
           selectAreaCoordinate={selectAreaCoordinate}
+          captureImgUrl={captureImgUrl}
         />
         <VideoDocumentEditor
           selectAreaCoordinate={selectAreaCoordinate}

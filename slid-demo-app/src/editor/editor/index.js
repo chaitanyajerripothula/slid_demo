@@ -51,9 +51,9 @@ class Editor extends React.PureComponent {
 
   handleInsertImage = () => {
     if (this.editorInstance.blocks.getCurrentBlockIndex() === -1) {
-      this.editorInstance.blocks.insert("image", { url: this.props.captureImgUrl }, {}, this.state["lastFocusedBlockIndex"] + 1, true);
+      this.editorInstance.blocks.insert("image", { url: this.props.captureImgUrl.url }, {}, this.state["lastFocusedBlockIndex"] + 1, true);
     } else {
-      this.editorInstance.blocks.insert("image", { url: this.props.captureImgUrl }, {}, this.editorInstance.blocks.getCurrentBlockIndex() + 1, true);
+      this.editorInstance.blocks.insert("image", { url: this.props.captureImgUrl.url }, {}, this.editorInstance.blocks.getCurrentBlockIndex() + 1, true);
     }
   };
 
