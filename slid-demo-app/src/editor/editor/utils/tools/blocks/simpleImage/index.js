@@ -2,6 +2,9 @@
  * Build styles
  */
 import "./index.css";
+import { useContext } from "react";
+import { store } from "../../../../../../store";
+import { playVideoFromTS } from "../../../../../../store/actionCreators";
 
 /**
  * SimpleImage Tool for the Editor.js
@@ -104,6 +107,7 @@ export default class SimpleImage {
                 <path d="M9.99996 18.3333C5.39968 18.3283 1.67168 14.6003 1.66663 9.99997V9.83331C1.75824 5.25375 5.52878 1.6066 10.1089 1.66737C14.6889 1.72814 18.3614 5.47405 18.3314 10.0544C18.3015 14.6348 14.5804 18.3324 9.99996 18.3333ZM8.33329 6.24997V13.75L13.3333 9.99997L8.33329 6.24997Z" fill="#2E3A59"/>
               </svg>`,
         //title: lang === "ko-KR" ? "여기부터 재생" : "Play here",
+        click: () => {},
       },
     ];
   }

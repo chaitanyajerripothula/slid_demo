@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import VideoDocument from "./vdocs/VideoDocument";
 import { isMacOs } from "react-device-detect";
+import { Provider } from "../store";
 
 const App = () => {
   const [lang, setLang] = useState("en");
@@ -9,7 +10,11 @@ const App = () => {
     setLang(navigator.language || navigator.userLanguage);
   }, []);
 
-  return <VideoDocument lang={lang} isMacOs={isMacOs} />;
+  return (
+    <Provider>
+      <VideoDocument lang={lang} isMacOs={isMacOs} />
+    </Provider>
+  );
 };
 
 export default App;
