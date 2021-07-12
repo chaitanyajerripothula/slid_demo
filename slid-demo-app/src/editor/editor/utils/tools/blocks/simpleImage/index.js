@@ -14,9 +14,9 @@ import { playVideoFromTS } from "../../../../../../store/actionCreators";
  * @description Tool's input and output data format
  * @property {string} url — image URL
  * @property {string} caption — image caption
- * @property {boolean} withBorder - should image be rendered with border
- * @property {boolean} withBackground - should image be rendered with background
- * @property {boolean} stretched - should image be stretched to full width of container
+ * @property {boolean} markup - should image be rendered with border
+ * @property {boolean} play - should image be rendered with background
+ * @property {boolean} orc - should image be orc to full width of container
  */
 
 export default class SimpleImage {
@@ -78,9 +78,9 @@ export default class SimpleImage {
      */
     this.data = {
       url: data.url || "",
-      withBorder: data.withBorder !== undefined ? data.withBorder : false,
-      withBackground: data.withBackground !== undefined ? data.withBackground : false,
-      stretched: data.stretched !== undefined ? data.stretched : false,
+      markup: data.markup !== undefined ? data.markup : false,
+      play: data.play !== undefined ? data.play : false,
+      orc: data.orc !== undefined ? data.orc : false,
     };
 
     /**
@@ -107,7 +107,11 @@ export default class SimpleImage {
                 <path d="M9.99996 18.3333C5.39968 18.3283 1.67168 14.6003 1.66663 9.99997V9.83331C1.75824 5.25375 5.52878 1.6066 10.1089 1.66737C14.6889 1.72814 18.3614 5.47405 18.3314 10.0544C18.3015 14.6348 14.5804 18.3324 9.99996 18.3333ZM8.33329 6.24997V13.75L13.3333 9.99997L8.33329 6.24997Z" fill="#2E3A59"/>
               </svg>`,
         //title: lang === "ko-KR" ? "여기부터 재생" : "Play here",
-        click: () => {},
+        click: () => {
+          console.log("playVideoFromTS");
+          //dispatch(playVideoFromTS());
+          //console.log("onClickPlayVideoFromTS" + state.onClickPlayVideoFromTS);
+        },
       },
     ];
   }
@@ -176,9 +180,9 @@ export default class SimpleImage {
   static get sanitize() {
     return {
       url: {},
-      withBorder: {},
-      withBackground: {},
-      stretched: {},
+      markup: {},
+      play: {},
+      orc: {},
     };
   }
 
@@ -360,8 +364,8 @@ export default class SimpleImage {
     this.settings.forEach((tune) => {
       this.nodes.imageHolder.classList.toggle(this.CSS.imageHolder + "--" + tune.name.replace(/([A-Z])/g, (g) => `-${g[0].toLowerCase()}`), !!this.data[tune.name]);
 
-      if (tune.name === "stretched") {
-        this.api.blocks.stretchBlock(this.blockIndex, !!this.data.stretched);
+      if (tune.name === "orc") {
+        this.api.blocks.stretchBlock(this.blockIndex, !!this.data.orc);
       }
     });
   }

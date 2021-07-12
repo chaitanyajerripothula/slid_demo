@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import VideoDocument from "./vdocs/VideoDocument";
 import { isMacOs } from "react-device-detect";
-import { Provider } from "../store";
+import { StoreProvider } from "./store";
 
 const App = () => {
   const [lang, setLang] = useState("en");
@@ -11,9 +11,9 @@ const App = () => {
   }, []);
 
   return (
-    <Provider>
+    <StoreProvider>
       <VideoDocument lang={lang} isMacOs={isMacOs} />
-    </Provider>
+    </StoreProvider>
   );
 };
 

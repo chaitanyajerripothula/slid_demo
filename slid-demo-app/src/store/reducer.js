@@ -5,7 +5,7 @@ export const reducer = (state, action) => {
 
   switch (type) {
     case PLAYVIDEOFROMTS:
-      return { ...state };
+      return { ...state, onClickPlayVideoFromTS: true };
     default:
       return state;
   }

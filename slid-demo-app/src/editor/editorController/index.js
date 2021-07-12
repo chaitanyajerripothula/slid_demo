@@ -84,7 +84,6 @@ const EditorController = (props) => {
     }).then((result) => {
       if (result.isDenied) {
         let videoSize = document.getElementById("video-size-check");
-        console.log(videoSize.offsetWidth);
         setSelectAreaCoordinate({
           left: 0,
           top: 0,
