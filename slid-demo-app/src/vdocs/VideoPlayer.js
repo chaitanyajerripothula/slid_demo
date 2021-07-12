@@ -23,7 +23,7 @@ const VideoPlayer = (props) => {
       top: 0,
       width: videoPlaceholderRef.current.offsetWidth - 2,
       height: videoPlaceholderRef.current.offsetHeight - 2,
-    })
+    });
   }, [props.width]);
 
   const goBackHistory = () => {
