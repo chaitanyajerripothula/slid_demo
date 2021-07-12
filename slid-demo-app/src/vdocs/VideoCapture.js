@@ -3,7 +3,8 @@ import { fabric } from "fabric";
 import styles from "./VideoCapture.module.css";
 
 const VideoCapture = (props) => {
-  const { selectAreaCoordinate, setSelectAreaCoordinate, setCaptureImgUrl, showSelectAreaCanvas, videoPlayerRef, videoPlaceholderRef, isCapturingOneClick, setIsCapturingOneClick } = props;
+  const { selectAreaCoordinate, setSelectAreaCoordinate, setCaptureImgUrl, showSelectAreaCanvas, videoPlayerRef, videoPlaceholderRef, isCapturingOneClick, setIsCapturingOneClick, captureImgUrl } =
+    props;
   const canvasRef = useRef();
 
   // 영상 캡처
@@ -11,6 +12,8 @@ const VideoCapture = (props) => {
     if (isCapturingOneClick) {
       imageCapture();
       setIsCapturingOneClick(false);
+
+      console.log(videoPlayerRef.current.getCurrentTime());
 
       // //const frame = captureVideoFrame(this.player.getInternalPlayer())
       // //let imageURL = frame.dataUri
@@ -180,7 +183,11 @@ const VideoCapture = (props) => {
       captureImageCanvas.height
     );
 
-    setCaptureImgUrl(captureImageCanvas.toDataURL());
+    setCaptureImgUrl({
+      ...captureImgUrl,
+      url: captureImageCanvas.toDataURL(),
+      time: videoPlayerRef.current.getCurrentTime(),
+    });
   };
 
   const clearCanvas = (canvas) => {

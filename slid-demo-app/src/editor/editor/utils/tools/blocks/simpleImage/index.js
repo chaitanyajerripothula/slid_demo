@@ -30,9 +30,10 @@ export default class SimpleImage {
     /**
      * Editor.js API
      */
+    this.config = config;
     this.api = api;
     this.readOnly = readOnly;
-    this.config = config;
+
     /**
      * When block is only constructing,
      * current block points to previous block.
@@ -84,8 +85,17 @@ export default class SimpleImage {
      */
     this.settings = [
       {
-        name: "withBorder",
-        icon: `<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M15.8 10.592v2.043h2.35v2.138H15.8v2.232h-2.25v-2.232h-2.4v-2.138h2.4v-2.28h2.25v.237h1.15-1.15zM1.9 8.455v-3.42c0-1.154.985-2.09 2.2-2.09h4.2v2.137H4.15v3.373H1.9zm0 2.137h2.25v3.325H8.3v2.138H4.1c-1.215 0-2.2-.936-2.2-2.09v-3.373zm15.05-2.137H14.7V5.082h-4.15V2.945h4.2c1.215 0 2.2.936 2.2 2.09v3.42z"/></svg>`,
+        name: "markup",
+        icon: `<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.68333 17.1492C3.44956 17.1488 3.22672 17.0502 3.06916 16.8775C2.9087 16.7062 2.82896 16.4746 2.84999 16.2408L3.05416 13.9958L12.4858 4.5675L15.4333 7.51417L6.00416 16.9417L3.75916 17.1458C3.73333 17.1483 3.70749 17.1492 3.68333 17.1492ZM16.0217 6.925L13.075 3.97834L14.8425 2.21084C14.9988 2.05436 15.2109 1.96643 15.4321 1.96643C15.6533 1.96643 15.8654 2.05436 16.0217 2.21084L17.7892 3.97834C17.9456 4.13464 18.0336 4.34675 18.0336 4.56792C18.0336 4.78909 17.9456 5.0012 17.7892 5.1575L16.0225 6.92417L16.0217 6.925Z" fill="#2E3A59"></path></svg>`,
+        title: this.config.lang === "ko" ? "펜 필기" : "Annotate",
+        click: () => {
+          // this.onClickImgMarkup({
+          //   imgSrc: this.imgUrl,
+          //   imgBlockIndex: this.api.blocks.getCurrentBlockIndex(),
+          //   markupImgSrc: this.markupImgSrc,
+          // })
+          console.log("pen drawing");
+        },
       },
       {
         name: "stretched",
