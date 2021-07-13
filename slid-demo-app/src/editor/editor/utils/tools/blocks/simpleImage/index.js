@@ -16,7 +16,7 @@ import { playVideoFromTS } from "../../../../../../store/actionCreators";
  * @property {string} caption — image caption
  * @property {boolean} markup - should image be rendered with border
  * @property {boolean} play - should image be rendered with background
- * @property {boolean} orc - should image be orc to full width of container
+ * @property {boolean} ocr - should image be ocr to full width of container
  */
 
 export default class SimpleImage {
@@ -80,7 +80,7 @@ export default class SimpleImage {
       url: data.url || "",
       markup: data.markup !== undefined ? data.markup : false,
       play: data.play !== undefined ? data.play : false,
-      orc: data.orc !== undefined ? data.orc : false,
+      ocr: data.ocr !== undefined ? data.ocr : false,
     };
 
     /**
@@ -95,7 +95,7 @@ export default class SimpleImage {
         //title: lang === "ko-KR" ? "펜 필기" : "Annotate",
       },
       {
-        name: "orc",
+        name: "ocr",
         icon: `<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M15 18.3333H5.00004C4.07957 18.3333 3.33337 17.5871 3.33337 16.6666V3.3333C3.33337 2.41283 4.07957 1.66663 5.00004 1.66663H10.8334C11.0545 1.66585 11.2668 1.75381 11.4225 1.9108L16.4225 6.9108C16.5795 7.06658 16.6675 7.27881 16.6667 7.49996V16.6666C16.6667 17.5871 15.9205 18.3333 15 18.3333ZM5.00004 3.3333V16.6666H13.8217L11.6834 14.5283C11.1752 14.8347 10.5935 14.9977 10 15C8.46771 15.0166 7.11712 13.9972 6.71292 12.5191C6.30872 11.0409 6.95269 9.47615 8.28025 8.7107C9.6078 7.94525 11.2846 8.17185 12.3614 9.2622C13.4382 10.3526 13.6437 12.0321 12.8617 13.35L15 15.49V7.84497L10.4884 3.3333H5.00004ZM10 9.99997C9.07957 9.99997 8.33337 10.7462 8.33337 11.6666C8.33337 12.5871 9.07957 13.3333 10 13.3333C10.9205 13.3333 11.6667 12.5871 11.6667 11.6666C11.6667 10.7462 10.9205 9.99997 10 9.99997Z" fill="#2E3A59"/>
               </svg> `,
@@ -182,7 +182,7 @@ export default class SimpleImage {
       url: {},
       markup: {},
       play: {},
-      orc: {},
+      ocr: {},
     };
   }
 
@@ -364,8 +364,8 @@ export default class SimpleImage {
     this.settings.forEach((tune) => {
       this.nodes.imageHolder.classList.toggle(this.CSS.imageHolder + "--" + tune.name.replace(/([A-Z])/g, (g) => `-${g[0].toLowerCase()}`), !!this.data[tune.name]);
 
-      if (tune.name === "orc") {
-        this.api.blocks.stretchBlock(this.blockIndex, !!this.data.orc);
+      if (tune.name === "ocr") {
+        this.api.blocks.stretchBlock(this.blockIndex, !!this.data.ocr);
       }
     });
   }
