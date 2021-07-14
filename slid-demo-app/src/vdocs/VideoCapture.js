@@ -2,27 +2,16 @@ import React, { useRef, useEffect, useState } from "react";
 import { fabric } from "fabric";
 import styles from "./VideoCapture.module.css";
 
-import { useContext } from "react";
-import { store } from "../store";
-import { playVideoFromTS } from "../store/actionCreators";
-
 const VideoCapture = (props) => {
   const { selectAreaCoordinate, setSelectAreaCoordinate, setCaptureImgUrl, showSelectAreaCanvas, videoPlayerRef, videoPlaceholderRef, isCapturingOneClick, setIsCapturingOneClick, captureImgUrl } =
     props;
   const canvasRef = useRef();
-
-  const [state, dispatch] = useContext(store);
 
   // 영상 캡처
   useEffect(() => {
     if (isCapturingOneClick) {
       imageCapture();
       setIsCapturingOneClick(false);
-
-      console.log(videoPlayerRef.current.getCurrentTime());
-
-      dispatch(playVideoFromTS());
-      console.log("onClickPlayVideoFromTS" + state.onClickPlayVideoFromTS);
 
       // //const frame = captureVideoFrame(this.player.getInternalPlayer())
       // //let imageURL = frame.dataUri
@@ -195,16 +184,13 @@ const VideoCapture = (props) => {
     setCaptureImgUrl({
       ...captureImgUrl,
       url: captureImageCanvas.toDataURL(),
-      time: videoPlayerRef.current.getCurrentTime(),
+      timestamp: videoPlayerRef.current.getCurrentTime(),
     });
   };
 
   const clearCanvas = (canvas) => {
     canvas.getObjects().forEach((o) => {
       canvas.remove(o);
-      // if (o !== canvas.backgroundImage) {
-      //   canvas.remove(o);
-      // }
     });
   };
 

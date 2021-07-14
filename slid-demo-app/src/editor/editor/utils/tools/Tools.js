@@ -7,7 +7,6 @@ import NestedList from "./blocks/nestedList/index";
 import Underline from "./underline/index";
 import SimpleImage from "./blocks/simpleImage/index";
 import InlineCode from "./inlineCode/index";
-import Image from "./blocks/image";
 
 export const EDITOR_JS_TOOLS = {
   header: {
@@ -57,8 +56,8 @@ export const EDITOR_JS_TOOLS = {
     shortcut: "CMD+SHIFT+L",
   },
   image: {
-    //class: SimpleImage,
-    class: Image,
+    class: SimpleImage,
+    //class: Image,
   },
   underline: {
     class: Underline,

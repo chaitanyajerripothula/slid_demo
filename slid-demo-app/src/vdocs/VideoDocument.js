@@ -21,7 +21,7 @@ const VideoDocument = (props) => {
   });
   const [captureImgUrl, setCaptureImgUrl] = useState({
     url: "",
-    time: "",
+    timestamp: "",
   });
 
   return (
