@@ -79,12 +79,6 @@ class Editor extends React.PureComponent {
     }
   };
 
-  timestamp = () => {
-    const videos = document.getElementsByTagName("video");
-    const video = videos[0];
-    video.currentTime = this.props.captureImgUrl.timestamp;
-  }
-
   handleKeyPress = (e) => {
     if (e.key === "Enter") {
       if (!this.editorInstance || !this.editorInstance.blocks) return;
@@ -105,6 +99,12 @@ class Editor extends React.PureComponent {
     this.setState({ fontSize: size ? size : "small" });
   };
 
+  playVideoFromTs = () => {
+    const videos = document.getElementsByTagName("video");
+    const video = videos[0];
+    video.currentTime = this.props.captureImgUrl.timestamp;
+  };
+
   render() {
     let { fontSize, isSaving } = this.state;
     const { width, lang, isMacOs } = this.props;
@@ -112,8 +112,12 @@ class Editor extends React.PureComponent {
     EDITOR_JS_TOOLS.image.config = {
       lang: lang,
       onClickPlayVideoFromTs: () => {
-        this.timestamp();
+        this.playVideoFromTs();
       },
+    };
+
+    EDITOR_JS_TOOLS.image.data = {
+      timestamp: 30,
     };
 
     this.handleAddListener();
