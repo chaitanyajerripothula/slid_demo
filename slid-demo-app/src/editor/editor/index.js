@@ -2,7 +2,6 @@ import React from "react";
 import EditorJs from "react-editor-js";
 import { EDITOR_JS_TOOLS } from "./utils/tools/Tools";
 import styles from "./editor.module.css";
-import testImg from "./utils/tools/blocks/simpleImage/img_test.png";
 import EditorController from "../editorController";
 import Undo from "./utils/tools/undo";
 import DragDrop from "./utils/tools/dragDrop";
@@ -105,8 +104,16 @@ class Editor extends React.PureComponent {
 
   render() {
     let { fontSize, isSaving } = this.state;
-    const { width, lang, isMacOs } = this.props;
+    const { width, lang, isMacOs, captureImgUrl } = this.props;
     this.handleAddListener();
+
+    EDITOR_JS_TOOLS.image.config = {
+      url: captureImgUrl,
+      dragAndDropImageBlock(param) {
+        this.currentSrc = param.imgUrl;
+      }
+    };
+
     return (
       <div>
         <div id="editor-container" className={`${styles[`container`]}`}>

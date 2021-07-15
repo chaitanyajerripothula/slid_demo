@@ -44,7 +44,7 @@ export default class SimpleImage {
      * @type {number}
      */
     this.blockIndex = this.api.blocks.getCurrentBlockIndex() + 1;
-
+    this.currentSrc = data.url;
     /**
      * Styles
      */
@@ -114,7 +114,6 @@ export default class SimpleImage {
       loader = this._make("div", this.CSS.loading),
       imageHolder = this._make("div", this.CSS.imageHolder),
       image = this._make("img");
-
     image.setAttribute("blockType", "image");
     wrapper.draggable = true;
     image.draggable = true;
@@ -153,7 +152,6 @@ export default class SimpleImage {
       document.getElementById("editor-container").scrollTop = currentScrollTop - 100;
     }
   }
-
 
   /**
    * @public
@@ -222,20 +220,14 @@ export default class SimpleImage {
   onPaste(event) {
     switch (event.type) {
       case "tag": {
-        if (event.detail.data.hasAttribute("blockType")) {
-          switch (event.detail.data.getAttribute("blockType")) {
-            case "image":
-              this.api.blocks.delete();
-              return;
+        if (!event.detail.data.currentSrc) return this.destroy();
+        const imgSrc = event.detail.data.currentSrc;
+        this.config.dragAndDropImageBlock({
+          imgSrc: imgSrc,
+        });
+        this.api.blocks.delete();
 
-            default:
-              this.api.blocks.delete();
-              return;
-          }
-        } else {
-          this.api.blocks.delete();
-          return;
-        }
+        return;
       }
 
       case "pattern": {
