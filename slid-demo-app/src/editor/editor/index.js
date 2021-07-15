@@ -2,7 +2,6 @@ import React from "react";
 import EditorJs from "react-editor-js";
 import { EDITOR_JS_TOOLS } from "./utils/tools/Tools";
 import styles from "./editor.module.css";
-import testImg from "./utils/tools/blocks/simpleImage/img_test.png";
 import EditorController from "../editorController";
 import Undo from "./utils/tools/undo";
 import EditorHeader from "../editorHeader";
