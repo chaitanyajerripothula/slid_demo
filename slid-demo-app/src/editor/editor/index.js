@@ -55,9 +55,9 @@ class Editor extends React.PureComponent {
 
   handleInsertImage = () => {
     if (this.editorInstance.blocks.getCurrentBlockIndex() === -1) {
-      this.editorInstance.blocks.insert("image", { url: testImg }, {}, this.state["lastFocusedBlockIndex"] + 1, true);
+      this.editorInstance.blocks.insert("image", { url: this.props.captureImgUrl }, {}, this.state["lastFocusedBlockIndex"] + 1, true);
     } else {
-      this.editorInstance.blocks.insert("image", { url: testImg }, {}, this.editorInstance.blocks.getCurrentBlockIndex() + 1, true);
+      this.editorInstance.blocks.insert("image", { url: this.props.captureImgUrl }, {}, this.editorInstance.blocks.getCurrentBlockIndex() + 1, true);
     }
   };
 
@@ -135,6 +135,13 @@ class Editor extends React.PureComponent {
           </div>
         </div>
         <EditorController
+          selectAreaCoordinate={this.props.selectAreaCoordinate}
+          captureImgUrl={this.props.captureImgUrl}
+          isCapturingOneClick={this.props.isCapturingOneClick}
+          setSelectAreaCoordinate={this.props.setSelectAreaCoordinate}
+          setShowSelectAreaCanvas={this.props.setShowSelectAreaCanvas}
+          setCaptureSelectArea={this.props.setCaptureSelectArea}
+          setCaptureImgUrl={this.props.setCaptureImgUrl}
           handleInsertImage={this.handleInsertImage}
           componentRef={this.componentRef}
           handleSetFontSize={this.handleSetFontSize}
@@ -144,6 +151,7 @@ class Editor extends React.PureComponent {
           }}
           redoEditor={() => this.undoInstance.redo()}
           isSaving={isSaving}
+          setIsCapturingOneClick={this.props.setIsCapturingOneClick}
           editorWidth={width}
           lang={lang}
           isMacOs={isMacOs}

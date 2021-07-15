@@ -7,10 +7,23 @@ import { withResizeDetector } from "react-resize-detector";
 const EditorAdaptiveWithDetector = withResizeDetector(Editor);
 
 const EditorComponent = (props) => {
-  const { lang, isMacOs } = props;
+  const { selectAreaCoordinate, captureImgUrl, isCapturingOneClick, setSelectAreaCoordinate, setShowSelectAreaCanvas, setCaptureSelectArea, setCaptureImgUrl, setIsCapturingOneClick, lang, isMacOs } =
+    props;
+
   return (
-    <div className={`${styles[`container`]}`}>
-      <EditorAdaptiveWithDetector lang={lang} isMacOs={isMacOs} />
+    <div id="custom-target" className={`${styles[`container`]}`}>
+      <EditorAdaptiveWithDetector
+        selectAreaCoordinate={selectAreaCoordinate}
+        captureImgUrl={captureImgUrl}
+        isCapturingOneClick={isCapturingOneClick}
+        setSelectAreaCoordinate={setSelectAreaCoordinate}
+        setShowSelectAreaCanvas={setShowSelectAreaCanvas}
+        setCaptureSelectArea={setCaptureSelectArea}
+        setCaptureImgUrl={setCaptureImgUrl}
+        setIsCapturingOneClick={setIsCapturingOneClick}
+        lang={lang}
+        isMacOs={isMacOs}
+      />
     </div>
   );
 };
