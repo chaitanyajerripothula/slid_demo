@@ -5,6 +5,7 @@ import styles from "./editor.module.css";
 import testImg from "./utils/tools/blocks/simpleImage/img_test.png";
 import EditorController from "../editorController";
 import Undo from "./utils/tools/undo";
+import EditorHeader from "../editorHeader";
 
 class Editor extends React.PureComponent {
   componentRef = React.createRef();
@@ -105,6 +106,7 @@ class Editor extends React.PureComponent {
     this.handleAddListener();
     return (
       <div className={`${styles[`container`]}`}>
+        <EditorHeader />
         <h1 className={`${styles[`font-${fontSize}`]}`}>
           <input
             className={`${styles[`input-title`]}`}

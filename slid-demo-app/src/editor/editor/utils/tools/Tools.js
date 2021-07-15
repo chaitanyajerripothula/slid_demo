@@ -7,7 +7,7 @@ import NestedList from "./blocks/nestedList/index";
 import Underline from "./underline/index";
 import SimpleImage from "./blocks/simpleImage/index";
 import InlineCode from "./inlineCode/index";
-
+import LaTeXTool from "./blocks/latex/index";
 export const EDITOR_JS_TOOLS = {
   header: {
     class: Header,
@@ -65,5 +65,8 @@ export const EDITOR_JS_TOOLS = {
   inlineCode: {
     class: InlineCode,
     shortcut: "CMD+E",
+  },
+  math: {
+    class: LaTeXTool,
   },
 };

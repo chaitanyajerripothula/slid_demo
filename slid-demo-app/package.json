@@ -59,6 +59,7 @@
     "@editorjs/list": "^1.6.2",
     "@editorjs/marker": "^1.2.2",
     "@editorjs/paragraph": "^2.8.0",
+    "editorjs-math": "^1.0.2",
     "prettier": "2.3.1",
     "react-split": "^2.0.11"
   }

@@ -491,7 +491,7 @@ class SlidImageBlock {
                   Sentry.withScope((scope) => {
                     scope.setLevel("error");
                     Sentry.captureMessage("SLID_WEB_IMAGE_UPLOAD_ERROR");
-                  });
+                  })
                 }
 
                 this.block.holder.querySelector(".capture-img").src = imgSrc;

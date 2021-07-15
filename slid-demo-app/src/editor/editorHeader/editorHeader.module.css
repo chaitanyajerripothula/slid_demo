@@ -1,0 +1,8 @@
+.editor-header-container {
+    height: 56px;
+    border-bottom: 2px solid #efefef;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 20px;
+}
