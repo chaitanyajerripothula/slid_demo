@@ -54,7 +54,7 @@ export const EDITOR_JS_TOOLS = {
   },
   nestedList: {
     class: NestedList,
-    inlineToolbar: false,
+    inlineToolbar: true,
     shortcut: "CMD+SHIFT+L",
   },
   image: {
