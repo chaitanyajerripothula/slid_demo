@@ -110,7 +110,7 @@ class Editor extends React.PureComponent {
     EDITOR_JS_TOOLS.image.config = {
       url: captureImgUrl,
       dragAndDropImageBlock(param) {
-        this.currentSrc = param.imgUrl;
+        this.currentSrc = param.imgSrc;
       }
     };
 
