@@ -5,6 +5,7 @@ import styles from "./editor.module.css";
 import testImg from "./utils/tools/blocks/simpleImage/img_test.png";
 import EditorController from "../editorController";
 import Undo from "./utils/tools/undo";
+import Swal from "sweetalert2";
 
 class Editor extends React.PureComponent {
   componentRef = React.createRef();
@@ -102,6 +103,50 @@ class Editor extends React.PureComponent {
   render() {
     let { fontSize, isSaving } = this.state;
     const { width, lang, isMacOs } = this.props;
+
+    EDITOR_JS_TOOLS.image.config = {
+      lang: lang,
+      onClickMarkup: () => {
+        Swal.fire({
+          target: document.getElementById("toast-container"),
+          title: "펜필기",
+          html: (
+            <div className={`${styles[`markup-container`]}`}>
+              <div className={`${styles[`markup-tool-container`]}`}>
+                <div className={`${styles[`markup-type-container`]}`}>
+                  <div className={`btn-group`} role="group">
+                    <button type="button" className={`btn btn-light`}>
+                      <img className={`${styles[`markup-type-image`]}`} alt={'slid cursor icon'} src={`../../../design/assets/slid_cursor_icon.png`}/>
+                    </button>
+                    <button type="button" className={`btn btn-light`}>
+                      <img className={`${styles[`markup-type-image`]}`} alt={'slid pen icon'} src={`../../../design/assets/slid_pen_icon.png`}/>
+                    </button>
+                    <button type="button" className={`btn btn-light`}>
+                      <img className={`${styles[`markup-type-image`]}`} alt={'slid highlighter icon'} src={`../../../design/assets/slid_highlighter_icon.png`}/>
+                    </button>
+                    <button type="button" className={`btn btn-light`}>
+                      <img className={`${styles[`markup-type-image`]}`} alt={'slid text icon'} src={`../../../design/assets/slid_text_icon.png`}/>
+                    </button>
+                  </div>
+                </div>
+                <div className={`${styles[`color-picker-container`]}`}>
+                  <div className={`btn-group`} role="group">
+                    <button type="button" className={`${styles[`markup-tool-container`]} btn btn-light`}>
+                      
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ),
+          position: "center",
+          confirmButtonText: "저장",
+          confirmButtonColor: "#007bff",
+          heightAuto: false,
+        }).then(() => {});
+      },
+    }
+
     this.handleAddListener();
     return (
       <div className={`${styles[`container`]}`}>
