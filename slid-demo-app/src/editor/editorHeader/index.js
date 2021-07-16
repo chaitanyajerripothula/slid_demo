@@ -7,7 +7,7 @@ const EditorHeader = () => {
   return (
     <div className={`${styles[`editor-header-container`]}`}>
       <span>
-        <a href={slidDownloadURL} target="_blank">
+        <a className={`${styles[`editor-header-link`]}`} href={slidDownloadURL} target="_blank">
           슬리드 설치하러 가기{" "}
         </a>
         👉🏻

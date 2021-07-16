@@ -6,3 +6,7 @@
     align-items: center;
     padding: 20px;
 }
+
+.editor-header-link {
+    font-weight: bold;
+}
