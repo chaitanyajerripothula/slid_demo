@@ -30,7 +30,7 @@ export default class SimpleImage {
     /**
      * Editor.js API
      */
-    //this.data = data;
+    // this.data = data;
     this.config = config;
     this.api = api;
     this.readOnly = readOnly;
@@ -109,7 +109,8 @@ export default class SimpleImage {
         title: this.config.lang === "ko-KR" ? "여기부터 재생" : "Play here",
         click: () => {
           this.config.onClickPlayVideoFromTs();
-          console.log("time: " + this.data.timestamp);
+          console.log(this)
+          console.log("config timestamp" + this.config.timestamp);
         },
       },
     ];
@@ -231,7 +232,6 @@ export default class SimpleImage {
     switch (event.type) {
       case "tag": {
         const img = event.detail.data;
-
         this.data = {
           url: img.src,
           timestamp: img.time,

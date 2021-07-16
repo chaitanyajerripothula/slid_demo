@@ -109,17 +109,18 @@ class Editor extends React.PureComponent {
     let { fontSize, isSaving } = this.state;
     const { width, lang, isMacOs } = this.props;
 
+    EDITOR_JS_TOOLS.image.data = {
+      timestamp: 1
+    };
+
     EDITOR_JS_TOOLS.image.config = {
       lang: lang,
+      timestamp : this.props.captureImgUrl.timestamp,
       onClickPlayVideoFromTs: () => {
         this.playVideoFromTs();
       },
     };
-
-    EDITOR_JS_TOOLS.image.data = {
-      timestamp: 30,
-    };
-
+    
     this.handleAddListener();
     return (
       <div className={`${styles[`container`]}`}>
