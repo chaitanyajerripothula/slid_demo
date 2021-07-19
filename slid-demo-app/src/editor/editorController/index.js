@@ -8,6 +8,7 @@ import downloadImg from "../../design/assets/slid_download_icon.png";
 import captureImg from "../../design/assets/slid_capture_icon.png";
 import areaCaptureImg from "../../design/assets/slid_set_area_icon.png";
 import recordingImg from "../../design/assets/slid_recording_gray_icon.png";
+import loadingImg from "../../design/assets/slid_loading_circle_icon.png";
 import { useReactToPrint } from "react-to-print";
 import EditorSetting from "../editorSetting";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
@@ -173,10 +174,13 @@ const EditorController = (props) => {
             className={`${styles[`video-document-editor-capture-btn`]} btn btn-primary`}
             onClick={() => {
               captureOneClick();
-              //setTimeout(insertImage, 10);
             }}
           >
-            <img className={`${styles[`video-document-editor-capture-icon`]}`} src={captureImg} alt="captureImage" />
+            {isCapturingOneClick ? (
+              <img className={`${styles[`video-document-editor-loading-icon`]}`} src={loadingImg} alt="loadingImage" />
+            ) : (
+              <img className={`${styles[`video-document-editor-capture-icon`]}`} src={captureImg} alt="captureImage" />
+            )}
           </button>
         </OverlayTrigger>
 

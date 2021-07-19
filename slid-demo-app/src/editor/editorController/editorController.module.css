@@ -1,13 +1,14 @@
 .container {
   display: flex;
   flex-direction: row;
-  height: 72px;
+  min-height: 72px;
+  box-shadow: 0 -5px 10px hsl(0deg 0% 70% / 20%);
   justify-content: space-between;
   background: #ffffff;
-  box-shadow: 0 -5px 10px hsl(0, 0%, 97%);
   position: absolute;
   width: 100%;
-  bottom : 0;
+  bottom: 0;
+  z-index: 1000;
 }
 
 .video-document-editor-left-wrapper {
@@ -162,4 +163,17 @@
   height: 34px;
   margin: 0 10px;
   padding: 0.5rem 0;
+}
+
+.video-document-editor-loading-icon {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  animation: rotate_image 1s linear infinite;
+  transform-origin: 50% 50%;
+}
+@keyframes rotate_image {
+  100% {
+    transform: rotate(360deg);
+  }
 }
