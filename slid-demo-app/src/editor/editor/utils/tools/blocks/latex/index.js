@@ -117,9 +117,9 @@ export default class LaTeXTool {
     return wrapper;
   }
 
- /* save(blockContent) {
+  save(blockContent) {
     return {
       math: blockContent.childNodes[1].value,
     };
-  }*/
+  }
 }
