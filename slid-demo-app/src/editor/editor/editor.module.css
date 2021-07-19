@@ -46,6 +46,16 @@
   left: 0 !important;
 }
 
+.modal {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 99;
+  background: rgba(0, 0, 0, 0.6);
+}
+
 .markup-container {
   position: absolute;
   left: 50%;
@@ -70,6 +80,15 @@
   overflow-y: visible;
 }
 
+.markup-tool-container button {
+  width: 34px;
+  height: 34px;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .markup-type-container {
   margin-right: 10px;
 }
@@ -82,6 +101,10 @@
   margin-left: 10px;
   margin-right: 10px;
   display: flex;
+}
+
+.color-picker-toggle {
+  font-size: 1rem;
 }
 
 .size-picker-container {
@@ -132,8 +155,30 @@
 .markup-control-btn {
   width: 34px;
   height: 34px;
-  padding: 5px;
+  padding: 5px !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+.markup-control-btn:not(:first-of-type) {
+  margin-left: 10px;
+}
+
+.markup-control-btn img {
+  width: 100%;
+}
+
+.close-container {
+  display: flex;
+}
+
+.close-container button {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.markup-save-btn {
+  font-weight: 700;
 }
