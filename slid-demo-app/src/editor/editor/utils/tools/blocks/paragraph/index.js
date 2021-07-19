@@ -83,36 +83,23 @@ class Paragraph {
     const { textContent } = this._element;
 
     if (textContent === "```") {
-      this.config.convertBlock({
-        blockIndex: this.api.blocks.getCurrentBlockIndex(),
-        blockType: "codeTool",
-        value: "",
-      });
+      this.convertBlock(this.api.blocks.getCurrentBlockIndex(), "codeTool", {});
     } else if (textContent === "- ") {
-      this.config.convertBlock({
-        blockIndex: this.api.blocks.getCurrentBlockIndex(),
-        blockType: "nested_list_unordered",
-        value: textContent === "- " ? "" : textContent.split("- ").splice(1, 1).join("- "),
-      });
+      this.convertBlock(this.api.blocks.getCurrentBlockIndex(), "nestedList_unordered", { style: "unordered" });
     } else if (textContent === "1. ") {
-      this.config.convertBlock({
-        blockIndex: this.api.blocks.getCurrentBlockIndex(),
-        blockType: "nested_list_ordered",
-        value: textContent === "1. " ? "" : textContent.split("1. ").splice(1, 1).join("1. "),
-      });
+      this.convertBlock(this.api.blocks.getCurrentBlockIndex(), "nestedList_ordered", { style: "ordered" });
     } else if (textContent === "# ") {
-      this.config.convertBlock({
-        blockIndex: this.api.blocks.getCurrentBlockIndex(),
-        blockType: "header",
-        value: "",
-      });
-    } else if (textContent === "[]") {
-      this.config.convertBlock({
-        blockIndex: this.api.blocks.getCurrentBlockIndex(),
-        blockType: "checklist",
-        value: "",
-      });
+      this.convertBlock(this.api.blocks.getCurrentBlockIndex(), "header", {});
+    } else if (textContent === "[] ") {
+      this.convertBlock(this.api.blocks.getCurrentBlockIndex(), "checkList", {});
     }
+  }
+
+  // convert block
+  convertBlock(blockIndex, blockType, value) {
+    this.api.blocks.delete(blockIndex);
+    this.api.blocks.insert(blockType, value, {}, blockIndex, true);
+    this.api.caret.setToBlock(blockIndex);
   }
 
   /**

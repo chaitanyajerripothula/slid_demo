@@ -1,12 +1,12 @@
 .editor-setting-container {
   position: absolute;
   width: 284px;
-  height: 108px;
+  height: 100px;
   background: #ffffff;
   border-radius: 5px !important;
   padding: 24px 27px;
   margin: 0 0 2px 2px;
-  transform: translate(0px, -74px);
+  transform: translate(0px, -104px);
   insert: auto auto 0px 0px;
   border: 1px solid rgba(0, 0, 0, 0.15);
   box-sizing: border-box;
@@ -19,6 +19,7 @@
   align-items: center;
   justify-content: space-between;
   font-size: 14px;
+  margin-top : 5px;
   margin-bottom: 10px;
 }
 

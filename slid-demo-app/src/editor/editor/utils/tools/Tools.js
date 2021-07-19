@@ -24,13 +24,6 @@ export const EDITOR_JS_TOOLS = {
     inlineToolbar: true,
     config: {
       preserveBlank: true,
-      convertBlock: ({ blockIndex, blockType, value }) => {
-        this.convertBlock({ blockIndex, blockType, value });
-      },
-      // 자동형식변환기능 -> false(현재 demo 페이지에서 보이지 않는 기능임으로 임시적으로 false 처리)
-      checkIsAutoFormatActive: () => {
-        return false;
-      },
     },
   },
   checkList: {
@@ -40,20 +33,27 @@ export const EDITOR_JS_TOOLS = {
   codeTool: {
     class: CodeTool,
     shortcut: "CMD+SHIFT+C",
-    config: {
-      convertBlock: ({ blockIndex, blockType, value }) => {
-        this.convertBlock({ blockIndex, blockType, value });
-      },
-    },
   },
   marker: {
     class: Marker,
     shortcut: "CMD+SHIFT+M",
   },
-  nestedList: {
+  nestedList_unordered: {
     class: NestedList,
+    data: {
+      style: "unordered",
+    },
+    style: "unordered",
     inlineToolbar: false,
     shortcut: "CMD+SHIFT+L",
+  },
+  nestedList_ordered: {
+    class: NestedList,
+    data: {
+      style: "ordered",
+    },
+    style: "ordered",
+    inlineToolbar: false,
   },
   image: {
     class: SimpleImage,

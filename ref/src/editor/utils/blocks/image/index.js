@@ -53,7 +53,6 @@ export default class ImageTool {
     const img = document.createElement("img");
     img.setAttribute("blocktype", "image");
     img.draggable = true;
-    img.contentEditable = false;
     if (this.data.rawSrc) {
       img.src = this.data.rawSrc;
       img.onload = async (event) => {

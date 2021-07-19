@@ -103,6 +103,14 @@ class Editor extends React.PureComponent {
     let { fontSize, isSaving } = this.state;
     const { width, lang, isMacOs } = this.props;
     this.handleAddListener();
+
+    EDITOR_JS_TOOLS.paragraph.config = {
+      // 자동형식변환기능 -> false(현재 demo 페이지에서 보이지 않는 기능임으로 임시적으로 false 처리)
+      checkIsAutoFormatActive: () => {
+        return true;
+      },
+    };
+
     return (
       <div className={`${styles[`container`]}`}>
         <h1 className={`${styles[`font-${fontSize}`]}`}>

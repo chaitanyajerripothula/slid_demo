@@ -127,6 +127,8 @@ export default class SimpleImage {
       this._acceptTuneView();
     };
 
+    image.contentEditable = false;
+
     image.onerror = (e) => {
       // @todo use api.Notifies.show() to show error notification
       console.log("Failed to load an image", e);
