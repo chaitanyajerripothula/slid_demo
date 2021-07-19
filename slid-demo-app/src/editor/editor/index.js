@@ -51,9 +51,9 @@ class Editor extends React.PureComponent {
 
   handleInsertImage = () => {
     if (this.editorInstance.blocks.getCurrentBlockIndex() === -1) {
-      this.editorInstance.blocks.insert("image", { url: this.props.captureImgUrl.url }, {}, this.state["lastFocusedBlockIndex"] + 1, true);
+      this.editorInstance.blocks.insert("image", { url: this.props.captureImgUrl.url, timestamp: this.props.captureImgUrl.timestamp }, {}, this.state["lastFocusedBlockIndex"] + 1, true);
     } else {
-      this.editorInstance.blocks.insert("image", { url: this.props.captureImgUrl.url }, {}, this.editorInstance.blocks.getCurrentBlockIndex() + 1, true);
+      this.editorInstance.blocks.insert("image", { url: this.props.captureImgUrl.url, timestamp: this.props.captureImgUrl.timestamp }, {}, this.editorInstance.blocks.getCurrentBlockIndex() + 1, true);
     }
   };
 
@@ -99,25 +99,16 @@ class Editor extends React.PureComponent {
     this.setState({ fontSize: size ? size : "small" });
   };
 
-  playVideoFromTs = () => {
-    const videos = document.getElementsByTagName("video");
-    const video = videos[0];
-    video.currentTime = this.props.captureImgUrl.timestamp;
-  };
-
   render() {
     let { fontSize, isSaving } = this.state;
     const { width, lang, isMacOs } = this.props;
 
-    EDITOR_JS_TOOLS.image.data = {
-      timestamp: 1
-    };
-
     EDITOR_JS_TOOLS.image.config = {
       lang: lang,
-      timestamp : this.props.captureImgUrl.timestamp,
-      onClickPlayVideoFromTs: () => {
-        this.playVideoFromTs();
+      onClickPlayVideoFromTs: (timestamp) => {
+        const videos = document.getElementsByTagName("video");
+        const video = videos[0];
+        video.currentTime = timestamp;
       },
     };
     

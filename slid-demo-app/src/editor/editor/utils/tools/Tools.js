@@ -57,9 +57,6 @@ export const EDITOR_JS_TOOLS = {
   },
   image: {
     class: SimpleImage,
-    // config: {
-    //   timestamp: 11,
-    // },
   },
   underline: {
     class: Underline,

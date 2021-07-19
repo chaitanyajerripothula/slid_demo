@@ -34,7 +34,6 @@ export default class SimpleImage {
     this.config = config;
     this.api = api;
     this.readOnly = readOnly;
-    this.timestamp = data.timestamp;
 
     /**
      * When block is only constructing,
@@ -108,9 +107,7 @@ export default class SimpleImage {
               </svg>`,
         title: this.config.lang === "ko-KR" ? "여기부터 재생" : "Play here",
         click: () => {
-          this.config.onClickPlayVideoFromTs();
-          console.log(this)
-          console.log("config timestamp" + this.config.timestamp);
+          this.config.onClickPlayVideoFromTs(this.data.timestamp);
         },
       },
     ];
@@ -135,10 +132,6 @@ export default class SimpleImage {
 
     if (this.data.url) {
       image.src = this.data.url;
-    }
-
-    if (this.data.timestamp) {
-      image.time = this.data.timestamp;
     }
 
     image.onload = () => {
@@ -173,10 +166,7 @@ export default class SimpleImage {
       return this.data;
     }
 
-    return Object.assign(this.data, {
-      url: image.src,
-      timestamp: image.time,
-    });
+    return this.data;
   }
 
   /**
@@ -217,7 +207,6 @@ export default class SimpleImage {
       reader.onload = (event) => {
         resolve({
           url: event.target.result,
-          timestamp: event.target.result,
         });
       };
     });
@@ -234,7 +223,6 @@ export default class SimpleImage {
         const img = event.detail.data;
         this.data = {
           url: img.src,
-          timestamp: img.time,
         };
         break;
       }
@@ -244,7 +232,6 @@ export default class SimpleImage {
 
         this.data = {
           url: text,
-          timestamp: text,
         };
         break;
       }
@@ -280,7 +267,6 @@ export default class SimpleImage {
 
     if (this.nodes.image) {
       this.nodes.image.src = this.data.url;
-      this.nodes.image.time = this.data.timestamp;
     }
   }
 
