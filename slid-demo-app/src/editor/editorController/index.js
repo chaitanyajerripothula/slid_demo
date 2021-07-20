@@ -31,6 +31,8 @@ const EditorController = (props) => {
   } = props;
   const [open, setOpen] = useState(false);
   const [fontSize, setFontSize] = useState("small");
+  const [onClickRecord, setOnClickRecord] = useState(false);
+  let recorder = new MediaRecorder();
 
   useEffect(() => {
     props.handleSetFontSize(fontSize);
@@ -49,17 +51,18 @@ const EditorController = (props) => {
   }, [open]);
 
   const onClickRecordVideoBtn = () => {
-    Swal.fire({
-      target: document.getElementById("toast-container"),
-      title: "준비중입니다!",
-      html: `<p>영상을 짧게 녹화할 수 있는 기능이 현재 준비 중입니다!</p><p>슬리드의 업데이트들을 기대해 주세요. :)</p>`,
-      position: "center",
-      confirmButtonText: "확인",
-      icon: "info",
-      confirmButtonColor: "#2778c4",
-      heightAuto: false,
-    }).then(() => {});
+    onClickRecord ? setOnClickRecord(false) : setOnClickRecord(true);
   };
+
+  useEffect(() => {
+    if (onClickRecord) {
+      let data = [];
+      recorder.ondataavailable = (event) => data.push(event.data);
+      recorder.start();
+    } else {
+      recorder.stop();
+    }
+  }, [onClickRecord]);
 
   const captureOneClick = () => {
     setIsCapturingOneClick(true);

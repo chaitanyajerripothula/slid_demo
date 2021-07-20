@@ -1,0 +1,36 @@
+.cdx-simple-video {
+}
+
+.cdx-simple-video .cdx-loader {
+  min-height: 200px;
+}
+
+.cdx-simple-video .cdx-input {
+  margin-top: 10px;
+}
+
+.cdx-simple-video video {
+  max-width: 100%;
+  vertical-align: bottom;
+}
+
+.cdx-simple-video__caption[contentEditable="true"][data-placeholder]:empty::before {
+  position: absolute;
+  content: attr(data-placeholder);
+  color: #707684;
+  font-weight: normal;
+  opacity: 0;
+}
+
+.cdx-simple-video__caption[contentEditable="true"][data-placeholder]:empty::before {
+  opacity: 1;
+}
+
+.cdx-simple-video__caption[contentEditable="true"][data-placeholder]:empty:focus::before {
+  opacity: 0;
+}
+
+.cdx-simple-video__picture--stretched video {
+  max-width: none;
+  width: 100%;
+}

@@ -7,6 +7,7 @@ import NestedList from "./blocks/nestedList/index";
 import Underline from "./underline/index";
 import SimpleImage from "./blocks/simpleImage/index";
 import InlineCode from "./inlineCode/index";
+import Video from "./blocks/simpleVideo/index";
 
 export const EDITOR_JS_TOOLS = {
   header: {
@@ -65,5 +66,8 @@ export const EDITOR_JS_TOOLS = {
   inlineCode: {
     class: InlineCode,
     shortcut: "CMD+E",
+  },
+  video: {
+    class: Video,
   },
 };
