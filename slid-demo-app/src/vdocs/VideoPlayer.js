@@ -228,7 +228,6 @@ const VideoPlayer = (props) => {
             </OverlayTrigger>
           </div>
         </div>
-        {/* Video Stamp */}
       </div>
     </div>
   );

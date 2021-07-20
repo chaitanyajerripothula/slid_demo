@@ -21,6 +21,7 @@ class Editor extends React.PureComponent {
       lastFocusedBlockIndex: 0,
       isSaving: true,
       markupModalOpen: false,
+      markupImgUrl: "",
     };
   }
 
@@ -102,20 +103,20 @@ class Editor extends React.PureComponent {
     this.setState({ fontSize: size ? size : "small" });
   };
 
-  showMarkupWindow = () => {
-    this.setState({ markupModalOpen : true })
-  }
+  handleSaveMarkupImage = () => {
+    this.setState({ markupModalOpen: false });
+  };
 
   render() {
-    let { fontSize, isSaving, markupModalOpen } = this.state;
+    let { fontSize, isSaving, markupModalOpen, markupImgUrl } = this.state;
     const { width, lang, isMacOs } = this.props;
 
     EDITOR_JS_TOOLS.image.config = {
       lang: lang,
-      onClickMarkup: () => {
-        this.showMarkupWindow();
-      }
-    }
+      onClickMarkup: (url) => {
+        this.setState({ markupModalOpen: true, markupImgUrl: url });
+      },
+    };
 
     this.handleAddListener();
     return (
@@ -139,7 +140,7 @@ class Editor extends React.PureComponent {
             onChange={this.handleChangeEditor}
             instanceRef={(instance) => (this.editorInstance = instance)}
           />
-          <MarkupModal markupModalOpen={markupModalOpen}/>
+          <MarkupModal markupModalOpen={markupModalOpen} markupImgUrl={markupImgUrl} handleSaveMarkupImage={this.handleSaveMarkupImage} />
         </div>
 
         <EditorController
