@@ -2,11 +2,15 @@
     height: 56px;
     border-bottom: 2px solid #efefef;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
     padding: 20px;
 }
 
 .editor-header-link {
     font-weight: bold;
+}
+
+.editor-header-slid-logo-icon {
+    height: 40px;
 }

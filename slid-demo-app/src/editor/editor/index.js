@@ -108,7 +108,7 @@ class Editor extends React.PureComponent {
     return (
       <div className={`${styles[`container`]}`}>
         <EditorHeader />
-        <div className={`${styles[`editor-container`]} ${styles[`font-${fontSize}`]}`} ref={this.componentRef}>
+        <div className={`${styles[`editor-container`]} ${styles[`font-${fontSize}`]}`} >
           <h1 className={`${styles[`font-${fontSize}`]}`}>
             <input
               className={`${styles[`input-title`]}`}
@@ -121,6 +121,7 @@ class Editor extends React.PureComponent {
             />
           </h1>
           <EditorJs
+            ref={this.componentRef}
             className={`${styles[`editor-js`]}`}
             tools={EDITOR_JS_TOOLS}
             onReady={this.handleSetUndoRedoInstance}

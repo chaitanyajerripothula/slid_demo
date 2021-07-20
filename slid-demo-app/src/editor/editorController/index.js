@@ -57,9 +57,11 @@ const EditorController = (props) => {
       position: "center",
       confirmButtonText: "확인",
       icon: "info",
+      heightAuto: false,
+      width: "85%",
       confirmButtonColor: "#2778c4",
       heightAuto: false,
-    }).then(() => {});
+    }).then(() => { });
   };
 
   const captureOneClick = () => {
