@@ -23,7 +23,7 @@ const VideoPlayer = (props) => {
       top: 0,
       width: videoPlaceholderRef.current.offsetWidth - 2,
       height: videoPlaceholderRef.current.offsetHeight - 2,
-    })
+    });
   }, [props.width]);
 
   const goBackHistory = () => {
@@ -88,7 +88,7 @@ const VideoPlayer = (props) => {
           <ReactPlayer
             id="videoPlayer"
             className={styles[`video-player`]}
-            url="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+            url="../../slid_video.mp4"
             playing={isPlaying}
             ref={videoPlayerRef}
             width="100%"
