@@ -80,6 +80,7 @@ class Paragraph {
   onInput(e) {
     if (!this.config.checkIsAutoFormatActive()) return;
 
+
     const { textContent } = this._element;
 
     if (textContent === "```") {

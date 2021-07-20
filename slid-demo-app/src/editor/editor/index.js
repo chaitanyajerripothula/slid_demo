@@ -16,12 +16,13 @@ class Editor extends React.PureComponent {
     this.state = {
       undoInstance: this.handleSetUndoRedoInstance,
       fontSize: "small",
+      isAutoFormatActive: true,
       lastFocusedBlockIndex: 0,
       isSaving: true,
     };
   }
 
-  async componentDidMount() {}
+  async componentDidMount() { }
 
   handleAddListener = () => {
     for (let index = 0; index < this.ceBlocks.length; index++) {
@@ -75,7 +76,7 @@ class Editor extends React.PureComponent {
     if (e.target.value) {
       document.title = e.target.value;
     } else {
-      document.title = this.props.lang === "ko-KR" ? "제목 없음" : "Untitle";
+      document.title = this.props.lang === "ko-KR" ? "제목 없음" : "Untitled";
     }
   };
 
@@ -99,15 +100,25 @@ class Editor extends React.PureComponent {
     this.setState({ fontSize: size ? size : "small" });
   };
 
+
+  handleSetAutoFormatActive = (isAutoFormatActive) => {
+    console.log(`0. ${isAutoFormatActive}`)
+    this.setState({ isAutoFormatActive: isAutoFormatActive ? isAutoFormatActive : true });
+  };
+
+  checkIsAutoFormatActive() {
+    return this.state["isAutoFormatActive"];
+  }
+
+
   render() {
-    let { fontSize, isSaving } = this.state;
+    let { fontSize, isSaving, isAutoFormatActive } = this.state;
     const { width, lang, isMacOs } = this.props;
     this.handleAddListener();
 
     EDITOR_JS_TOOLS.paragraph.config = {
-      // 자동형식변환기능 -> false(현재 demo 페이지에서 보이지 않는 기능임으로 임시적으로 false 처리)
       checkIsAutoFormatActive: () => {
-        return true;
+        return this.checkIsAutoFormatActive();
       },
     };
 
@@ -145,6 +156,7 @@ class Editor extends React.PureComponent {
           handleInsertImage={this.handleInsertImage}
           componentRef={this.componentRef}
           handleSetFontSize={this.handleSetFontSize}
+          handleSetAutoFormatActive={this.handleSetAutoFormatActive}
           undoEditor={() => {
             this.undoInstance.undo();
             this.handleCheckEditorBlockCount();

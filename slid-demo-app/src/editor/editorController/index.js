@@ -17,12 +17,10 @@ const EditorController = (props) => {
   const {
     componentRef,
     isSaving,
-    selectAreaCoordinate,
     captureImgUrl,
     isCapturingOneClick,
     setShowSelectAreaCanvas,
     setCaptureSelectArea,
-    setCaptureImgUrl,
     setSelectAreaCoordinate,
     setIsCapturingOneClick,
     editorWidth,
@@ -31,10 +29,12 @@ const EditorController = (props) => {
   } = props;
   const [open, setOpen] = useState(false);
   const [fontSize, setFontSize] = useState("small");
+  const [isAutoFormatActive, setAutoFormatActive] = useState(true);
 
   useEffect(() => {
     props.handleSetFontSize(fontSize);
-  }, [fontSize]);
+    props.handleSetAutoFormatActive(isAutoFormatActive);
+  }, [fontSize, isAutoFormatActive]);
 
   const renderPdfPrint = useReactToPrint({
     content: () => componentRef.current,
@@ -58,7 +58,7 @@ const EditorController = (props) => {
       icon: "info",
       confirmButtonColor: "#2778c4",
       heightAuto: false,
-    }).then(() => {});
+    }).then(() => { });
   };
 
   const captureOneClick = () => {
@@ -95,7 +95,6 @@ const EditorController = (props) => {
       } else if (result.isConfirmed) {
         setCaptureSelectArea(true);
         captureOneClick();
-        //setTimeout(insertImage, 10);
         setShowSelectAreaCanvas(false);
       } else {
         setShowSelectAreaCanvas(false);
@@ -105,7 +104,7 @@ const EditorController = (props) => {
 
   return (
     <div className={`${styles[`container`]}`}>
-      {open ? <EditorSetting setFontSize={setFontSize} fontSize={fontSize} /> : null}
+      {open ? <EditorSetting setFontSize={setFontSize} fontSize={fontSize} isAutoFormatActive={isAutoFormatActive} setAutoFormatActive={setAutoFormatActive} /> : null}
       {editorWidth > 400 ? null : (
         <div className={`${styles[`video-document-editor-setting-popup`]}`}>
           <OverlayTrigger defaultShow={false} placement={"top"} overlay={<Tooltip>{lang === "ko-KR" ? "영역 지정" : "Set capture area"}</Tooltip>}>
