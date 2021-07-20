@@ -11,6 +11,11 @@
     font-weight: bold;
 }
 
+.editor-header-link:hover {
+    text-decoration: none;
+}
+
 .editor-header-slid-logo-icon {
     height: 40px;
+    cursor : pointer;
 }
