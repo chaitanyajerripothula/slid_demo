@@ -31,8 +31,17 @@ const EditorController = (props) => {
   } = props;
   const [open, setOpen] = useState(false);
   const [fontSize, setFontSize] = useState("small");
-  const [onClickRecord, setOnClickRecord] = useState(false);
-  let recorder = new MediaRecorder();
+  const [isOnClickRecordBtn, setIsOnClickRecordBtn] = useState(false);
+  const videos = document.getElementsByTagName("video");
+  const video = videos[0];
+  const stream = videos.captureStream();
+  // const stream = navigator.mediaDevices.getUserMedia({video: true});
+  // const stream = navigator.mediaDevices.getDisplayMedia({
+  //   video: {
+  //       mediaSource: 'screen'
+  //   },
+  // })
+  let recorder = new MediaRecorder(stream);
 
   useEffect(() => {
     props.handleSetFontSize(fontSize);
@@ -51,18 +60,18 @@ const EditorController = (props) => {
   }, [open]);
 
   const onClickRecordVideoBtn = () => {
-    onClickRecord ? setOnClickRecord(false) : setOnClickRecord(true);
-  };
-
-  useEffect(() => {
-    if (onClickRecord) {
-      let data = [];
-      recorder.ondataavailable = (event) => data.push(event.data);
-      recorder.start();
+    if(isOnClickRecordBtn) {
+      //recorder.stop();
+      setIsOnClickRecordBtn(false)
+      console.log(isOnClickRecordBtn);
     } else {
-      recorder.stop();
+      let data = [];
+      //recorder.ondataavailable = (event) => data.push(event.data);
+      //recorder.start();
+      setIsOnClickRecordBtn(true);
+      console.log(stream);
     }
-  }, [onClickRecord]);
+  };
 
   const captureOneClick = () => {
     setIsCapturingOneClick(true);
@@ -98,7 +107,6 @@ const EditorController = (props) => {
       } else if (result.isConfirmed) {
         setCaptureSelectArea(true);
         captureOneClick();
-        //setTimeout(insertImage, 10);
         setShowSelectAreaCanvas(false);
       } else {
         setShowSelectAreaCanvas(false);
