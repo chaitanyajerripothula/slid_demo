@@ -10,7 +10,7 @@ import areaCaptureImg from "../../design/assets/slid_set_area_icon.png";
 import recordingImg from "../../design/assets/slid_recording_gray_icon.png";
 import { useReactToPrint } from "react-to-print";
 import EditorSetting from "../editorSetting";
-import { OverlayTrigger, Tooltip } from "react-bootstrap";
+import { Col, OverlayTrigger, Tooltip } from "react-bootstrap";
 import Swal from "sweetalert2";
 
 const EditorController = (props) => {
@@ -32,20 +32,22 @@ const EditorController = (props) => {
   const [open, setOpen] = useState(false);
   const [fontSize, setFontSize] = useState("small");
   const [isOnClickRecordBtn, setIsOnClickRecordBtn] = useState(false);
+  const [recorder, setRecorder] = useState("");
   const videos = document.getElementsByTagName("video");
   const video = videos[0];
-  const stream = videos.captureStream();
-  // const stream = navigator.mediaDevices.getUserMedia({video: true});
-  // const stream = navigator.mediaDevices.getDisplayMedia({
-  //   video: {
-  //       mediaSource: 'screen'
-  //   },
-  // })
-  let recorder = new MediaRecorder(stream);
+  let data = [];
 
   useEffect(() => {
     props.handleSetFontSize(fontSize);
   }, [fontSize]);
+
+  useEffect(() => {
+    if (video != undefined) {
+      const stream = video.captureStream();
+      setRecorder(new MediaRecorder(stream));
+      console.log("냐옹");
+    }
+  }, [video]);
 
   const renderPdfPrint = useReactToPrint({
     content: () => componentRef.current,
@@ -60,16 +62,18 @@ const EditorController = (props) => {
   }, [open]);
 
   const onClickRecordVideoBtn = () => {
-    if(isOnClickRecordBtn) {
-      //recorder.stop();
-      setIsOnClickRecordBtn(false)
+    if (isOnClickRecordBtn) {
+      recorder.stop();
+
+      setIsOnClickRecordBtn(false);
       console.log(isOnClickRecordBtn);
     } else {
+      recorder.ondataavailable = (event) => data.push(event.data);
+      recorder.start();
+
       let data = [];
-      //recorder.ondataavailable = (event) => data.push(event.data);
-      //recorder.start();
       setIsOnClickRecordBtn(true);
-      console.log(stream);
+      console.log(isOnClickRecordBtn);
     }
   };
 

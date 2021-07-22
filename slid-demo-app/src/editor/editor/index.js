@@ -102,6 +102,7 @@ class Editor extends React.PureComponent {
   render() {
     let { fontSize, isSaving } = this.state;
     const { width, lang, isMacOs } = this.props;
+
     this.handleAddListener();
     return (
       <div className={`${styles[`container`]}`}>

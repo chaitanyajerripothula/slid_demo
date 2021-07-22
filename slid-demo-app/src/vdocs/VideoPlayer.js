@@ -17,7 +17,6 @@ const VideoPlayer = (props) => {
   const videoPlaceholderRef = useRef();
 
   useEffect(() => {
-    console.log("test : " + props.width);
     setSelectAreaCoordinate({
       left: 0,
       top: 0,
