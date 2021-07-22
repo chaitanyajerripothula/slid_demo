@@ -19,7 +19,7 @@ const VideoDocument = (props) => {
     width: "",
     height: "",
   });
-  const [captureImgUrl, setCaptureImgUrl] = useState({
+  const [captureImgData, setCaptureImgData] = useState({
     url: "",
     timestamp: "",
   });
@@ -43,21 +43,21 @@ const VideoDocument = (props) => {
           isCapturingOneClick={isCapturingOneClick}
           setIsCapturingOneClick={setIsCapturingOneClick}
           setSelectAreaCoordinate={setSelectAreaCoordinate}
-          setCaptureImgUrl={setCaptureImgUrl}
+          setCaptureImgData={setCaptureImgData}
           lang={lang}
           isMacOs={isMacOs}
           selectAreaCoordinate={selectAreaCoordinate}
-          captureImgUrl={captureImgUrl}
+          captureImgData={captureImgData}
         />
         <VideoDocumentEditor
           selectAreaCoordinate={selectAreaCoordinate}
-          captureImgUrl={captureImgUrl}
+          captureImgData={captureImgData}
           isCapturingOneClick={isCapturingOneClick}
           setSelectAreaCoordinate={setSelectAreaCoordinate}
           setShowSelectAreaCanvas={setShowSelectAreaCanvas}
           setIsCapturingOneClick={setIsCapturingOneClick}
           setCaptureSelectArea={setCaptureSelectArea}
-          setCaptureImgUrl={setCaptureImgUrl}
+          setCaptureImgData={setCaptureImgData}
           lang={lang}
           isMacOs={isMacOs}
         />

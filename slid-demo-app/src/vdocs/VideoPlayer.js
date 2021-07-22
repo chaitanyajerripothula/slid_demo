@@ -5,7 +5,7 @@ import VideoCapture from "./VideoCapture";
 import styles from "./VideoPlayer.module.css";
 
 const VideoPlayer = (props) => {
-  const { selectAreaCoordinate, setSelectAreaCoordinate, setCaptureImgUrl, showSelectAreaCanvas, isCapturingOneClick, setIsCapturingOneClick, lang, isMacOs, captureImgUrl } = props;
+  const { selectAreaCoordinate, setSelectAreaCoordinate, setCaptureImgData, showSelectAreaCanvas, isCapturingOneClick, setIsCapturingOneClick, lang, isMacOs, captureImgData } = props;
 
   const [isPlaying, setIsPlaying] = useState(false);
   const [videoState, setVideoState] = useState("available");
@@ -77,13 +77,13 @@ const VideoPlayer = (props) => {
           <VideoCapture
             selectAreaCoordinate={selectAreaCoordinate}
             setSelectAreaCoordinate={setSelectAreaCoordinate}
-            setCaptureImgUrl={setCaptureImgUrl}
+            setCaptureImgData={setCaptureImgData}
             showSelectAreaCanvas={showSelectAreaCanvas}
             videoPlayerRef={videoPlayerRef}
             videoPlaceholderRef={videoPlaceholderRef}
             isCapturingOneClick={isCapturingOneClick}
             setIsCapturingOneClick={setIsCapturingOneClick}
-            captureImgUrl={captureImgUrl}
+            captureImgData={captureImgData}
           />
           <ReactPlayer
             id="videoPlayer"

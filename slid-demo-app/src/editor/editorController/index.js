@@ -18,11 +18,11 @@ const EditorController = (props) => {
     componentRef,
     isSaving,
     selectAreaCoordinate,
-    captureImgUrl,
+    captureImgData,
     isCapturingOneClick,
     setShowSelectAreaCanvas,
     setCaptureSelectArea,
-    setCaptureImgUrl,
+    setCaptureImgData,
     setSelectAreaCoordinate,
     setIsCapturingOneClick,
     editorWidth,
@@ -65,7 +65,7 @@ const EditorController = (props) => {
     setIsCapturingOneClick(true);
   };
   useEffect(() => {
-    if (captureImgUrl.url !== "" && isCapturingOneClick === false) {
+    if (captureImgData.url !== "" && isCapturingOneClick === false) {
       insertImage();
     }
   }, [isCapturingOneClick]);

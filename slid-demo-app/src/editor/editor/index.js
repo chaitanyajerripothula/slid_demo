@@ -51,9 +51,9 @@ class Editor extends React.PureComponent {
 
   handleInsertImage = () => {
     if (this.editorInstance.blocks.getCurrentBlockIndex() === -1) {
-      this.editorInstance.blocks.insert("image", { url: this.props.captureImgUrl.url, timestamp: this.props.captureImgUrl.timestamp }, {}, this.state["lastFocusedBlockIndex"] + 1, true);
+      this.editorInstance.blocks.insert("image", { url: this.props.captureImgData.url, timestamp: this.props.captureImgData.timestamp }, {}, this.state["lastFocusedBlockIndex"] + 1, true);
     } else {
-      this.editorInstance.blocks.insert("image", { url: this.props.captureImgUrl.url, timestamp: this.props.captureImgUrl.timestamp }, {}, this.editorInstance.blocks.getCurrentBlockIndex() + 1, true);
+      this.editorInstance.blocks.insert("image", { url: this.props.captureImgData.url, timestamp: this.props.captureImgData.timestamp }, {}, this.editorInstance.blocks.getCurrentBlockIndex() + 1, true);
     }
   };
 
@@ -138,12 +138,12 @@ class Editor extends React.PureComponent {
 
         <EditorController
           selectAreaCoordinate={this.props.selectAreaCoordinate}
-          captureImgUrl={this.props.captureImgUrl}
+          captureImgData={this.props.captureImgData}
           isCapturingOneClick={this.props.isCapturingOneClick}
           setSelectAreaCoordinate={this.props.setSelectAreaCoordinate}
           setShowSelectAreaCanvas={this.props.setShowSelectAreaCanvas}
           setCaptureSelectArea={this.props.setCaptureSelectArea}
-          setCaptureImgUrl={this.props.setCaptureImgUrl}
+          setCaptureImgData={this.props.setCaptureImgData}
           handleInsertImage={this.handleInsertImage}
           componentRef={this.componentRef}
           handleSetFontSize={this.handleSetFontSize}

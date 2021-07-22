@@ -3,7 +3,7 @@ import { fabric } from "fabric";
 import styles from "./VideoCapture.module.css";
 
 const VideoCapture = (props) => {
-  const { selectAreaCoordinate, setSelectAreaCoordinate, setCaptureImgUrl, showSelectAreaCanvas, videoPlayerRef, videoPlaceholderRef, isCapturingOneClick, setIsCapturingOneClick, captureImgUrl } =
+  const { selectAreaCoordinate, setSelectAreaCoordinate, setCaptureImgData, showSelectAreaCanvas, videoPlayerRef, videoPlaceholderRef, isCapturingOneClick, setIsCapturingOneClick, captureImgData } =
     props;
   const canvasRef = useRef();
 
@@ -181,8 +181,8 @@ const VideoCapture = (props) => {
       captureImageCanvas.height
     );
 
-    setCaptureImgUrl({
-      ...captureImgUrl,
+    setCaptureImgData({
+      ...captureImgData,
       url: captureImageCanvas.toDataURL(),
       timestamp: videoPlayerRef.current.getCurrentTime(),
     });
