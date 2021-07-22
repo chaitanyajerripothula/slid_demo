@@ -113,7 +113,6 @@ export default class SimpleImage {
       imageHolder = this._make("div", this.CSS.imageHolder),
       image = this._make("img");
 
-    image.contentEditable = false;
     wrapper.appendChild(loader);
 
     if (this.data.url) {
@@ -132,12 +131,6 @@ export default class SimpleImage {
       // @todo use api.Notifies.show() to show error notification
       console.log("Failed to load an image", e);
     };
-
-
-    wrapper.addEventListener("click", (event) => {
-      console.log(`click!!`);
-      console.log(this)
-    });
 
     this.nodes.imageHolder = imageHolder;
     this.nodes.wrapper = wrapper;
