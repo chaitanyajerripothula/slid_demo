@@ -32,10 +32,13 @@ const EditorController = (props) => {
   const [open, setOpen] = useState(false);
   const [fontSize, setFontSize] = useState("small");
   const [isOnClickRecordBtn, setIsOnClickRecordBtn] = useState(false);
+  const [recordVideoTime, setRecordVideoTime] = useState({
+    startTime: 0,
+    stopTime: 0,
+  });
   const [recorder, setRecorder] = useState("");
   const videos = document.getElementsByTagName("video");
   const video = videos[0];
-  let data = [];
 
   useEffect(() => {
     props.handleSetFontSize(fontSize);
@@ -44,8 +47,8 @@ const EditorController = (props) => {
   useEffect(() => {
     if (video != undefined) {
       const stream = video.captureStream();
-      setRecorder(new MediaRecorder(stream));
-      console.log("냐옹");
+      const options = {mimeType: 'video/webm'};
+      setRecorder(new MediaRecorder(stream, options));
     }
   }, [video]);
 
@@ -63,15 +66,23 @@ const EditorController = (props) => {
 
   const onClickRecordVideoBtn = () => {
     if (isOnClickRecordBtn) {
-      recorder.stop();
+      //recorder.stop();
+      //console.log(URL.createObjectURL(new Blob(data)));
+      setCaptureImgUrl({
+        ...recordVideoTime,
+        stoptTime: video.currentTime,
+      });
 
       setIsOnClickRecordBtn(false);
       console.log(isOnClickRecordBtn);
     } else {
-      recorder.ondataavailable = (event) => data.push(event.data);
-      recorder.start();
-
-      let data = [];
+      //recorder.ondataavailable = event => setData(event.data);
+      //recorder.start();
+      setCaptureImgUrl({
+        ...recordVideoTime,
+        startTime: video.currentTime,
+      });
+      
       setIsOnClickRecordBtn(true);
       console.log(isOnClickRecordBtn);
     }
@@ -213,6 +224,7 @@ const EditorController = (props) => {
           <span className={`${styles[`video-document-editor-text`]}`}>Download</span>
         </div>
       </div>
+      <video id="testVideo" src="../../slid_video.mp4#t=${recordVideoTime.startTime},${recordVideoTime.stopTime}"></video>
     </div>
   );
 };
