@@ -38,22 +38,10 @@ export const EDITOR_JS_TOOLS = {
     class: Marker,
     shortcut: "CMD+SHIFT+M",
   },
-  nestedList_unordered: {
+  nestedList: {
     class: NestedList,
-    data: {
-      style: "unordered",
-    },
-    style: "unordered",
     inlineToolbar: false,
     shortcut: "CMD+SHIFT+L",
-  },
-  nestedList_ordered: {
-    class: NestedList,
-    data: {
-      style: "ordered",
-    },
-    style: "ordered",
-    inlineToolbar: false,
   },
   image: {
     class: SimpleImage,

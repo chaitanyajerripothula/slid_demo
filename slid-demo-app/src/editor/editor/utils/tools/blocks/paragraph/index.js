@@ -86,9 +86,9 @@ class Paragraph {
     if (textContent === "```") {
       this.convertBlock(this.api.blocks.getCurrentBlockIndex(), "codeTool", {});
     } else if (textContent === "- ") {
-      this.convertBlock(this.api.blocks.getCurrentBlockIndex(), "nestedList_unordered", { style: "unordered" });
+      this.convertBlock(this.api.blocks.getCurrentBlockIndex(), "nestedList", { style: "unordered" });
     } else if (textContent === "1. ") {
-      this.convertBlock(this.api.blocks.getCurrentBlockIndex(), "nestedList_ordered", { style: "ordered" });
+      this.convertBlock(this.api.blocks.getCurrentBlockIndex(), "nestedList", { style: "ordered" });
     } else if (textContent === "# ") {
       this.convertBlock(this.api.blocks.getCurrentBlockIndex(), "header", {});
     } else if (textContent === "[] ") {
