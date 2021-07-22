@@ -10,7 +10,6 @@ class Editor extends React.PureComponent {
   componentRef = React.createRef();
   noteSavingTimeoutId = 1;
   ceBlocks = document.getElementsByClassName("ce-block");
-  //ceFocusedBlock = document.getElementsByClassName("ce-block--focused";
 
   constructor(props) {
     super(props);
@@ -22,7 +21,7 @@ class Editor extends React.PureComponent {
     };
   }
 
-  async componentDidMount() { }
+  async componentDidMount() {}
 
   handleAddListener = () => {
     for (let index = 0; index < this.ceBlocks.length; index++) {
