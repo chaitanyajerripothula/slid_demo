@@ -102,7 +102,6 @@ class Editor extends React.PureComponent {
 
 
   handleSetAutoFormatActive = (isAutoFormatActive) => {
-    console.log(`0. ${isAutoFormatActive}`)
     this.setState({ isAutoFormatActive: isAutoFormatActive ? isAutoFormatActive : true });
   };
 
@@ -112,7 +111,7 @@ class Editor extends React.PureComponent {
 
 
   render() {
-    let { fontSize, isSaving, isAutoFormatActive } = this.state;
+    let { fontSize, isSaving } = this.state;
     const { width, lang, isMacOs } = this.props;
     this.handleAddListener();
 
