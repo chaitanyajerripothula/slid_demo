@@ -32,13 +32,10 @@ const EditorController = (props) => {
   const [open, setOpen] = useState(false);
   const [fontSize, setFontSize] = useState("small");
   const [isOnClickRecordBtn, setIsOnClickRecordBtn] = useState(false);
-  const [recordVideoTime, setRecordVideoTime] = useState({
-    startTime: 0,
-    stopTime: 0,
-  });
   const [recorder, setRecorder] = useState("");
   const videos = document.getElementsByTagName("video");
   const video = videos[0];
+  const [data, setData] = useState();
 
   useEffect(() => {
     props.handleSetFontSize(fontSize);
@@ -66,27 +63,25 @@ const EditorController = (props) => {
 
   const onClickRecordVideoBtn = () => {
     if (isOnClickRecordBtn) {
-      //recorder.stop();
-      //console.log(URL.createObjectURL(new Blob(data)));
-      setCaptureImgUrl({
-        ...recordVideoTime,
-        stoptTime: video.currentTime,
-      });
+      recorder.stop();
 
       setIsOnClickRecordBtn(false);
       console.log(isOnClickRecordBtn);
     } else {
-      //recorder.ondataavailable = event => setData(event.data);
-      //recorder.start();
-      setCaptureImgUrl({
-        ...recordVideoTime,
-        startTime: video.currentTime,
-      });
+      recorder.ondataavailable = event => setData(event.data);
       
+      recorder.start();
+
       setIsOnClickRecordBtn(true);
       console.log(isOnClickRecordBtn);
     }
   };
+
+  const submitVideo = () => {
+    console.log(data);
+    console.log(URL.createObjectURL(data));
+    //console.log(URL.createObjectURL(new Blob(data, { type: "video/webm" })));
+  }
 
   const captureOneClick = () => {
     setIsCapturingOneClick(true);
@@ -224,7 +219,8 @@ const EditorController = (props) => {
           <span className={`${styles[`video-document-editor-text`]}`}>Download</span>
         </div>
       </div>
-      <video id="testVideo" src="../../slid_video.mp4#t=${recordVideoTime.startTime},${recordVideoTime.stopTime}"></video>
+      <video id="testVideo"></video>
+      <button onClick={submitVideo}>결과확인</button>
     </div>
   );
 };
