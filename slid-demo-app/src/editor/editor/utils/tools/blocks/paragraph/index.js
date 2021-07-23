@@ -78,12 +78,11 @@ class Paragraph {
 
   // auto format by markdown syntax
   onInput(e) {
-    console.log("checkIsAutoFormatActive", this.config.checkIsAutoFormatActive());
-    if (!this.config.checkIsAutoFormatActive()) {
-      console.log("return!");
+    const checkedAutoFormat = this.config.checkIsAutoFormatActive() === "false" ? false : true;
+
+    if (!checkedAutoFormat) {
       return;
     }
-    console.log("convert!");
 
     const { textContent } = this._element;
 
