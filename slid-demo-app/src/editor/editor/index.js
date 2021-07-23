@@ -147,6 +147,7 @@ class Editor extends React.PureComponent {
           editorWidth={width}
           lang={lang}
           isMacOs={isMacOs}
+          currentContent={this.editorInstance}
         />
       </div>
     );

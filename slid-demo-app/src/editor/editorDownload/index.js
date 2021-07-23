@@ -5,9 +5,12 @@ import wordFileImg from "../../design/assets/slid_download_word_icon.png";
 import pngFileImg from "../../design/assets/slid_download_png_icon.png";
 import markdownFileImg from "../../design/assets/slid_download_markdown_icon.png";
 import { useReactToPrint } from "react-to-print";
+import { exportToWord } from "../editor/utils/download";
 
 const EditorDownload = (props) => {
-  const { componentRef } = props;
+  const { componentRef, currentContent } = props;
+
+  console.log(`this editor : ${props.currentContent.blocks.getBlocksCount()}`);
   const renderPdfPrint = useReactToPrint({
     content: () => componentRef.current,
   });
@@ -19,7 +22,13 @@ const EditorDownload = (props) => {
         <img src={pdfFileImg} className={`${styles[`editor-download-type-icon`]}`} />
         PDF
       </a>
-      <a className={`${styles[`editor-download-container-item`]}`} href="#">
+      <a
+        className={`${styles[`editor-download-container-item`]}`}
+        href="#"
+        onClick={() => {
+          exportToWord({ currentContent: currentContent, title: "testTitle" });
+        }}
+      >
         <img src={wordFileImg} className={`${styles[`editor-download-type-icon`]}`} />
         Word
       </a>

@@ -29,6 +29,7 @@ const EditorController = (props) => {
     editorWidth,
     lang,
     isMacOs,
+    currentContent,
   } = props;
   const [isOpenEditorSetting, setOpenEditorSetting] = useState(false);
   const [isOpenEditorDownload, setOpenEditorDownload] = useState(false);
@@ -37,10 +38,6 @@ const EditorController = (props) => {
   useEffect(() => {
     props.handleSetFontSize(fontSize);
   }, [fontSize]);
-
-  // const renderPdfPrint = useReactToPrint({
-  //   content: () => componentRef.current,
-  // });
 
   const insertImage = useCallback(() => {
     props.handleInsertImage();
@@ -112,7 +109,7 @@ const EditorController = (props) => {
   return (
     <div className={`${styles[`container`]}`}>
       {isOpenEditorSetting ? <EditorSetting setFontSize={setFontSize} fontSize={fontSize} /> : null}
-      {isOpenEditorDownload ? <EditorDownload componentRef={componentRef} /> : null}
+      {isOpenEditorDownload ? <EditorDownload componentRef={componentRef} currentContent={currentContent} /> : null}
       {editorWidth > 400 ? null : (
         <div className={`${styles[`video-document-editor-setting-popup`]}`}>
           <OverlayTrigger defaultShow={false} placement={"top"} overlay={<Tooltip>{lang === "ko-KR" ? "영역 지정" : "Set capture area"}</Tooltip>}>
