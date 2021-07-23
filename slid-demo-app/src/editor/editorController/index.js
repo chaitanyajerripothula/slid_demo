@@ -12,6 +12,7 @@ import { useReactToPrint } from "react-to-print";
 import EditorSetting from "../editorSetting";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import Swal from "sweetalert2";
+import EditorDownload from "../editorDownload";
 
 const EditorController = (props) => {
   const {
@@ -29,7 +30,8 @@ const EditorController = (props) => {
     lang,
     isMacOs,
   } = props;
-  const [open, setOpen] = useState(false);
+  const [isOpenEditorSetting, setOpenEditorSetting] = useState(false);
+  const [isOpenEditorDownload, setOpenEditorDownload] = useState(false);
   const [fontSize, setFontSize] = useState("small");
 
   useEffect(() => {
@@ -44,9 +46,13 @@ const EditorController = (props) => {
     props.handleInsertImage();
   }, []);
 
-  const openEditorSetting = useCallback(() => {
-    setOpen(!open);
-  }, [open]);
+  const showEditorSettingComponent = useCallback(() => {
+    setOpenEditorSetting(!isOpenEditorSetting);
+  }, [isOpenEditorSetting]);
+
+  const showEditorDownloadComponent = useCallback(() => {
+    setOpenEditorDownload(!isOpenEditorDownload);
+  }, [isOpenEditorDownload]);
 
   const onClickRecordVideoBtn = () => {
     Swal.fire({
@@ -105,7 +111,8 @@ const EditorController = (props) => {
 
   return (
     <div className={`${styles[`container`]}`}>
-      {open ? <EditorSetting setFontSize={setFontSize} fontSize={fontSize} /> : null}
+      {isOpenEditorDownload ? <EditorDownload /> : null}
+      {isOpenEditorSetting ? <EditorSetting setFontSize={setFontSize} fontSize={fontSize} /> : null}
       {editorWidth > 400 ? null : (
         <div className={`${styles[`video-document-editor-setting-popup`]}`}>
           <OverlayTrigger defaultShow={false} placement={"top"} overlay={<Tooltip>{lang === "ko-KR" ? "영역 지정" : "Set capture area"}</Tooltip>}>
@@ -139,7 +146,7 @@ const EditorController = (props) => {
             }}
           />
         </div>
-        <div className={`${styles[`video-document-editor-setting-container`]}`} onClick={openEditorSetting}>
+        <div className={`${styles[`video-document-editor-setting-container`]}`} onClick={showEditorSettingComponent}>
           <img className={`${styles[`video-document-editor-setting-icon`]}`} src={settingImg} alt="settingImage" />
           <span className={`${styles[`video-document-editor-text`]}`}>Editor Setting</span>
         </div>
@@ -193,7 +200,7 @@ const EditorController = (props) => {
           <img className={`${styles[`video-document-editor-save-icon`]}`} src={saveImg} alt="saveImage" />
           <span className={`${styles[`video-document-editor-text`]}`}>{isSaving ? (lang === "ko-KR" ? "저장 완료" : "Auto Saved") : lang === "ko-KR" ? "자동 저장 중..." : "Saving..."}</span>
         </div>
-        <div className={`${styles[`video-document-editor-download-container`]}`} onClick={renderPdfPrint}>
+        <div className={`${styles[`video-document-editor-download-container`]}`} onClick={showEditorDownloadComponent}>
           <img className={`${styles[`video-document-editor-download-icon`]}`} src={downloadImg} alt="downloadImage" />
           <span className={`${styles[`video-document-editor-text`]}`}>Download</span>
         </div>

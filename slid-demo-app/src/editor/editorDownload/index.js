@@ -1,12 +1,7 @@
-import React from 'react';
-
+import React from "react";
+import styles from "./editorDownload.module.css";
 const EditorDownload = () => {
-
-    return(
-        <div>
-            download!!
-        </div>
-    );
+  return <div className={`${styles[`editor-download-container`]}`}>download!!</div>;
 };
 
 export default EditorDownload;

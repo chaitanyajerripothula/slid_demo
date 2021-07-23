@@ -1,0 +1,16 @@
+.editor-download-container {
+  position: absolute;
+  width: 284px;
+  height: 108px;
+  background: #ffffff;
+  border-radius: 5px !important;
+  padding: 24px 27px;
+  margin: 0 0 2px 2px;
+  right: 1px;
+  transform: translate(0px, -76px);
+  insert: auto auto 0px 0px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  box-sizing: border-box;
+  cursor: auto;
+  z-index: 1000;
+}
