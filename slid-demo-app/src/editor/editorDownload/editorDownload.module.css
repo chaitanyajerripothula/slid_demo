@@ -30,8 +30,16 @@
   border-top: 1px solid #f2f2f2;
   cursor: pointer;
   padding: 10px 5px;
+  font-weight: 400;
+  color: #212529;
+  text-align: inherit;
+  white-space: nowrap;
+  background-color: transparent;
+}
+
+.editor-download-container-item:hover {
   text-decoration: none;
-  color: #000000;
+  color: #212529;
 }
 
 .editor-download-container-item:first-of-type {
@@ -39,7 +47,7 @@
   margin-top: 10px;
 }
 .editor-download-container-item:hover {
-  background: #f2f2f2;
+  background: #f2f2f280;
 }
 
 .editor-download-type-icon {
