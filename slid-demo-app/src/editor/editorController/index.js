@@ -41,10 +41,12 @@ const EditorController = (props) => {
     props.handleSetFontSize(fontSize);
   }, [fontSize]);
 
+
   useEffect(() => {
     if (video != undefined) {
       const stream = video.captureStream();
-      const options = {mimeType: 'video/webm'};
+      const options = {mimeType: 'video/webm;codecs=vp9,opus'};
+      //videoBitsPerSecond
       setRecorder(new MediaRecorder(stream, options));
     }
   }, [video]);
@@ -57,6 +59,14 @@ const EditorController = (props) => {
     props.handleInsertImage();
   }, []);
 
+  const insertVideo = useCallback(() => {
+    props.handleInsertVideo();
+  }, []);
+
+  const insertVideoLoader = useCallback(() => {
+    props.handleInsertVideoLoader();
+  })
+
   const openEditorSetting = useCallback(() => {
     setOpen(!open);
   }, [open]);
@@ -64,13 +74,18 @@ const EditorController = (props) => {
   const onClickRecordVideoBtn = () => {
     if (isOnClickRecordBtn) {
       recorder.stop();
+      insertVideo();
 
       setIsOnClickRecordBtn(false);
       console.log(isOnClickRecordBtn);
     } else {
-      recorder.ondataavailable = event => setData(event.data);
-      
+      recorder.ondataavailable = event => { 
+        console.log(event.data);
+        setData(event.data)
+      };
       recorder.start();
+
+      insertVideoLoader();
 
       setIsOnClickRecordBtn(true);
       console.log(isOnClickRecordBtn);
@@ -80,12 +95,20 @@ const EditorController = (props) => {
   const submitVideo = () => {
     console.log(data);
     console.log(URL.createObjectURL(data));
-    //console.log(URL.createObjectURL(new Blob(data, { type: "video/webm" })));
+    const recordVideoUrl = URL.createObjectURL(new Blob([data], { type: "video/webm" }));
+    console.log(URL.createObjectURL(new Blob([data], { type: "video/webm" })));
+    var a = document.createElement("a");
+    document.body.appendChild(a);
+    a.href = recordVideoUrl;
+    a.download = "test.webm";
+    a.click();
+    //video.url = recordVideoUrl;
   }
 
   const captureOneClick = () => {
     setIsCapturingOneClick(true);
   };
+
   useEffect(() => {
     if (captureImgUrl !== "" && isCapturingOneClick === false) {
       insertImage();
@@ -194,7 +217,6 @@ const EditorController = (props) => {
             className={`${styles[`video-document-editor-capture-btn`]} btn btn-primary`}
             onClick={() => {
               captureOneClick();
-              //setTimeout(insertImage, 10);
             }}
           >
             <img className={`${styles[`video-document-editor-capture-icon`]}`} src={captureImg} alt="captureImage" />
@@ -219,7 +241,6 @@ const EditorController = (props) => {
           <span className={`${styles[`video-document-editor-text`]}`}>Download</span>
         </div>
       </div>
-      <video id="testVideo"></video>
       <button onClick={submitVideo}>결과확인</button>
     </div>
   );
