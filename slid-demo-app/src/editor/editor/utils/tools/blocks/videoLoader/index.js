@@ -21,7 +21,7 @@ class VideoLoader {
     const loaderHeader = document.createElement("div");
     loaderHeader.className = "loader-header";
     const loaderRedDotIcon = document.createElement("img");
-    loaderRedDotIcon.src = "/src/design/assets/slid_recording_loader_red_icon.png";
+    loaderRedDotIcon.src = "../../../../../../../design/assets/slid_recording_loader_red_icon.png";
     const loaderHeaderText = document.createElement("span");
     loaderHeaderText.innerText = " Recording..";
     loaderHeader.append(loaderRedDotIcon, loaderHeaderText);
@@ -31,10 +31,7 @@ class VideoLoader {
     const loaderCountdownText = document.createElement("span");
     this.countdownNumber = 0;
     loaderCountdownText.innerText = `${this.countdownNumber} sec`;
-    const loaderAdditionalText = document.createElement("span");
-    loaderAdditionalText.className = "loader-body-additional-text";
-    loaderAdditionalText.innerText = ` (max ${this.data.clipRecordingMaxCountdownNumber})`;
-    loaderBody.append(loaderCountdownText, loaderAdditionalText);
+    loaderBody.append(loaderCountdownText);
 
     loaderPlaceHolder.append(loaderHeader, loaderBody);
     loader.append(loaderPlaceHolder);

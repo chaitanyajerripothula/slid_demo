@@ -69,9 +69,9 @@ class Editor extends React.PureComponent {
 
   handleInsertVideoLoader = () => {
     if (this.editorInstance.blocks.getCurrentBlockIndex() === -1) {
-      this.editorInstance.blocks.insert("videoLoader", {}, this.state["lastFocusedBlockIndex"] + 1, true);
+      this.editorInstance.blocks.insert("videoLoader", {}, {}, this.state["lastFocusedBlockIndex"] + 1, true);
     } else {
-      this.editorInstance.blocks.insert("videoLoader", {}, this.editorInstance.blocks.getCurrentBlockIndex() + 1, true);
+      this.editorInstance.blocks.insert("videoLoader", {}, {}, this.editorInstance.blocks.getCurrentBlockIndex() + 1, true);
     }
   };
 
@@ -120,6 +120,12 @@ class Editor extends React.PureComponent {
   render() {
     let { fontSize, isSaving } = this.state;
     const { width, lang, isMacOs } = this.props;
+
+    EDITOR_JS_TOOLS.videoLoader.config = {
+      onClickLoader: () => {
+        //this.props.setEditorLastActiveBlockPosition(this.editorInstance.blocks.getCurrentBlockIndex());
+      },
+    };
 
     this.handleAddListener();
     return (

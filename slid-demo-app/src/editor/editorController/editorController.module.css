@@ -7,7 +7,7 @@
   box-shadow: 0 -5px 10px hsl(0, 0%, 97%);
   position: absolute;
   width: 100%;
-  bottom : 0;
+  bottom: 0;
 }
 
 .video-document-editor-left-wrapper {
@@ -138,6 +138,20 @@
 .video-document-editor-recording-icon {
   width: 30px;
   height: auto;
+}
+
+.video-document-editor-record-active {
+  width: 30px;
+  height: auto;
+  -webkit-filter: invert(28%) sepia(96%) saturate(6474%) hue-rotate(355deg) brightness(94%) contrast(121%);
+  filter: invert(28%) sepia(96%) saturate(6474%) hue-rotate(355deg) brightness(94%) contrast(121%);
+  animation: blink 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
 }
 
 .video-document-editor-setting-popup {

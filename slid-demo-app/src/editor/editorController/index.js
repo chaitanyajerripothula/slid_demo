@@ -35,20 +35,11 @@ const EditorController = (props) => {
   const [recorder, setRecorder] = useState("");
   const videos = document.getElementsByTagName("video");
   const video = videos[0];
-  const [data, setData] = useState();
+  const [data, setData] = useState("");
 
   useEffect(() => {
     props.handleSetFontSize(fontSize);
   }, [fontSize]);
-
-  useEffect(() => {
-    if (video != undefined) {
-      const stream = video.captureStream();
-      const options = { mimeType: "video/webm;codecs=vp9,opus" };
-      //videoBitsPerSecond
-      setRecorder(new MediaRecorder(stream, options));
-    }
-  }, [video]);
 
   const renderPdfPrint = useReactToPrint({
     content: () => componentRef.current,
@@ -58,53 +49,9 @@ const EditorController = (props) => {
     props.handleInsertImage();
   }, []);
 
-  const insertVideo = useCallback(() => {
-    const recordVideoUrl = URL.createObjectURL(new Blob([data], { type: "video/webm" }));
-    // var a = document.createElement("a");
-    // document.body.appendChild(a);
-    // a.href = recordVideoUrl;
-    // a.download = "test.webm";
-    // a.click();
-    props.handleInsertVideo(recordVideoUrl);
-  }, []);
-
-  const insertVideoLoader = useCallback(() => {
-    props.handleInsertVideoLoader();
-  });
-
   const openEditorSetting = useCallback(() => {
     setOpen(!open);
   }, [open]);
-
-  const onClickRecordVideoBtn = () => {
-    if (isOnClickRecordBtn) {
-      recorder.stop();
-      insertVideo();
-
-      setIsOnClickRecordBtn(false);
-      console.log(isOnClickRecordBtn);
-    } else {
-      recorder.ondataavailable = (event) => {
-        console.log(event.data);
-        setData(event.data);
-      };
-      recorder.start();
-
-      insertVideoLoader();
-
-      setIsOnClickRecordBtn(true);
-      console.log(isOnClickRecordBtn);
-    }
-  };
-
-  const submitVideo = () => {
-    const recordVideoUrl = URL.createObjectURL(new Blob([data], { type: "video/webm" }));
-    // var a = document.createElement("a");
-    // document.body.appendChild(a);
-    // a.href = recordVideoUrl;
-    // a.download = "test.webm";
-    // a.click();
-  };
 
   const captureOneClick = () => {
     setIsCapturingOneClick(true);
@@ -115,6 +62,54 @@ const EditorController = (props) => {
       insertImage();
     }
   }, [isCapturingOneClick]);
+
+  useEffect(() => {
+    if (video !== undefined) {
+      const stream = video.captureStream();
+      const options = {
+        mimeType: "video/webm;codecs=vp9,opus",
+        videoBitsPerSecond: 20000,
+      };
+      setRecorder(new MediaRecorder(stream, options));
+    }
+  }, [video]);
+
+  useEffect(() => {
+    if (data !== "") {
+      const recordVideoUrl = URL.createObjectURL(new Blob([data], { type: "video/webm" }));
+      props.handleInsertVideo(recordVideoUrl);
+    }
+  }, [data]);
+
+  const insertVideoLoader = useCallback(() => {
+    props.handleInsertVideoLoader();
+  });
+
+  const onClickRecordVideoBtn = () => {
+    if (video.paused) {
+      Swal.fire({
+        target: document.getElementById("toast-container"),
+        title: "영상을 재생해주세요!",
+        html: `<p>영상이 멈춰있는 상태에서는 녹화할 수 없습니다.</p>`,
+        position: "center",
+        confirmButtonText: "확인",
+        icon: "info",
+        confirmButtonColor: "#2778c4",
+        heightAuto: false,
+      }).then(() => {});
+    } else {
+      if (isOnClickRecordBtn) {
+        recorder.stop();
+        setIsOnClickRecordBtn(false);
+      } else {
+        recorder.ondataavailable = (event) => setData(event.data);
+        recorder.start();
+
+        insertVideoLoader();
+        setIsOnClickRecordBtn(true);
+      }
+    }
+  };
 
   const onClickAreaSelectBtn = () => {
     setShowSelectAreaCanvas(true);
@@ -160,7 +155,12 @@ const EditorController = (props) => {
           </OverlayTrigger>
           <OverlayTrigger defaultShow={false} placement={"top"} overlay={<Tooltip>{lang === "ko-KR" ? "클립 녹화" : "Clip recording"} </Tooltip>}>
             <button className={`${styles[`video-document-editor-capture-option-btn`]} btn btn-light`} onClick={onClickRecordVideoBtn}>
-              <img className={`${styles[`video-document-editor-recording-icon`]}`} src={recordingImg} alt="recordingImg" />
+              {isOnClickRecordBtn ? (
+                <img className={`${styles[`video-document-editor-record-active`]}`} src={recordingImg} alt="recordingImg" />
+              ) : (
+                <img className={`${styles[`video-document-editor-recording-icon`]}`} src={recordingImg} alt="recordingImg" />
+              )}
+              ;
             </button>
           </OverlayTrigger>
         </div>
@@ -227,7 +227,11 @@ const EditorController = (props) => {
         {editorWidth > 400 ? (
           <OverlayTrigger defaultShow={false} placement={"top"} overlay={<Tooltip>{lang === "ko-KR" ? "클립 녹화" : "Clip recording"} </Tooltip>}>
             <button className={`${styles[`video-document-editor-capture-option-btn`]} btn btn-light`} onClick={onClickRecordVideoBtn}>
-              <img className={`${styles[`video-document-editor-recording-icon`]}`} src={recordingImg} alt="recordingImg" />
+              {isOnClickRecordBtn ? (
+                <img className={`${styles[`video-document-editor-record-active`]}`} src={recordingImg} alt="recordingImg" />
+              ) : (
+                <img className={`${styles[`video-document-editor-recording-icon`]}`} src={recordingImg} alt="recordingImg" />
+              )}
             </button>
           </OverlayTrigger>
         ) : null}
@@ -242,7 +246,6 @@ const EditorController = (props) => {
           <span className={`${styles[`video-document-editor-text`]}`}>Download</span>
         </div>
       </div>
-      <button onClick={submitVideo}>결과확인</button>
     </div>
   );
 };
