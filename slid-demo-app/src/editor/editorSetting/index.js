@@ -9,9 +9,8 @@ const FONT_SIZE_OPTIONS = [
 
 const AUTO_FORMAT_ACTIVE_OPTIONS = [
   { key: "On", value: true },
-  { key: "Off", value: false }
+  { key: "Off", value: false },
 ];
-
 
 const EditorSetting = (props) => {
   const [fontOptionValue, setFontOptionValue] = useState(props.fontSize);

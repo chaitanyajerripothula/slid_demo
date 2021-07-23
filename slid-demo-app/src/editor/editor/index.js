@@ -22,7 +22,7 @@ class Editor extends React.PureComponent {
     };
   }
 
-  async componentDidMount() { }
+  async componentDidMount() {}
 
   handleAddListener = () => {
     for (let index = 0; index < this.ceBlocks.length; index++) {
@@ -100,15 +100,14 @@ class Editor extends React.PureComponent {
     this.setState({ fontSize: size ? size : "small" });
   };
 
-
   handleSetAutoFormatActive = (isAutoFormatActive) => {
     this.setState({ isAutoFormatActive: isAutoFormatActive ? isAutoFormatActive : true });
   };
 
   checkIsAutoFormatActive() {
+    console.log(this.state["isAutoFormatActive"]);
     return this.state["isAutoFormatActive"];
   }
-
 
   render() {
     let { fontSize, isSaving } = this.state;
