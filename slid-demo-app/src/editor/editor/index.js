@@ -8,8 +8,10 @@ import EditorHeader from "../editorHeader";
 
 class Editor extends React.PureComponent {
   componentRef = React.createRef();
+  editorContainerRef = React.createRef();
   noteSavingTimeoutId = 1;
   ceBlocks = document.getElementsByClassName("ce-block");
+  editorContainer = document.querySelector("#editor-container");
 
   constructor(props) {
     super(props);
@@ -55,13 +57,14 @@ class Editor extends React.PureComponent {
     } else {
       this.editorInstance.blocks.insert("image", { url: this.props.captureImgUrl }, {}, this.editorInstance.blocks.getCurrentBlockIndex() + 1, true);
     }
+    this.editorContainerRef.current.scrollTop = this.editorContainerRef.current.scrollHeight;
   };
 
   handleCheckEditorBlockCount = () => {
     if (this.editorInstance.blocks.getBlocksCount() === 0) {
       this.editorInstance.blocks.insert(
         "paragraph",
-        {
+        ~{
           text: "",
         },
         {},
@@ -107,7 +110,7 @@ class Editor extends React.PureComponent {
     return (
       <div className={`${styles[`container`]}`}>
         <EditorHeader />
-        <div className={`${styles[`editor-container`]} ${styles[`font-${fontSize}`]}`} >
+        <div ref={this.editorContainerRef} className={`${styles[`editor-container`]} ${styles[`font-${fontSize}`]}`}>
           <h1 className={`${styles[`font-${fontSize}`]}`}>
             <input
               className={`${styles[`input-title`]}`}
