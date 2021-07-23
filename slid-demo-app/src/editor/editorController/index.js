@@ -41,11 +41,10 @@ const EditorController = (props) => {
     props.handleSetFontSize(fontSize);
   }, [fontSize]);
 
-
   useEffect(() => {
     if (video != undefined) {
       const stream = video.captureStream();
-      const options = {mimeType: 'video/webm;codecs=vp9,opus'};
+      const options = { mimeType: "video/webm;codecs=vp9,opus" };
       //videoBitsPerSecond
       setRecorder(new MediaRecorder(stream, options));
     }
@@ -60,12 +59,18 @@ const EditorController = (props) => {
   }, []);
 
   const insertVideo = useCallback(() => {
-    props.handleInsertVideo();
+    const recordVideoUrl = URL.createObjectURL(new Blob([data], { type: "video/webm" }));
+    // var a = document.createElement("a");
+    // document.body.appendChild(a);
+    // a.href = recordVideoUrl;
+    // a.download = "test.webm";
+    // a.click();
+    props.handleInsertVideo(recordVideoUrl);
   }, []);
 
   const insertVideoLoader = useCallback(() => {
     props.handleInsertVideoLoader();
-  })
+  });
 
   const openEditorSetting = useCallback(() => {
     setOpen(!open);
@@ -79,9 +84,9 @@ const EditorController = (props) => {
       setIsOnClickRecordBtn(false);
       console.log(isOnClickRecordBtn);
     } else {
-      recorder.ondataavailable = event => { 
+      recorder.ondataavailable = (event) => {
         console.log(event.data);
-        setData(event.data)
+        setData(event.data);
       };
       recorder.start();
 
@@ -93,17 +98,13 @@ const EditorController = (props) => {
   };
 
   const submitVideo = () => {
-    console.log(data);
-    console.log(URL.createObjectURL(data));
     const recordVideoUrl = URL.createObjectURL(new Blob([data], { type: "video/webm" }));
-    console.log(URL.createObjectURL(new Blob([data], { type: "video/webm" })));
-    var a = document.createElement("a");
-    document.body.appendChild(a);
-    a.href = recordVideoUrl;
-    a.download = "test.webm";
-    a.click();
-    //video.url = recordVideoUrl;
-  }
+    // var a = document.createElement("a");
+    // document.body.appendChild(a);
+    // a.href = recordVideoUrl;
+    // a.download = "test.webm";
+    // a.click();
+  };
 
   const captureOneClick = () => {
     setIsCapturingOneClick(true);

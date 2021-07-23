@@ -57,15 +57,15 @@ class Editor extends React.PureComponent {
     }
   };
 
-  handleInsertVideo = () => {
+  handleInsertVideo = (recordVideoUrl) => {
     this.editorInstance.blocks.delete();
 
     if (this.editorInstance.blocks.getCurrentBlockIndex() === -1) {
-      this.editorInstance.blocks.insert("video", { url: "../../../slid_video.mp4" }, {}, this.state["lastFocusedBlockIndex"] + 1, true);
+      this.editorInstance.blocks.insert("video", { url: recordVideoUrl }, {}, this.state["lastFocusedBlockIndex"] + 1, true);
     } else {
-      this.editorInstance.blocks.insert("video", { url: "../../../slid_video.mp4"  }, {}, this.editorInstance.blocks.getCurrentBlockIndex() + 1, true);
+      this.editorInstance.blocks.insert("video", { url: recordVideoUrl }, {}, this.editorInstance.blocks.getCurrentBlockIndex() + 1, true);
     }
-  }
+  };
 
   handleInsertVideoLoader = () => {
     if (this.editorInstance.blocks.getCurrentBlockIndex() === -1) {
@@ -73,7 +73,7 @@ class Editor extends React.PureComponent {
     } else {
       this.editorInstance.blocks.insert("videoLoader", {}, this.editorInstance.blocks.getCurrentBlockIndex() + 1, true);
     }
-  }
+  };
 
   handleCheckEditorBlockCount = () => {
     if (this.editorInstance.blocks.getBlocksCount() === 0) {
