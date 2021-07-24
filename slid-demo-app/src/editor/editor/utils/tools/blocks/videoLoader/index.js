@@ -8,6 +8,8 @@ class VideoLoader {
     this.config = config;
 
     this.countdownNumber = 1;
+
+    this.blockIndex = this.api.blocks.getCurrentBlockIndex();
   }
 
   render() {
@@ -43,9 +45,9 @@ class VideoLoader {
       if (this.countdownNumber === this.data.clipRecordingMaxCountdownNumber) clearInterval(countdownId);
     }, 1000);
 
-    loader.addEventListener("click", () => {
-      this.config.onClickLoader();
-    });
+    // loader.addEventListener("click", () => {
+    //   this.config.onClickLoader();
+    // });
 
     return loader;
   }

@@ -68,7 +68,8 @@ const EditorController = (props) => {
       const stream = video.captureStream();
       const options = {
         mimeType: "video/webm;codecs=vp9,opus",
-        videoBitsPerSecond: 20000,
+        videoBitsPerSecond: 2400000,
+        //bitsPerSecond: 1000,
       };
       setRecorder(new MediaRecorder(stream, options));
     }

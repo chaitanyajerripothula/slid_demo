@@ -10,6 +10,7 @@ class Editor extends React.PureComponent {
   componentRef = React.createRef();
   noteSavingTimeoutId = 1;
   ceBlocks = document.getElementsByClassName("ce-block");
+  loader = document.getElementsByClassName("loader-placeholder");
 
   constructor(props) {
     super(props);
@@ -58,7 +59,7 @@ class Editor extends React.PureComponent {
   };
 
   handleInsertVideo = (recordVideoUrl) => {
-    this.editorInstance.blocks.delete();
+    this.editorInstance.blocks.delete(this.state["lastFocusedBlockIndex"]);
 
     if (this.editorInstance.blocks.getCurrentBlockIndex() === -1) {
       this.editorInstance.blocks.insert("video", { url: recordVideoUrl }, {}, this.state["lastFocusedBlockIndex"] + 1, true);
@@ -121,11 +122,7 @@ class Editor extends React.PureComponent {
     let { fontSize, isSaving } = this.state;
     const { width, lang, isMacOs } = this.props;
 
-    EDITOR_JS_TOOLS.videoLoader.config = {
-      onClickLoader: () => {
-        //this.props.setEditorLastActiveBlockPosition(this.editorInstance.blocks.getCurrentBlockIndex());
-      },
-    };
+    //EDITOR_JS_TOOLS.videoLoader.config = {};
 
     this.handleAddListener();
     return (
