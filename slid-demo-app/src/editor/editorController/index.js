@@ -32,10 +32,11 @@ const EditorController = (props) => {
   const [open, setOpen] = useState(false);
   const [fontSize, setFontSize] = useState("small");
   const [isOnClickRecordBtn, setIsOnClickRecordBtn] = useState(false);
+  const [stream, setStream] = useState("");
   const [recorder, setRecorder] = useState("");
+  const [data, setData] = useState("");
   const videos = document.getElementsByTagName("video");
   const video = videos[0];
-  const [data, setData] = useState("");
 
   useEffect(() => {
     props.handleSetFontSize(fontSize);
@@ -71,9 +72,16 @@ const EditorController = (props) => {
         videoBitsPerSecond: 2400000,
         //bitsPerSecond: 1000,
       };
+      setStream(stream);
       setRecorder(new MediaRecorder(stream, options));
     }
   }, [video]);
+
+  useEffect(() => {
+    if (recorder.state === "inactive") {
+      setIsOnClickRecordBtn(false);
+    }
+  }, [recorder.state]);
 
   useEffect(() => {
     if (data !== "") {
@@ -100,12 +108,13 @@ const EditorController = (props) => {
       }).then(() => {});
     } else {
       if (isOnClickRecordBtn) {
+        // stream.getVideoTracks().forEach(function (track) {
+        //   track.stop();
+        // });
         recorder.stop();
-        setIsOnClickRecordBtn(false);
       } else {
         recorder.ondataavailable = (event) => setData(event.data);
         recorder.start();
-
         insertVideoLoader();
         setIsOnClickRecordBtn(true);
       }
