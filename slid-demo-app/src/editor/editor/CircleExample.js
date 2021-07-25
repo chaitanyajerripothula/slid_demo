@@ -80,10 +80,37 @@ class CircleExample extends React.Component {
     });
 
     const colorArray = [
+      "rgba(255, 19, 0, 1)",
+      "rgba(236, 120, 120, 1)",
+      "rgba(156, 39, 176, 1)",
+      "rgba(103, 58, 183, 1)",
+      "rgba(63, 81, 181, 1)",
+      "rgba(0, 112, 255, 1)",
+      "rgba(3, 169, 244, 1)",
+      "rgba(0, 188, 212, 1)",
+      "rgba(76, 175, 80, 1)",
+      "rgba(139, 195, 74, 1)",
+      "rgba(205, 220, 57, 1)",
+      "rgba(255, 229, 0, 1)",
+      "rgba(255, 191, 0, 1)",
+      "rgba(255, 152, 0, 1)",
+      "rgba(121, 85, 72, 1)",
+      "rgba(158, 158, 158, 1)",
+      "rgba(90, 90, 90, 1)",
+      "rgba(33, 37, 41, 1)",
+    ];
+
+    const colorObjectArray = [
       {
         r: 255,
         g: 19,
         b: 0,
+        a: 1,
+      },
+      {
+        r: 236,
+        g: 120,
+        b: 120,
         a: 1,
       },
     ];
@@ -98,9 +125,9 @@ class CircleExample extends React.Component {
         {this.props.displayColorPicker ? (
           <SweetAlert title={"색상을 선택하세요"} onConfirm={this.onConfirm} showConfirm={false}>
             {this.props.highlightColorPicker ? (
-              <CirclePicker color={this.state.color} colors={[`rgba(255, 19, 0, 0.3)`, "rgba(236, 120, 120, 0.3)", "rgba(156, 39, 176, 0.3)"]} onChange={this.handleChange} />
+              <CirclePicker color={this.state.color} colors={["rgba(255, 19, 0, 0.3)", "rgba(236, 120, 120, 0.3)", "rgba(156, 39, 176, 0.3)"]} onChange={this.handleChange} />
             ) : (
-              <CirclePicker color={this.state.color} colors={[`rgba(255, 19, 0, 1)`, "rgba(236, 120, 120, 1)", "rgba(156, 39, 176, 1)"]} onChange={this.handleChange} />
+              <CirclePicker color={this.state.color} colors={colorArray} width="100%" onChange={this.handleChange} />
             )}
           </SweetAlert>
         ) : null}

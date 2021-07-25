@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Modal } from "react-bootstrap";
+import { Button, Modal } from "react-bootstrap";
 import styles from "./editor.module.css";
 import { fabric } from "fabric";
 import Swal from "sweetalert2";
@@ -16,6 +16,30 @@ const MarkupModal = (props) => {
   const [displayColorPicker, setDisplayColorPicker] = useState(false);
   const [highlightColorPicker, setHighlightColorPicker] = useState(false);
   const [color, setColor] = useState({ r: 255, g: 255, b: 255, a: 1 });
+  const [penWidthState, setPenWidthState] = useState("small");
+  const [cursorState, setCursorState] = useState("pen");
+
+  const [isRedoing, setIsRedoing] = useState(false);
+  let h = [];
+
+  const undo = () => {
+    if (markupCanvasRef.current._objects.length > 0) {
+      h.push(markupCanvasRef.current._objects.pop());
+      markupCanvasRef.current.renderAll();
+    }
+  };
+
+  const redo = () => {
+    if (h.length > 0) {
+      setIsRedoing(true);
+      markupCanvasRef.current.add(h.pop());
+    }
+  };
+
+  // useEffect(() => {
+  //   console.log(isRedoing);
+  //   console.log(markupCanvasRef.current._objects);
+  // }, [isRedoing]);
 
   useEffect(() => {
     if (markupModalOpen) {
@@ -38,13 +62,19 @@ const MarkupModal = (props) => {
         isDrawingMode: true,
         freeDrawingCursor: "url(../../../design/assets/slid_pen_cursor.png) 0 0, auto",
       });
+
+      markupCanvasRef.current.on("object:added", () => {
+        if (!isRedoing) {
+          h = [];
+        }
+        setIsRedoing(false);
+      });
+
       markupCanvasRef.current.freeDrawingBrush.color = `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`;
       markupCanvasRef.current.freeDrawingBrush.width = penWidth;
 
       // setMarkupCanvas(initCanvas());
       fabric.Object.prototype.transparentCorners = false;
-
-      // initCanvas();
     }
   }, [markupModalOpen]);
 
@@ -52,7 +82,12 @@ const MarkupModal = (props) => {
     console.log(color);
     console.log(penWidth);
     if (markupCanvasRef.current !== undefined) {
-      markupCanvasRef.current.freeDrawingBrush.width = penWidth;
+      // markupCanvasRef.current.freeDrawingBrush.width = penWidth;
+      if (cursorState === "highlighter") {
+        markupCanvasRef.current.freeDrawingBrush.width = penWidth * 3;
+      } else {
+        markupCanvasRef.current.freeDrawingBrush.width = penWidth;
+      }
       markupCanvasRef.current.freeDrawingBrush.color = `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`;
     }
   }, [color, penWidth]);
@@ -68,21 +103,13 @@ const MarkupModal = (props) => {
     // });
   };
 
-  const setOnClickListenerByClassName = () => {
-    let btns = document.getElementsByClassName("btn-cursor");
-    for (let i = 0; i < btns.length; i++) {
-      btns[i].addEventListener("click", () => {
-        this.addClass("active");
-      });
-    }
-  };
-
   useEffect(() => {
     console.log(highlightColorPicker);
   }, [highlightColorPicker]);
 
   const cursorClick = () => {
     console.log("cursorClick");
+    setCursorState("cursor");
     markupCanvasRef.current.isDrawingMode = false;
     // markupCanvasRef.current.freeDrawingCursor = "url(../../../design/assets/slid_cursor_icon.png) 0 0, auto";
     markupCanvasRef.current.defaultCursor = "url(../../../design/assets/slid_select_cursor.png) 0 0, auto";
@@ -90,6 +117,7 @@ const MarkupModal = (props) => {
 
   const penClick = () => {
     console.log("penClick");
+    setCursorState("pen");
     markupCanvasRef.current.isDrawingMode = true;
     markupCanvasRef.current.freeDrawingCursor = "url(../../../design/assets/slid_pen_cursor.png) 0 0, auto";
     setHighlightColorPicker(false);
@@ -97,21 +125,19 @@ const MarkupModal = (props) => {
       ...color,
       a: 1,
     });
-    // markupCanvasRef.current.freeDrawingBrush.color = `rgba(${color.r}, ${color.g}, ${color.b}, 1)`;
   };
 
   const highlightingClick = () => {
     console.log("highlightingClick");
+    setCursorState("highlighter");
+    console.log(markupCanvasRef.current.freeDrawingBrush.width);
     setHighlightColorPicker(true);
     markupCanvasRef.current.isDrawingMode = true;
     setColor({
       ...color,
       a: 0.3,
     });
-
     markupCanvasRef.current.freeDrawingCursor = "url(../../../design/assets/slid_highlighter_cursor.png) 0 0, auto";
-    // markupCanvasRef.current.freeDrawingBrush.color = "rgba(255, 19, 0, 0.3)";
-    // markupCanvasRef.current.freeDrawingBrush.width = setPenWidth * 2;
   };
 
   const textBtnClick = () => {
@@ -120,7 +146,7 @@ const MarkupModal = (props) => {
       ...color,
       a: 1,
     });
-    const text = new fabric.Textbox("텍스트 입력", { left: 5, top: 5, fontSize: 20 });
+    const text = new fabric.Textbox("텍스트 입력", { left: 5, top: 5, fontSize: 20, fill: `rgba(${color.r}, ${color.g}, ${color.b})` });
     markupCanvasRef.current.add(text);
     markupCanvasRef.current.setActiveObject(text);
     markupCanvasRef.current.renderAll();
@@ -163,16 +189,16 @@ const MarkupModal = (props) => {
             <div className={styles[`markup-tool-container`]}>
               <div className={styles[`markup-type-container`]}>
                 <div className={`btn-group`} role="group">
-                  <button type="button" className={`btn btn-light btn-cursor`}>
+                  <button type="button" className={`btn btn-light ` + (cursorState === "cursor" ? "active" : "")}>
                     <img className={styles[`markup-type-image`]} onClick={cursorClick} alt={"slid cursor icon"} src={"../../../design/assets/slid_cursor_icon.png"} />
                   </button>
-                  <button type="button" className={`btn btn-light btn-cursor`}>
+                  <button type="button" className={`btn btn-light ` + (cursorState === "pen" ? "active" : "")}>
                     <img className={styles[`markup-type-image`]} onClick={penClick} alt={"slid pen icon"} src={"../../../design/assets/slid_pen_icon.png"} />
                   </button>
-                  <button type="button" className={`btn btn-light btn-cursor`}>
-                    <img className={styles[`markup-type-image`]} onClick={highlightingClick} alt={"slid highlighter icon"} src={"../../../design/assets/slid_highlighter_icon.png"} />
+                  <button type="button" className={`btn btn-light ` + (cursorState === "highlighter" ? "active" : "")} onClick={highlightingClick}>
+                    <img className={styles[`markup-type-image`]} alt={"slid highlighter icon"} src={"../../../design/assets/slid_highlighter_icon.png"} />
                   </button>
-                  <button type="button" className={`btn btn-light btn-cursor`} onClick={textBtnClick}>
+                  <button type="button" className={`btn btn-light`} onClick={textBtnClick}>
                     <img className={styles[`markup-type-image`]} alt={"slid text icon"} src={"../../../design/assets/slid_text_icon.png"} />
                   </button>
                 </div>
@@ -190,10 +216,9 @@ const MarkupModal = (props) => {
                     type="button"
                     onClick={() => {
                       setPenWidth(5);
-                      document.getElementById("btn1").addClass("active");
+                      setPenWidthState("small");
                     }}
-                    className={`${styles[`size-small`]} btn btn-light active`}
-                    id="btn1"
+                    className={(penWidthState === "small" ? "active" : "") + ` btn btn-light`}
                   >
                     <div
                       style={{
@@ -208,8 +233,9 @@ const MarkupModal = (props) => {
                     type="button"
                     onClick={() => {
                       setPenWidth(10);
+                      setPenWidthState("medium");
                     }}
-                    className={`${styles[`size-mideum`]} btn btn-light`}
+                    className={`btn btn-light ` + (penWidthState === "medium" ? "active" : "")}
                     id="btn2"
                   >
                     <div
@@ -225,8 +251,9 @@ const MarkupModal = (props) => {
                     type="button"
                     onClick={() => {
                       setPenWidth(15);
+                      setPenWidthState("large");
                     }}
-                    className={`${styles["size-large"]} btn btn-light`}
+                    className={`btn btn-light ` + (penWidthState === "large" ? "active" : "")}
                     id="btn3"
                   >
                     <div
@@ -252,10 +279,10 @@ const MarkupModal = (props) => {
             </div>
             <div className={styles[`markup-control-container`]}>
               <div className={styles[`history-container`]}>
-                <button type="button" className={`${styles[`markup-control-btn`]} btn btn-light`}>
+                <button type="button" className={`${styles[`markup-control-btn`]} btn btn-light`} onClick={undo}>
                   <img className={`markup-type-img`} alt={"backward button"} src={"../../../design/assets/slid_backward_icon.png"} />
                 </button>
-                <button type="button" className={`${styles[`markup-control-btn`]} btn btn-light`}>
+                <button type="button" className={`${styles[`markup-control-btn`]} btn btn-light`} onClick={redo}>
                   <img className={`markup-type-img`} alt={"forward button"} src={"../../../design/assets/slid_forward_icon.png"} />
                 </button>
                 <button type="button" onClick={deleteModal} className={`${styles[`markup-control-btn`]} btn btn-light`}>
